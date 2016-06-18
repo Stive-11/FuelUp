@@ -1,0 +1,144 @@
+﻿<div class="index-content">
+   <!-- Navigation -->
+   <header class="navbar navbar-default navbar-custom navbar-fixed-top" header-scroll>
+      <div class="container-fluid">
+         <!-- Brand and toggle get grouped for better mobile display -->
+         <div class="navbar-header page-scroll">
+            <a href="" class="navbar-toggle" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </a>
+            <a class="navbar-brand" href="/index">
+               <img src="assets/images/logo.png" alt="">
+            </a>
+         </div>
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
+            <ul class="nav navbar-nav navbar-right">
+               <li>
+                  <a href="/login">Вход</a>
+               </li>
+            </ul>
+         </div>
+         <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+   </header>
+
+   <div class="intro-header">
+      <div class="container">
+         <div layout="row" layout-align="center center">
+            <div class="">
+               <div class="site-heading">
+                  <!--<h1>FuelUp</h1>-->
+                  <div>
+                     <img src="assets/images/logo.png" alt="" width="200">
+                  </div>
+                  <hr class="small">
+                  <span class="subheading">Помощник</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Main Content -->
+   <div class="container">
+      <div layout="column" layout-align="center center">
+         <div class="post-preview hidden" when-visible="animateElementIn">
+            <h2 class="post-title">
+               О нас
+            </h2>
+            <h4 class="post-subtitle">
+               FuelUp - подскажет где заправка
+            </h4>
+         </div>
+         <hr>
+
+         <hr>
+         <div class="post-preview hidden" when-visible="animateElementIn">
+            <h2 class="post-title">
+               Преимущества
+            </h2>
+            <h4 class="post-subtitle">
+               С нами Вам не понадобиться отвлекаться на посторонние сервисы. 
+            </h4>
+ 
+         </div>
+         <hr>
+         <div class="post-preview hidden" when-visible="animateElementIn">
+            <h2 class="post-title">
+               Что нас отличает?
+            </h2>
+            <ul class="post-subtitle">
+               <li>- Оперативная информация</li>
+               <li>- Все заправки в одном месте</li>
+            </ul>
+         </div>
+         <hr>
+         <div class="post-preview hidden" when-visible="animateElementIn">
+            <h2 class="post-title">
+               Контакты
+            </h2>
+            <h4 class="post-subtitle">
+               Адрес: г. Минск
+            </h4>
+            <h4 class="post-subtitle">
+               Тел. +375 ........
+            </h4>
+            <h4 class="post-subtitle">
+               e-mail: <a href="mailto:stive-11@tut.by">stive-11@tut.by</a>
+            </h4>
+         </div>
+         <hr />
+         <div class="map-preview hidden" when-visible="animateElementIn">
+            <md-card>
+               <md-card-content>
+                  <ui-gmap-google-map center="vm.labeledMap.center" zoom="vm.labeledMap.zoom" options="vm.labeledMap.options">
+                     <ui-gmap-marker coords="vm.labeledMap.marker.coords" idkey="vm.labeledMap.marker.id" options="vm.labeledMap.marker.options">
+                        <ui-gmap-window show="'true'">
+                           <div>{{vm.labelTitle}}</div>
+                        </ui-gmap-window>
+                     </ui-gmap-marker>
+                  </ui-gmap-google-map>
+               </md-card-content>
+            </md-card>
+         </div>
+      </div>
+   </div>
+   <hr>
+   <!-- Footer -->
+   <div class="container">
+      <div layout="row" layout-align="center center">
+         <!--<ul class="list-inline text-center">
+            <li>
+               <a href="#">
+                  <span class="fa-stack fa-lg">
+                     <i class="fa fa-circle fa-stack-2x"></i>
+                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <span class="fa-stack fa-lg">
+                     <i class="fa fa-circle fa-stack-2x"></i>
+                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <span class="fa-stack fa-lg">
+                     <i class="fa fa-circle fa-stack-2x"></i>
+                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+               </a>
+            </li>
+         </ul>-->
+         <p class="copyright text-muted">&copy; 2016 FuetlUp</p>
+      </div>
+   </div>
+</div>
