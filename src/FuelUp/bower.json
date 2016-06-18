@@ -1,0 +1,11 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "angular": "1.5.5",
+    "moment": "2.13.0",
+    "gmaps": "0.4.24",
+    "angular-google-maps": "2.3.2"
+  }
+}
