@@ -1,24 +1,15 @@
 ﻿(function () {
    'use strict';
 
-   var config = {
-      api: {
-         url: '/api/v1'
-         
-         }
-      }
-   };
-
-
     angular.module('app')
        .constant('cfg', defineConstants());
 
+    /* @ngInject */ 
    function defineConstants() {
       var constants = {
-	URL : {
-	api: config.api.url
-	}
-
+	        URL : {
+	            api: '/api'
+	        }
       };
 
       return constants;

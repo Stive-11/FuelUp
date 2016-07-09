@@ -1,0 +1,14 @@
+
+	Настройка строки подключения
+
+Файл appsetting.json
+Здесь есть строка - "DefaultConnection": "Data Source=MEGAMOZG\\SQLEXPRESS;Initial Catalog=FuelUp;Integrated Security=True"
+MEGAMOZG - заменить на имя своего компьютера
+
+
+	Обновление БД
+
+1) Запустить консоль (cmd.exe)
+2) Перейти в каталог проекта - в тот где лежит project.json
+3) Запустить команду: dotnet ef database update
+4) Дождаться выполнения. Должно выдать "Done."

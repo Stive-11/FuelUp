@@ -82,7 +82,13 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "compile": {
+      "exclude": [
+        "bower_components",
+        "node_modules"
+      ]
+    }
   },
 
   "runtimeOptions": {
@@ -95,6 +101,10 @@
       "Views",
       "appsettings.json",
       "web.config"
+    ],
+    "exclude": [
+      "bower_components",
+      "node_modules"
     ]
   },
 
