@@ -12,3 +12,8 @@ MEGAMOZG - заменить на имя своего компьютера
 2) Перейти в каталог проекта - в тот где лежит project.json
 3) Запустить команду: dotnet ef database update
 4) Дождаться выполнения. Должно выдать "Done."
+
+
+	Команда для получения DBContext DatabaseFirst
+
+dotnet ef dbcontext scaffold "Server=MEGAMOZG\SQLEXPRESS;Database=FuelUp;Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer --output-dir Models/DB
