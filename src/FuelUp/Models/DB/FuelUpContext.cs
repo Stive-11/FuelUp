@@ -1,14 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FuelUp.Models.DB
 {
-    public partial class FuelUpContext : DbContext
+    public partial class FuelUpContext : IdentityDbContext<ApplicationUser>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //    optionsBuilder.UseSqlServer(@"Server=MEGAMOZG\SQLEXPRESS;Database=FuelUp;Integrated Security=True;");
+        //}
+
+        public FuelUpContext ( DbContextOptions<FuelUpContext> options )
+            : base(options)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server=MEGAMOZG\SQLEXPRESS;Database=FuelUp;Integrated Security=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

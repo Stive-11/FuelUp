@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using FuelUp.Data;
 using FuelUp.Models;
+using FuelUp.Models.DB;
 using FuelUp.Services;
 
 namespace FuelUp
@@ -45,11 +46,11 @@ namespace FuelUp
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<FuelUpContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<FuelUpContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
