@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace FuelUp.Models.DB
 {
-    public partial class FuelUpContext : IdentityDbContext<ApplicationUser>
+    public partial class FuelUpContext : DbContext
     {
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
