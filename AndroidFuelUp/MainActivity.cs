@@ -25,6 +25,23 @@ namespace AndroidFuelUp
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
             button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+
+
+            Button theHiButton = FindViewById<Button>(Resource.Id.HiButton);
+
+            ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
+
+            stationBtn.Click += delegate { theHiButton.Text = string.Format("{0}", GetString(Resource.String.ImgBtnStaition)); };
+
+
+            //var geoUri = Android.Net.Uri.Parse("geo:42.374260,-71.120824");
+            //var mapIntent = new Intent(Intent.ActionView, geoUri);
+            //StartActivity(mapIntent);
+
+
+
+
+
         }
     }
 }
