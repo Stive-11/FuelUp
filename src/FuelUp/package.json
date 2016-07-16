@@ -1,7 +1,11 @@
 {
-  "name": "fuelUp",
+  "name": "fuelup",
   "version": "0.1.0",
   "devDependencies": {
- 
-  }
+    "gulp": "^3.9.1"
+  },
+  "description": "fuelup",
+  "dependencies": {},
+  "author": "",
+  "license": "ISC"
 }
