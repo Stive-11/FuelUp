@@ -49,12 +49,12 @@ namespace FuelUp.Controllers
         // PUT: api/FuelTypes/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFuelTypes([FromRoute] int id, [FromBody] FuelTypes fuelTypes)
-        {
+        { 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            
             if (id != fuelTypes.ID)
             {
                 return BadRequest();

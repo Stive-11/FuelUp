@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@android:style/TextAppearance.DeviceDefault.WindowTitle">
+    <Button
+        android:id="@+id/MyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello" />
+    <Button
+        android:text="Hi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/HiButton" />
+    <ImageView
+        android:src="@drawable/station"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"
+        style="@android:style/TextAppearance.Material.Title"
+        android:scaleType="center" />
+    <ImageButton
+        android:src="@drawable/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageBtnMoney" />
+    <ImageButton
+        android:src="@drawable/station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageBtnStation" />
+    <ImageButton
+        android:src="@drawable/business_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageBtnBusinessCenter" />
+    <ImageButton
+        android:src="@drawable/access"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageBtnAccess" />
+</LinearLayout>
