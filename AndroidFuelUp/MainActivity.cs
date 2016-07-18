@@ -5,13 +5,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Gms.Maps;
 
 namespace AndroidFuelUp
 {
     [Activity(Label = "AndroidFuelUp", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : Activity, IOnMapReadyCallback
     {
         int count = 1;
+
+        private GoogleMap mMap;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -19,6 +22,8 @@ namespace AndroidFuelUp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            SetUpMap();
 
             // Get our button from the layout resource,
             // and attach an event to it
@@ -33,15 +38,22 @@ namespace AndroidFuelUp
 
             stationBtn.Click += delegate { theHiButton.Text = string.Format("{0}", GetString(Resource.String.ImgBtnStaition)); };
 
+        }
 
-            //var geoUri = Android.Net.Uri.Parse("geo:42.374260,-71.120824");
-            //var mapIntent = new Intent(Intent.ActionView, geoUri);
-            //StartActivity(mapIntent);
+        private void SetUpMap()
+        {
+            if (mMap == null)
+            {
+                FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
+            }
+        }
 
 
+        public void OnMapReady(GoogleMap googleMap)
+        {
+            mMap = googleMap;
 
-
-
+            //throw new NotImplementedException();
         }
     }
 }
