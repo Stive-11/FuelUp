@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Gms.Maps;
+using Android.Gms.Maps.Model;
 
 namespace AndroidFuelUp
 {
@@ -25,8 +26,6 @@ namespace AndroidFuelUp
 
             SetUpMap();
 
-           
-
             // Get our button from the layout resource,
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.MyButton);
@@ -35,6 +34,7 @@ namespace AndroidFuelUp
 
 
             Button theHiButton = FindViewById<Button>(Resource.Id.HiButton);
+            theHiButton.Click += delegate { FunWithMap(); };
 
             ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
 
@@ -48,14 +48,43 @@ namespace AndroidFuelUp
             {
                 FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map).GetMapAsync(this);
             }
+            
         }
 
 
         public void OnMapReady(GoogleMap googleMap)
         {
             mMap = googleMap;
-
+            
             //throw new NotImplementedException();
+        }
+
+
+        public void FunWithMap()
+        {
+            if (mMap != null)
+            {
+                mMap.MapType = GoogleMap.MapTypeNormal;
+
+                LatLng location = new LatLng(53.87615, 27.6739);
+                CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                builder.Target(location);
+                builder.Zoom(18);
+                //builder.Bearing(155);
+                //builder.Tilt(65);
+                CameraPosition cameraPosition = builder.Build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+
+                mMap.MoveCamera(cameraUpdate);
+                //Marker marker1=new Marker();
+
+                MarkerOptions markerOpt1 = new MarkerOptions();
+                markerOpt1.SetPosition(new LatLng(53.87615, 27.6739));
+                markerOpt1.SetTitle("MINSK");
+                markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
+                mMap.AddMarker(markerOpt1);
+
+            }
         }
     }
 }
