@@ -81,7 +81,7 @@ namespace AndroidFuelUp
                 MarkerOptions markerOpt1 = new MarkerOptions();
                 markerOpt1.SetPosition(new LatLng(53.87615, 27.6739));
                 markerOpt1.SetTitle("MINSK");
-                markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
+                //markerOpt1.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
                 mMap.AddMarker(markerOpt1);
 
             }
