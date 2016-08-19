@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FuelUp", "src\FuelUp\FuelUp.xproj", "{49296CFE-F12A-4BCC-A7FE-E6C943874FB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidFuelUp", "AndroidFuelUp\AndroidFuelUp.csproj", "{0FD30AB3-E551-4088-AE49-2A27656F8013}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +24,18 @@ Global
 		{49296CFE-F12A-4BCC-A7FE-E6C943874FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49296CFE-F12A-4BCC-A7FE-E6C943874FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49296CFE-F12A-4BCC-A7FE-E6C943874FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD30AB3-E551-4088-AE49-2A27656F8013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FD30AB3-E551-4088-AE49-2A27656F8013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FD30AB3-E551-4088-AE49-2A27656F8013}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0FD30AB3-E551-4088-AE49-2A27656F8013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FD30AB3-E551-4088-AE49-2A27656F8013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD30AB3-E551-4088-AE49-2A27656F8013}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{49296CFE-F12A-4BCC-A7FE-E6C943874FB1} = {20F056A3-9F74-4465-85FD-A20D3A30F155}
+		{0FD30AB3-E551-4088-AE49-2A27656F8013} = {20F056A3-9F74-4465-85FD-A20D3A30F155}
 	EndGlobalSection
 EndGlobal

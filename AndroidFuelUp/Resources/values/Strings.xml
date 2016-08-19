@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hello">Hello World, Click Me!</string>
+    <string name="ApplicationName">FuelUp</string>
+    <string name="ImgBtnAccess">Accsess Btn is clicked!</string>
+    <string name="ImgBtnStaition">Station Btn is clicked!</string>
+    <string name="ImgBtnBusinesssCenter">Business Center Btn is clicked!</string>
+    <string name="ImgBtnMoney">Money Btn is clicked!</string>
+  
+    <string name="google_maps_key">AIzaSyBh30rQjww49Ag3lYn2Dcl-WrH0hdFfN34</string>
+
+</resources>
