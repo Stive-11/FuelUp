@@ -247,3 +247,6 @@ ModelManifest.xml
 # bower_components, wwwroot 
 bower_components/
 wwwroot/
+
+# Appsettings for project 
+/src/FuelUp/appsettings.json

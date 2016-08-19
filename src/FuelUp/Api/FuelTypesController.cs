@@ -6,29 +6,38 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FuelUp.Models.DB;
+using FuelUp.Models.ApiModels;
+using FuelUp.Services;
 
 namespace FuelUp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/FuelTypes")]
+    [Route("api/GetMainInfo")]
     public class FuelTypesController : Controller
     {
         private readonly FuelUpContext _context;
+        private readonly IGetInfo _getInfo;
 
-        public FuelTypesController(FuelUpContext context)
+        public FuelTypesController(
+            FuelUpContext context,
+            IGetInfo getInfo
+            )
         {
             _context = context;
+            _getInfo = getInfo;
         }
 
-        // GET: api/FuelTypes
+        // GET: api/GetMainInfo
         [HttpGet]
-        public IEnumerable<FuelTypes> GetFuelTypes()
+        public ActionResult GetMainInfo()
         {
-            return _context.FuelTypes;
+            var info = _getInfo.GetMainInfo();
+            var json = Json(info);
+            return json;
         }
 
         // GET: api/FuelTypes/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] 
         public async Task<IActionResult> GetFuelTypes([FromRoute] int id)
         {
             if (!ModelState.IsValid)
