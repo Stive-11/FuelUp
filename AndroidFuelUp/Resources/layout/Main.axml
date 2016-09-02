@@ -13,6 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/HiButton" />
+    <Button
+        android:text="@string/menuButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuButton" />
+    <Button
+        android:text="@string/testMenuButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/testMenuButton" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,84 +49,16 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center">
-            <ImageButton
-                android:src="@drawable/wifi_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnWiFi" />
-            <ImageButton
-                android:src="@drawable/station"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnStation" />
-            <ImageButton
-                android:src="@drawable/business_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnBusinessCenter" />
-            <ImageButton
-                android:src="@drawable/wifi_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnWiFi" />
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:minWidth="25px"
+            android:minHeight="25px" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="top|left">
-            <ImageButton
-                android:src="@drawable/money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnMoney" />
-            <ImageButton
-                android:src="@drawable/station"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnStation" />
-            <ImageButton
-                android:src="@drawable/business_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnBusinessCenter" />
-            <ImageButton
-                android:src="@drawable/access"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnAccess" />
-            <ImageButton
-                android:src="@drawable/hotel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnHotel" />
-            <ImageButton
-                android:src="@drawable/car_wash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnCarWash" />
-            <ImageButton
-                android:src="@drawable/store"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnStore" />
-            <ImageButton
-                android:src="@drawable/wifi_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnWiFi" />
-            <ImageButton
-                android:src="@drawable/local_atm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnLocalAtm" />
-            <ImageButton
-                android:src="@drawable/wc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnWc" />
-        </LinearLayout>
+            android:layout_gravity="top|left"
+            android:minWidth="25px"
+            android:minHeight="25px" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -177,27 +119,18 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center">
-            <ImageButton
-                android:src="@drawable/money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnMoney" />
-            <ImageButton
-                android:src="@drawable/station"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnStation" />
-            <ImageButton
-                android:src="@drawable/business_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnBusinessCenter" />
-            <ImageButton
-                android:src="@drawable/access"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageBtnAccess" />
-        </LinearLayout>
+            android:layout_gravity="bottom|center"
+            android:minWidth="25px"
+            android:minHeight="25px" />
     </FrameLayout>
+    <Button
+        android:id="@+id/MyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello" />
+    <Button
+        android:id="@+id/MyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Hello" />
 </LinearLayout>
