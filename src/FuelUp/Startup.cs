@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FuelUp.Models;
+using FuelUp.Models.DB;
+using FuelUp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,10 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using FuelUp.Data;
-using FuelUp.Models;
-using FuelUp.Models.DB;
-using FuelUp.Services;
 
 namespace FuelUp
 {
@@ -55,7 +50,7 @@ namespace FuelUp
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-           services.AddScoped<IGetInfo, GetInfo>();
+            services.AddScoped<IGetInfo, GetInfo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
