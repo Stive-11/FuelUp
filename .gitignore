@@ -245,8 +245,9 @@ ModelManifest.xml
 .fake/
 
 # bower_components, wwwroot 
-bower_components/
-wwwroot/
+/src/FuelUp/bower_components/
+/src/FuelUp/wwwroot/
+/src/FuelUp/node_modules
 
 # Appsettings for project 
 /src/FuelUp/appsettings.json

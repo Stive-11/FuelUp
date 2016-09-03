@@ -29,7 +29,6 @@ namespace FuelUp.Services
                 },
                 name = x.Name,
                 operatorName = x.Operator.NameRU
-
             });
 
             return stations;
