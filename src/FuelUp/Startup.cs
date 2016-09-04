@@ -1,13 +1,16 @@
-﻿using FuelUp.Models;
+﻿using System;
+using FuelUp.Models;
 using FuelUp.Models.DB;
 using FuelUp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace FuelUp
 {
@@ -70,6 +73,22 @@ namespace FuelUp
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            var angularRoutes = new[] {
+                 "/home"
+             };
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.HasValue && null != angularRoutes.FirstOrDefault(
+                    (ar) => context.Request.Path.Value.StartsWith(ar, StringComparison.OrdinalIgnoreCase)))
+                {
+                    context.Request.Path = new PathString("/");
+                }
+
+                await next();
+            });
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseIdentity();
