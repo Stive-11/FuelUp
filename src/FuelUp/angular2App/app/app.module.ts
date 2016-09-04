@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
 import { TestDataService } from './services/testDataService';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { TestDataService } from './services/testDataService';
         FormsModule,
         routing,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        AgmCoreModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -29,7 +31,7 @@ import { TestDataService } from './services/testDataService';
         TestDataService,
         Configuration
     ],
-    bootstrap:    [AppComponent],
+    bootstrap:    [AppComponent]
 })
 
 export class AppModule {}
