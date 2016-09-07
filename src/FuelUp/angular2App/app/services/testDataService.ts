@@ -24,7 +24,8 @@ export class TestDataService {
     }
 
     public GetServices = (): Observable<any> => {
-        var res = this._http.get(this.getServicesURL).map((response: Response) => <any>response.json());
+        var res = this._http.get(this.getServicesURL)
+            .map(res => res.json());
         console.log(res);
         return res;
     }

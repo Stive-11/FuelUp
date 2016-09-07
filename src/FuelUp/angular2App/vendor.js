@@ -8,4 +8,5 @@ require('angular2-google-maps/core');
 require('jquery/src/jquery');
 require('bootstrap/dist/js/bootstrap');
 require('./css/bootstrap.css');
+require('./css/bootstrap-theme.css');
 //# sourceMappingURL=vendor.js.map

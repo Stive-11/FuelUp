@@ -22,7 +22,7 @@ var HomeComponent = (function () {
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._dataService
-            .GetAll()
+            .GetServices()
             .subscribe(function (data) { return _this.values = data; }, function (error) { return console.log(error); }, function () { return console.log('Get all complete'); });
     };
     HomeComponent = __decorate([

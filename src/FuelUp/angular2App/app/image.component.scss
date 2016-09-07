@@ -1,14 +1,11 @@
-﻿    .filters li {
-        margin-top:10px;     
-    }
-    li:hover{
+﻿
+    /*.cont {padding-top:10px;}*/
+    .filters li:hover{
     background-color:black;
     }
-    img {width:65px;
+    .filters li, img {width:65px;
          height:65px;
     }
-    li {width:65px;
-         height:65px;}
     ul {
     -moz-column-count: 3; /* Firefox */
      -webkit-column-count: 3; /* Safari and Chrome */

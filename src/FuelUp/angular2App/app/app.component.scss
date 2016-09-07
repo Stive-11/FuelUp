@@ -3,6 +3,7 @@
   border-radius: 0;
   }
 
+html, body { height: 100%; }
 .navigationLinkButton:hover {
     cursor: pointer;
 }
@@ -16,7 +17,8 @@ footer {
 }
 
 
-.row {height: 600px;}
+.row {height: 550px;}
+/*.row {height:100%;}*/
 
 .sidenav {
   padding-top: 10px;

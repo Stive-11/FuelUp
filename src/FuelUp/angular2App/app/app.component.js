@@ -14,6 +14,8 @@ var styles = String(require('./app.component.scss'));
 var AppComponent = (function () {
     function AppComponent(router) {
         this.router = router;
+        this.home = "На главную";
+        this.about = "О сайте";
     }
     AppComponent = __decorate([
         core_1.Component({

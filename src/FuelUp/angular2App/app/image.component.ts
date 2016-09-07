@@ -6,11 +6,13 @@ let styles = String(require('./image.component.scss'));
 @Component({
     selector: 'filtres',
     template: `
+    <div class="cont">
   <ul class="filters">
     <li *ngFor="let image of images">
       <img src="{{image.url}}" alt="{{image.title}}">
     </li>
   </ul>
+</div>
   `,
     styles: ["require('./image.component.scss')"]
     //styles: [styles]

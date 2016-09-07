@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var styles = String(require('./image.component.scss'));
 var ImgComponent = (function () {
     function ImgComponent() {
         this.images = IMAGES;
@@ -16,8 +17,8 @@ var ImgComponent = (function () {
     ImgComponent = __decorate([
         core_1.Component({
             selector: 'filtres',
-            template: "\n  <ul class=\"slides\">\n    <li *ngFor=\"let image of images\">\n      <h2>{{image.title}}</h2>\n      <img src=\"{{image.url}}\" alt=\"\">\n    </li>\n  </ul>\n  ",
-            styles: [""],
+            template: "\n  <ul class=\"filters\">\n    <li *ngFor=\"let image of images\">\n      <img src=\"{{image.url}}\" alt=\"{{image.title}}\">\n    </li>\n  </ul>\n  ",
+            styles: ["require('./image.component.scss')"]
         }), 
         __metadata('design:paramtypes', [])
     ], ImgComponent);
@@ -25,7 +26,20 @@ var ImgComponent = (function () {
 }());
 exports.ImgComponent = ImgComponent;
 var IMAGES = [
-    { "title": "We are covered", "url": "./images/fabianGosebrink.jpg" },
-    { "title": "Generation Gap", "url": "./images/damienbod.jpg" },
+    { "title": "bankomat", "url": "./assets/bankomat.png" },
+    { "title": "24/7", "url": "assets/24.png" },
+    { "title": "exchange", "url": "assets/exchange.png" },
+    { "title": "phone", "url": "assets/phone.png" },
+    { "title": "hotel", "url": "assets/hotel.png" },
+    { "title": "shop", "url": "assets/shop.png" },
+    { "title": "repair", "url": "assets/repair.png" },
+    { "title": "tires", "url": "assets/tires.png" },
+    { "title": "wc", "url": "assets/wc.png" },
+    { "title": "car auto wash", "url": "assets/carautowash.png" },
+    { "title": "carwash", "url": "assets/carwash.png" },
+    { "title": "garden", "url": "assets/garden.png" },
+    { "title": "insurance", "url": "assets/shield.png" },
+    { "title": "trailer", "url": "assets/pri.png" },
+    { "title": "remove tires", "url": "assets/remove.png" }
 ];
 //# sourceMappingURL=image.component.js.map
