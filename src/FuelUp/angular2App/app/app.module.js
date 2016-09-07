@@ -19,6 +19,8 @@ var http_1 = require('@angular/http');
 var home_component_1 = require('./home/home.component');
 var about_component_1 = require('./about/about.component');
 var testDataService_1 = require('./services/testDataService');
+var core_2 = require('angular2-google-maps/core');
+var image_component_1 = require("./image.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,18 +32,20 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 app_routes_1.routing,
                 http_1.HttpModule,
-                http_1.JsonpModule
+                http_1.JsonpModule,
+                core_2.AgmCoreModule.forRoot()
             ],
             declarations: [
                 app_component_1.AppComponent,
                 about_component_1.AboutComponent,
-                home_component_1.HomeComponent
+                home_component_1.HomeComponent,
+                image_component_1.ImgComponent
             ],
             providers: [
                 testDataService_1.TestDataService,
                 app_constants_1.Configuration
             ],
-            bootstrap: [app_component_1.AppComponent],
+            bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

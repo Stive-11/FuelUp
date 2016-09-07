@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var Autoprefixer = require('autoprefixer');
@@ -60,20 +61,29 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif|ico|woff|woff2|ttf|svg|eot)$/,
                 exclude: /node_modules/,
-                loader: "file?name=assets/[name]-[hash:6].[ext]",
+                loader: "file?name=assets/[name]-[hash:6].[ext]"
             },
 
             // Load css files which are required in vendor.ts
-            {
+            /*{
                 test: /\.css$/,
                 exclude: /node_modules/,
                 loader: "style-loader!css-loader"
+            },*/
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
             },
 
-            {
+            /*{
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 loader: 'raw-loader!style-loader!css-loader!sass-loader'
+            },*/
+            {
+                test: /\.scss$/,
+                //exclude: /node_modules/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
             },
 
             {
@@ -106,7 +116,8 @@ module.exports = {
 
         new CopyWebpackPlugin([
             { from: './angular2App/images/*.*', to: "assets/", flatten: true }
-        ])
+        ]),
+        new ExtractTextPlugin('[name].css')
     ]
 };
 

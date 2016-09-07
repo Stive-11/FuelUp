@@ -1,0 +1,20 @@
+﻿    .filters li {
+        margin-top:10px;     
+    }
+    li:hover{
+    background-color:black;
+    }
+    img {width:65px;
+         height:65px;
+    }
+    li {width:65px;
+         height:65px;}
+    ul {
+    -moz-column-count: 3; /* Firefox */
+     -webkit-column-count: 3; /* Safari and Chrome */
+     column-count: 3;
+     list-style-type: none;
+     margin-left: 0!important;
+     padding: 0;
+    }
+

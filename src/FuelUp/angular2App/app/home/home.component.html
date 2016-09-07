@@ -1,10 +1,4 @@
-<div class="panel-group">
-
-    <p>hello {{message}}</p>
-
-    <ul>
-        <li *ngFor="let value of values">
-            <span>{{value}} </span>
-        </li>
-    </ul>
-</div>
+<sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <sebm-google-map-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
+    </sebm-google-map-marker>
+</sebm-google-map>

@@ -10,9 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var testDataService_1 = require('../services/testDataService');
+var styles = String(require('./home.component.scss'));
 var HomeComponent = (function () {
     function HomeComponent(_dataService) {
         this._dataService = _dataService;
+        this.lat = 53.8840092;
+        this.lng = 27.4548901;
+        this.zoom = 8;
         this.message = "Hello from HomeComponent constructor";
     }
     HomeComponent.prototype.ngOnInit = function () {
@@ -25,6 +29,7 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'homecomponent',
             template: require('./home.component.html'),
+            styles: [styles],
             providers: [testDataService_1.TestDataService]
         }), 
         __metadata('design:paramtypes', [testDataService_1.TestDataService])

@@ -1,16 +1,28 @@
-body {
-    padding-top: 50px;
-}
-
-.starter-template {
-    padding: 40px 15px;
-    text-align: center;
-}
+ .navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  }
 
 .navigationLinkButton:hover {
     cursor: pointer;
 }
-
-a {
-    color: #03A9F4;
+.col-sm-10{
+    padding-left: 0px!important;
 }
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+
+.row {height: 600px;}
+
+.sidenav {
+  padding-top: 10px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+
+

@@ -11,6 +11,8 @@ import { AboutComponent } from './about/about.component';
 
 import { TestDataService } from './services/testDataService';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import {SebmGoogleMapMarker} from 'angular2-google-maps/core';
+import {ImgComponent} from "./image.component";
 
 @NgModule({
     imports: [
@@ -20,12 +22,13 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
         routing,
         HttpModule,
         JsonpModule,
-        AgmCoreModule.forRoot()
+        AgmCoreModule.forRoot(),
     ],
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent
+        HomeComponent,
+        ImgComponent
     ],
     providers: [
         TestDataService,
