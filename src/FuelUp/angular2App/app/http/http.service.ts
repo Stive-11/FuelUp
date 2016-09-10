@@ -11,15 +11,15 @@ export class HTTPService {
 
     constructor(private _http: Http, private _configuration: Configuration) {
         this.getAllStationsURL = _configuration.Server + _configuration.URLgetMainInfo;
-    };
+    }
     getCurrentTime() {
-        return this._http.get('http://localhost:13929/api/GetServiceTypes')
+        return this._http.get('http://localhost:5000/api/GetServiceTypes')
             .map(res => res.json());
 
     }
     getAllStations() {
         return this._http.get(this.getAllStationsURL)
-            .map(res => <Station[]>res.json().data)
+            .map(res => <Station[]>res.json().data);
     }
     postJSON() {
         var json = JSON.stringify({ val1: 'test', var2: 2 });
