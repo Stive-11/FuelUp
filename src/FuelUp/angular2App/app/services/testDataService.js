@@ -20,6 +20,8 @@ var TestDataService = (function () {
         this.GetServices = function () {
             var res = _this._http.get(_this.getServicesURL)
                 .map(function (res) { return res.json(); });
+            console.info(res + " ");
+            console.info(JSON.stringify(res));
             return res;
         };
         this.GetMainInfo = function (id) {
