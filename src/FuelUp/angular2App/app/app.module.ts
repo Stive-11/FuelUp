@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +13,8 @@ import { TestDataService } from './services/testDataService';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import {SebmGoogleMapMarker} from 'angular2-google-maps/core';
 import {ImgComponent} from "./image.component";
+import {HTTPComponent} from "./http/http.component";
+
 
 @NgModule({
     imports: [
@@ -28,7 +30,8 @@ import {ImgComponent} from "./image.component";
         AppComponent,
         AboutComponent,
         HomeComponent,
-        ImgComponent
+        ImgComponent,
+        HTTPComponent
     ],
     providers: [
         TestDataService,

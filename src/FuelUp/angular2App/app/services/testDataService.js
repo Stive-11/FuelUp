@@ -18,8 +18,8 @@ var TestDataService = (function () {
         this._http = _http;
         this._configuration = _configuration;
         this.GetServices = function () {
-            var res = _this._http.get(_this.getServicesURL).map(function (response) { return response.json(); });
-            console.log(res);
+            var res = _this._http.get(_this.getServicesURL)
+                .map(function (res) { return res.json(); });
             return res;
         };
         this.GetMainInfo = function (id) {

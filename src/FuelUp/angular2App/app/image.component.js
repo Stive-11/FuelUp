@@ -17,7 +17,7 @@ var ImgComponent = (function () {
     ImgComponent = __decorate([
         core_1.Component({
             selector: 'filtres',
-            template: "\n  <ul class=\"filters\">\n    <li *ngFor=\"let image of images\">\n      <img src=\"{{image.url}}\" alt=\"{{image.title}}\">\n    </li>\n  </ul>\n  ",
+            template: " \n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div class=\"icon\" data-title=\"{{image.title}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n  ",
             styles: ["require('./image.component.scss')"]
         }), 
         __metadata('design:paramtypes', [])
@@ -26,20 +26,20 @@ var ImgComponent = (function () {
 }());
 exports.ImgComponent = ImgComponent;
 var IMAGES = [
-    { "title": "bankomat", "url": "./assets/bankomat.png" },
-    { "title": "24/7", "url": "assets/24.png" },
-    { "title": "exchange", "url": "assets/exchange.png" },
-    { "title": "phone", "url": "assets/phone.png" },
-    { "title": "hotel", "url": "assets/hotel.png" },
-    { "title": "shop", "url": "assets/shop.png" },
-    { "title": "repair", "url": "assets/repair.png" },
-    { "title": "tires", "url": "assets/tires.png" },
-    { "title": "wc", "url": "assets/wc.png" },
-    { "title": "car auto wash", "url": "assets/carautowash.png" },
-    { "title": "carwash", "url": "assets/carwash.png" },
-    { "title": "garden", "url": "assets/garden.png" },
-    { "title": "insurance", "url": "assets/shield.png" },
-    { "title": "trailer", "url": "assets/pri.png" },
-    { "title": "remove tires", "url": "assets/remove.png" }
+    { "title": "Круглосуточное обслуживание", "url": "assets/24.png" },
+    { "title": "Банкомат", "url": "./assets/bankomat.png" },
+    { "title": "Обмен валют", "url": "assets/exchange.png" },
+    { "title": "Телефон", "url": "assets/phone.png" },
+    { "title": "Отель", "url": "assets/hotel.png" },
+    { "title": "Магазин", "url": "assets/shop.png" },
+    { "title": "СТО", "url": "assets/repair.png" },
+    { "title": "Подкачка шин", "url": "assets/tires.png" },
+    { "title": "WC", "url": "assets/wc.png" },
+    { "title": "Автоматическая мойка", "url": "assets/carautowash.png" },
+    { "title": "Ручная мойка", "url": "assets/carwash.png" },
+    { "title": "Садовый центр", "url": "assets/garden.png" },
+    { "title": "Страхование авто", "url": "assets/shield.png" },
+    { "title": "Аренда прицепов", "url": "assets/pri.png" },
+    { "title": "Замена шин", "url": "assets/remove.png" }
 ];
 //# sourceMappingURL=image.component.js.map

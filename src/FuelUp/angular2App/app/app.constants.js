@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Configuration = (function () {
     function Configuration() {
-        this.Server = "http://193.124.57.9:2000";
+        this.Server = "http://localhost:13929";
         this.URLgetMainInfo = "/api/GetMainInfo";
         this.URLgetServiceTypes = "/api/GetServiceTypes";
     }

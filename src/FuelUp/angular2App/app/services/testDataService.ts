@@ -6,10 +6,11 @@ import { Configuration } from '../app.constants';
 
 @Injectable()
 export class TestDataService {
-
     private getMainInfoUrl: string;
     private headers: Headers;
     private getServicesURL: string;
+    private getServ: Array<string>;
+    private test: string;
 
     constructor(private _http: Http, private _configuration: Configuration) {
 
@@ -22,11 +23,13 @@ export class TestDataService {
 
       
     }
-
-    public GetServices = (): Observable<any> => {
+    //= (): Observable<any> =>
+    public GetServices = (): Observable<any[]> => {
         var res = this._http.get(this.getServicesURL)
-            .map(res => res.json());
-        console.log(res);
+            .map(res => res.json())
+            //.subscribe(data => this.test = JSON.parse(data), () => console.log('WE DID IT SHOWWE'));   
+        console.info(res + " " );
+        console.info(JSON.stringify(res));
         return res;
     }
 
