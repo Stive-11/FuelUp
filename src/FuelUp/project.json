@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-FuelUp-04aa646c-b0a0-4904-810b-2d1f72dd0b78",
 
   "dependencies": {
@@ -43,7 +43,9 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Newtonsoft.Json": "9.0.1"
+    "Newtonsoft.Json": "9.0.1",
+    "Microsoft.TypeScript.MSBuild": "1.8.11",
+    "Microsoft.TypeScript.Compiler": "1.8.11"
   },
 
   "tools": {

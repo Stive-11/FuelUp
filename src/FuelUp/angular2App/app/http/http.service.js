@@ -18,9 +18,8 @@ var HTTPService = (function () {
         this._configuration = _configuration;
         this.getAllStationsURL = _configuration.Server + _configuration.URLgetMainInfo;
     }
-    ;
     HTTPService.prototype.getCurrentTime = function () {
-        return this._http.get('http://localhost:13929/api/GetServiceTypes')
+        return this._http.get('http://localhost:5000/api/GetServiceTypes')
             .map(function (res) { return res.json(); });
     };
     HTTPService.prototype.getAllStations = function () {

@@ -10,29 +10,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var testDataService_1 = require('../services/testDataService');
+var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var HomeComponent = (function () {
-    function HomeComponent(_dataService) {
+    function HomeComponent(_dataService, _httpService) {
         this._dataService = _dataService;
+        this._httpService = _httpService;
         this.lat = 53.8840092;
         this.lng = 27.4548901;
+        this.lat1 = 53.8940092;
+        this.lng1 = 27.4648901;
+        this.cord1 = { latitude: this.lat, longitude: this.lng };
+        this.cord2 = { latitude: this.lat1, longitude: this.lng1 };
+        this.markers = [this.cord1, this.cord2];
         this.zoom = 8;
         this.message = "Hello from HomeComponent constructor";
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._dataService
-            .GetServices()
-            .subscribe(function (data) { return _this.values = data; }, function (error) { return console.log(error); }, function () { return console.log('Get all complete'); });
+        this._httpService.getAllStations()
+            .subscribe(function (allStations) { return _this.allStations = allStations; });
+        document.getElementById("gMap").style.height = "300px";
     };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'homecomponent',
             template: require('./home.component.html'),
             styles: [styles],
-            providers: [testDataService_1.TestDataService]
+            providers: [testDataService_1.TestDataService, Httpservice.HTTPService]
         }), 
-        __metadata('design:paramtypes', [testDataService_1.TestDataService])
+        __metadata('design:paramtypes', [testDataService_1.TestDataService, Httpservice.HTTPService])
     ], HomeComponent);
     return HomeComponent;
 }());
