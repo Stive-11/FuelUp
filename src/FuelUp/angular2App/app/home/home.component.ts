@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     allStations: Stationinterface.Station[];
 
 
-    constructor(private _dataService: TestDataService, private _httpService: Httpservice.HTTPService) {
+    constructor(private _httpService: Httpservice.HTTPService) {
         this.message = "Hello from HomeComponent constructor";
     }
 
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
         this._httpService.getAllStations()
             .subscribe(allStations => this.allStations = allStations);
 
-        document.getElementById("gMap").style.height = "300px";
+        document.getElementById("gMap").style.height = "97.4vh";
         // console.info("allStation - " + this.allStations.length);
 
     }

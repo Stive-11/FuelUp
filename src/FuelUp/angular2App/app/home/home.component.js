@@ -30,7 +30,7 @@ var HomeComponent = (function () {
         var _this = this;
         this._httpService.getAllStations()
             .subscribe(function (allStations) { return _this.allStations = allStations; });
-        document.getElementById("gMap").style.height = "300px";
+        document.getElementById("gMap").style.height = "100vh";
     };
     HomeComponent = __decorate([
         core_1.Component({
