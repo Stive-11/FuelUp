@@ -3,6 +3,7 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Graphics;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using AndroidFuelUp.Models;
 using Newtonsoft.Json;
@@ -45,8 +46,8 @@ namespace AndroidFuelUp
                 GetTEstInfo();
             };
 
-            ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
-            stationBtn.Click += delegate { theHiButton.Text = string.Format("{0}", GetString(Resource.String.ImgBtnStaition)); };
+           // ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
+            //stationBtn.Click += delegate { theHiButton.Text = string.Format("{0}", GetString(Resource.String.ImgBtnStaition)); };
 
             
             Button menuButton = FindViewById<Button>(Resource.Id.menuButton);
@@ -57,6 +58,34 @@ namespace AndroidFuelUp
             //testMenuButton.Click += delegate { GetServicesFromServer(); };
 
             testMenuButton.Click += delegate { StartActivity(typeof(TestMenuActivity)); };
+
+            EditText edittextStartPoint = FindViewById<EditText>(Resource.Id.edittextStartPoint);
+            edittextStartPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
+            {
+                e.Handled = false;
+                if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+                {
+                    Toast.MakeText(this, edittextStartPoint.Text, ToastLength.Short).Show();
+                    e.Handled = true;
+                }
+            };
+
+
+
+            EditText edittextFinishPoint = FindViewById<EditText>(Resource.Id.edittextFinishPoint);
+            //edittextFinishPoint.SetSingleLine = true;
+            edittextFinishPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
+            {
+                e.Handled = false;
+                if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+                {
+                    Toast.MakeText(this, edittextFinishPoint.Text, ToastLength.Short).Show();
+                    e.Handled = true;
+                }
+            };
+
+
+
         }
 
         private void SetUpMap()
