@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
+    <string name="MainDownload">Main</string>
     <string name="ApplicationName">FuelUp</string>
     <string name="ImgBtnAccess">Accsess Btn is clicked!</string>
     <string name="ImgBtnStaition">Station Btn is clicked!</string>
     <string name="ImgBtnBusinesssCenter">Business Center Btn is clicked!</string>
     <string name="ImgBtnMoney">Money Btn is clicked!</string>
-  <string name="menuButton">MENU</string>
+  <string name="Request">Post</string>
   <string name="testMenuButton">TEST MENU</string>
   <string name="noneButton">NONE</string>
   <string name="allButton">ALL</string>

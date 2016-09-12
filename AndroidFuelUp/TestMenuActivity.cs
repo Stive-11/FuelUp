@@ -15,7 +15,7 @@ namespace AndroidFuelUp
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.TestMenu);
+            SetContentView(Resource.Layout.ServicesMenu);
 
             var testListView = FindViewById<ListView>(Resource.Id.listViewTestMenu);
             testListView.Adapter = new ArrayAdapter<string>(this,
