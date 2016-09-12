@@ -1,0 +1,32 @@
+﻿
+    /*.cont {padding-top:10px;}*/
+    .filters li:hover{
+        background-color:black;
+    }
+    .filters li, img {
+         width:65px;
+         height:65px;
+    }
+    .filters li {
+        margin-bottom:8px;
+    }
+    ul {
+    -moz-column-count: 3; /* Firefox */
+     -webkit-column-count: 3; /* Safari and Chrome */
+     column-count: 3;
+     list-style-type: none;
+     margin-left: 0!important;
+     padding: 0;
+    }
+    .imagePressed {
+        background-color:#5DB75D;
+    }
+    .imageUnpressed:hover::after { 
+        content: attr(data-title); 
+        position: absolute; 
+        left: 20%; top: 30%; 
+        z-index: 1; 
+        font-family: Arial, sans-serif; 
+        font-size: 11px; 
+        padding: 5px 5px; 
+    }
