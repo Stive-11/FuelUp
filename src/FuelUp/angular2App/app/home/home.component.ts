@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
         this._httpService.getAllStations()
             .subscribe(allStations => this.allStations = allStations);
 
-        document.getElementById("gMap").style.height = "97.4vh";
+        document.getElementById("gMap").style.height = "86.3vh";
         // console.info("allStation - " + this.allStations.length);
 
     }
