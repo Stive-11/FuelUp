@@ -1,4 +1,5 @@
 using FuelUp.Models.ApiModels;
+using FuelUp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -7,6 +8,14 @@ namespace FuelUp.Api
     [Produces("application/json")]
     public class PathesController : Controller
     {
+        private readonly IGoogleMap _googleMap;
+        public PathesController(
+            IGoogleMap googleMap
+            )
+        {
+            _googleMap = googleMap;
+        }
+
         [Route("api/Pathes/stringsPath")]
         [HttpPost]
         public IActionResult StringPathes([FromBody] Requests.PathStrings pointsPathesRequest)
@@ -15,7 +24,9 @@ namespace FuelUp.Api
             {
                 return BadRequest(ModelState);
             }
-            return Ok(JsonConvert.SerializeObject(pointsPathesRequest));
+
+            var returnString = _googleMap.GetStringDirectionWithoutPoints(pointsPathesRequest);
+            return Ok(returnString);
         }
 
         [Route("api/Pathes/coordinatsPath")]
@@ -26,7 +37,8 @@ namespace FuelUp.Api
             {
                 return BadRequest(ModelState);
             }
-            return Ok(JsonConvert.SerializeObject(pointsPathesRequest));
+            var returnString = _googleMap.GetStringDirectionWithoutPoints(pointsPathesRequest);
+            return Ok(returnString);
         }
     }
 }
