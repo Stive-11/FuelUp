@@ -13,8 +13,7 @@ var testDataService_1 = require('../services/testDataService');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var HomeComponent = (function () {
-    function HomeComponent(_dataService, _httpService) {
-        this._dataService = _dataService;
+    function HomeComponent(_httpService) {
         this._httpService = _httpService;
         this.lat = 53.8840092;
         this.lng = 27.4548901;
@@ -30,7 +29,7 @@ var HomeComponent = (function () {
         var _this = this;
         this._httpService.getAllStations()
             .subscribe(function (allStations) { return _this.allStations = allStations; });
-        document.getElementById("gMap").style.height = "100vh";
+        document.getElementById("gMap").style.height = "97.4vh";
     };
     HomeComponent = __decorate([
         core_1.Component({
@@ -39,7 +38,7 @@ var HomeComponent = (function () {
             styles: [styles],
             providers: [testDataService_1.TestDataService, Httpservice.HTTPService]
         }), 
-        __metadata('design:paramtypes', [testDataService_1.TestDataService, Httpservice.HTTPService])
+        __metadata('design:paramtypes', [Httpservice.HTTPService])
     ], HomeComponent);
     return HomeComponent;
 }());

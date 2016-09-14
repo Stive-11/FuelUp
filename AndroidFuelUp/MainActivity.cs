@@ -27,11 +27,7 @@ namespace AndroidFuelUp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
             SetUpMap();
-
-            // Get our button from the layout resource,
-            // and attach an event to it
 
             GetServicesFromServer();
 
@@ -44,14 +40,14 @@ namespace AndroidFuelUp
             {
                 FunWithMap();
                 GetTEstInfo();
+                ShowAllStationOnMap();
             };
 
-           // ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
+            // ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
             //stationBtn.Click += delegate { theHiButton.Text = string.Format("{0}", GetString(Resource.String.ImgBtnStaition)); };
 
-            
             Button menuButton = FindViewById<Button>(Resource.Id.menuButton);
-             menuButton.Click += delegate { SendInfoToServer(); };
+            menuButton.Click += delegate { SendInfoToServer(); };
 
             Button testMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
 
@@ -70,8 +66,6 @@ namespace AndroidFuelUp
                 }
             };
 
-
-
             EditText edittextFinishPoint = FindViewById<EditText>(Resource.Id.edittextFinishPoint);
             //edittextFinishPoint.SetSingleLine = true;
             edittextFinishPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
@@ -83,9 +77,6 @@ namespace AndroidFuelUp
                     e.Handled = true;
                 }
             };
-
-
-
         }
 
         private void SetUpMap()
@@ -236,9 +227,6 @@ namespace AndroidFuelUp
                           Android.Widget.ToastLength.Short).Show();
                     }
                 }
-            
-
-
             }
             catch (Exception ex)
             {
@@ -290,5 +278,42 @@ namespace AndroidFuelUp
                       Android.Widget.ToastLength.Long).Show();
             }
         }
+
+        //Нанесение на карту заправочных станций
+        public void MakeStationOnMap(LatLng location, string operatorName)
+        {
+            if (mMap != null)
+            {
+                mMap.MapType = GoogleMap.MapTypeNormal;
+
+                //LatLng location = new LatLng(53.87615, 27.6739);
+                //CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                //builder.Target(location);
+                //builder.Zoom(18);
+
+                MarkerOptions newStatioinMarker = new MarkerOptions();
+                newStatioinMarker.SetPosition(location);
+                newStatioinMarker.SetTitle(operatorName);
+
+                BitmapDescriptor image = BitmapDescriptorFactory.FromResource(Resource.Drawable.station);
+                var bitmap = BitmapFactory.DecodeResource(Resources, Resource.Drawable.station);
+                var desc = BitmapDescriptorFactory.FromBitmap(bitmap);
+
+                newStatioinMarker.InvokeIcon(desc);
+                mMap.AddMarker(newStatioinMarker);
+            }
+        }
+
+        public  void ShowAllStationOnMap()
+        {
+            foreach (var station in InfoStore.InfoAzs)
+            {
+                MakeStationOnMap(new LatLng((double)station.coordinates.latitude,
+                    (double)station.coordinates.longitude), 
+                    station.operatorName);
+            }
+        }
+
+
     }
 }
