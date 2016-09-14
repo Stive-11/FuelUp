@@ -55,6 +55,7 @@ namespace FuelUp
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IGetInfo, GetInfo>();
+            services.AddScoped<IGoogleMap, GoogleMapDirections>();
 
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();

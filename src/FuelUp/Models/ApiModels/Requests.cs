@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace FuelUp.Models.ApiModels
@@ -18,6 +19,10 @@ namespace FuelUp.Models.ApiModels
             public Сoordinates startPoint { set; get; }
             public Сoordinates finishPoint { set; get; }
         }
-            
+
+        public class PathCoordinatsWithServiceCod :PathCoordinats
+        {
+            public long serviceCod { set; get; }
+        }
     }
 }
