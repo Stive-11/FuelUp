@@ -34,7 +34,7 @@ var AppModule = (function () {
                 app_routes_1.routing,
                 http_1.HttpModule,
                 http_1.JsonpModule,
-                core_2.AgmCoreModule.forRoot(),
+                core_2.AgmCoreModule.forRoot()
             ],
             declarations: [
                 app_component_1.AppComponent,
