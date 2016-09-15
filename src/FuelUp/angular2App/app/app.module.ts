@@ -24,7 +24,8 @@ import {HTTPComponent} from "./http/http.component";
         routing,
         HttpModule,
         JsonpModule,
-        AgmCoreModule.forRoot(),
+        AgmCoreModule.forRoot()
+        
     ],
     declarations: [
         AppComponent,
