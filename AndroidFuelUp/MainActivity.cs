@@ -9,8 +9,6 @@ using AndroidFuelUp.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Net.Http;using System.Text;
 
 namespace AndroidFuelUp
@@ -27,37 +25,31 @@ namespace AndroidFuelUp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
             SetUpMap();
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-
             GetServicesFromServer();
+            GetInfoFromServer();
 
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
-
-            //button.Click += delegate { GetMainInfoFromServer(); };
-
-            Button theHiButton = FindViewById<Button>(Resource.Id.HiButton);
-            theHiButton.Click += delegate
+            Button showStationsButton = FindViewById<Button>(Resource.Id.showStationsBtn);
+            showStationsButton.Click += delegate
             {
-                FunWithMap();
-                GetTEstInfo();
+                GetInfoFromServer();
+                ShowAllStationOnMap();
             };
 
-           // ImageButton stationBtn = FindViewById<ImageButton>(Resource.Id.imageBtnStation);
-            //stationBtn.Click += delegate { theHiButton.Text = string.Format("{0}", GetString(Resource.String.ImgBtnStaition)); };
+           
 
-            
-            Button menuButton = FindViewById<Button>(Resource.Id.menuButton);
-             menuButton.Click += delegate { SendInfoToServer(); };
+            Button routeButton = FindViewById<Button>(Resource.Id.routeBtn);
+            routeButton.Click += delegate
+            {
+                SendInfoToServer();
+            };
 
-            Button testMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
-
-            //testMenuButton.Click += delegate { GetServicesFromServer(); };
-
-            testMenuButton.Click += delegate { StartActivity(typeof(TestMenuActivity)); };
+            Button serviceMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
+            serviceMenuButton.Click += delegate
+            {
+                StartActivity(typeof(MenuActivity));
+            };
 
             EditText edittextStartPoint = FindViewById<EditText>(Resource.Id.edittextStartPoint);
             edittextStartPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
@@ -70,10 +62,7 @@ namespace AndroidFuelUp
                 }
             };
 
-
-
             EditText edittextFinishPoint = FindViewById<EditText>(Resource.Id.edittextFinishPoint);
-            //edittextFinishPoint.SetSingleLine = true;
             edittextFinishPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
             {
                 e.Handled = false;
@@ -83,9 +72,6 @@ namespace AndroidFuelUp
                     e.Handled = true;
                 }
             };
-
-
-
         }
 
         private void SetUpMap()
@@ -103,107 +89,48 @@ namespace AndroidFuelUp
                 new LatLng(51.230751, 23.178335),
                 new LatLng(56.173565, 32.776834));
             mMap.MoveCamera(CameraUpdateFactory.NewLatLngZoom(bounds.Center, (float)5.5));
-            //throw new NotImplementedException();
+            mMap.UiSettings.ZoomControlsEnabled = true;
+            mMap.UiSettings.CompassEnabled = true;
         }
 
-        public void FunWithMap()
+        
+
+        public async void GetInfoFromServer()
         {
-            if (mMap != null)
-            {
-                mMap.MapType = GoogleMap.MapTypeNormal;
-
-                LatLng location = new LatLng(53.87615, 27.6739);
-                CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                builder.Target(location);
-                builder.Zoom(18);
-                //builder.Bearing(155);
-                //builder.Tilt(65);
-                CameraPosition cameraPosition = builder.Build();
-                CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-                mMap.MoveCamera(cameraUpdate);
-                //Marker marker1=new Marker();
-
-                MarkerOptions markerOpt1 = new MarkerOptions();
-                markerOpt1.SetPosition(new LatLng(53.87615, 27.6739));
-                markerOpt1.SetTitle("MINSK");
-
-                BitmapDescriptor image = BitmapDescriptorFactory.FromResource(Resource.Drawable.station);
-                var bitmap = BitmapFactory.DecodeResource(Resources, Resource.Drawable.station);
-                var desc = BitmapDescriptorFactory.FromBitmap(bitmap);
-
-                markerOpt1.InvokeIcon(desc);
-                mMap.AddMarker(markerOpt1);
-            }
-        }
-
-        public string GetMainInfoFromServer()
-        {
-            Android.Widget.Toast.MakeText(this,
-                  "The Button to Server is clicked",
-                  Android.Widget.ToastLength.Short).Show();
-
-            var errorStr = string.Empty;
-
-            //var sendingString = JsonConvert.SerializeObject(sendingPayout);
-            var responseFromServer = string.Empty;
-
             try
             {
-                //var encoding = new UTF8Encoding();
-                //var body = encoding.GetBytes(sendingString);
-                var url = @"http://193.124.57.9:2000/api/GetMainInfo";
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                request.ContentType = "application/json";
-                request.Method = "GET";
-                //request.ContentLength = body.Length;
-                //request.Headers.Add("Authentication", authentication);
+                string getInfoUrl = "http://193.124.57.9:2000/api/GetMainInfo";
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync(getInfoUrl);
 
-                //using (Stream stream = request.GetRequestStream())
-                //{
-                //    stream.Write(body, 0, body.Length);
-                //    stream.Close();
-                //}
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                if (response.IsSuccessStatusCode)
                 {
-                    var strreader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-                    responseFromServer = strreader.ReadToEnd();
-                    strreader.Close();
+                    Android.Widget.Toast.MakeText(this,
+                      "SuccesGetMainInfoRespponse",
+                      Android.Widget.ToastLength.Short).Show();
+                    var json = await response.Content.ReadAsStringAsync();
+                    var infoAboutAzs = JsonConvert.DeserializeObject<List<MainInfoAzs>>(json);
+                    InfoStore.InfoAzs.Clear();
+                    InfoStore.InfoAzs.AddRange(infoAboutAzs);
+                    foreach (var tempStation in infoAboutAzs)
+                    {
+                        InfoStore.StationsOnMap.Add(new StationForMap(tempStation.coordinates, tempStation.operatorName));
+                    }
                 }
-
-                //var stations = JsonConvert.DeserializeObject<MainInfoAzs>(responseFromServer);
-
-                Android.Widget.Toast.MakeText(this,
-                   "The row #" + responseFromServer.ToString() + "is tappad",
-                   Android.Widget.ToastLength.Short).Show();
+                else
+                {
+                    Android.Widget.Toast.MakeText(this,
+                      "ERROR Http Respponse",
+                      Android.Widget.ToastLength.Short).Show();
+                }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                return "Ошибка  #";
-            }
-
-            return responseFromServer;
-        }
-
-        public async void GetTEstInfo()
-        {
-            string getInfoUrl = "http://193.124.57.9:2000/api/GetMainInfo";
-            HttpClient client = new HttpClient();            HttpResponseMessage response = await client.GetAsync(getInfoUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                Android.Widget.Toast.MakeText(this,
-                  "Succes Http Respponse",
-                  Android.Widget.ToastLength.Short).Show();
-
-                //return await ParseResponse(response.Content);
-            }
-            else
-            {
-                Android.Widget.Toast.MakeText(this,
-                  "ERROR Http Respponse",
-                  Android.Widget.ToastLength.Short).Show();
-            }
+                var strError = $"{ex.ToString()} {ex.Message} {ex.StackTrace} ";
+                //Android.Widget.Toast.MakeText(this,
+                //      strError,
+                //      Android.Widget.ToastLength.Long).Show();
+            }
         }
 
         public async void SendInfoToServer()
@@ -215,8 +142,6 @@ namespace AndroidFuelUp
 
                 using (HttpClient client = new HttpClient())
                 {
-                    //HttpResponseMessage response = await client.GetAsync(postServicesUrl);
-
                     var pointsPathesRequest = new Requests.PathStrings() { startPoint = "Minsk", finishPoint = "Brest" };
                     var json = JsonConvert.SerializeObject(pointsPathesRequest);
                     HttpResponseMessage response = await client.PostAsync(postStringServicesUrl, new StringContent(json, Encoding.UTF8, "application/json"));
@@ -226,8 +151,6 @@ namespace AndroidFuelUp
                         Android.Widget.Toast.MakeText(this,
                           await response.Content.ReadAsStringAsync(),
                           Android.Widget.ToastLength.Short).Show();
-
-                        //return await ParseResponse(response.Content);
                     }
                     else
                     {
@@ -236,9 +159,6 @@ namespace AndroidFuelUp
                           Android.Widget.ToastLength.Short).Show();
                     }
                 }
-            
-
-
             }
             catch (Exception ex)
             {
@@ -260,7 +180,7 @@ namespace AndroidFuelUp
                 if (response.IsSuccessStatusCode)
                 {
                     Android.Widget.Toast.MakeText(this,
-                      "Succes Http Respponse",
+                      "SuccesServicesResponse",
                       Android.Widget.ToastLength.Short).Show();
                     var json = await response.Content.ReadAsStringAsync();
                     var servicesFromDb = JsonConvert.DeserializeObject<List<ServiceTypes>>(json);
@@ -270,10 +190,6 @@ namespace AndroidFuelUp
                     {
                         InfoStore.Services.Add(tempServ.Service);
                     }
-
-                    // JsonConvert.SerializeObjectAsync(response.Content);
-
-                    //return await ParseResponse(JsonConvert.ToString(response.Content));
                 }
                 else
                 {
@@ -285,9 +201,41 @@ namespace AndroidFuelUp
             catch (System.Exception ex)
             {
                 var strError = $"{ex.ToString()} {ex.Message} {ex.StackTrace} ";
-                Android.Widget.Toast.MakeText(this,
-                      strError,
-                      Android.Widget.ToastLength.Long).Show();
+                //Android.Widget.Toast.MakeText(this,
+                //      strError,
+                //      Android.Widget.ToastLength.Long).Show();
+            }
+        }
+
+        //Нанесение на карту одной заправочной станции
+        public void MakeStationOnMap(LatLng location, string operatorName)
+        {
+            if (mMap != null)
+            {
+                mMap.MapType = GoogleMap.MapTypeNormal;
+
+                MarkerOptions newStatioinMarker = new MarkerOptions();
+                newStatioinMarker.SetPosition(location);
+                newStatioinMarker.SetTitle(operatorName);
+
+                BitmapDescriptor image = BitmapDescriptorFactory.FromResource(Resource.Drawable.station);
+                var bitmap = BitmapFactory.DecodeResource(Resources, Resource.Drawable.station);
+                var desc = BitmapDescriptorFactory.FromBitmap(bitmap);
+
+                newStatioinMarker.InvokeIcon(desc);
+                mMap.AddMarker(newStatioinMarker);
+            }
+        }
+
+        //Отображение на карте всех станций из базы данных
+        public void ShowAllStationOnMap()
+        {
+            foreach (var station in InfoStore.StationsOnMap)
+            {
+                if (station.coordinates.latitude != null && station.coordinates.longitude != null)
+                    MakeStationOnMap(new LatLng((double)station.coordinates.latitude,
+                            (double)station.coordinates.longitude),
+                        station.operatorName);
             }
         }
     }

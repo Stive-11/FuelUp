@@ -87,7 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\MenuItemAdapter.cs" />
     <Compile Include="Models\ServiceTypes.cs" />
-    <Compile Include="TestMenuActivity.cs" />
+    <Compile Include="MenuActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

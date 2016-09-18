@@ -10,26 +10,20 @@
         android:id="@+id/linearLayout1"
         android:layout_gravity="left">
         <Button
-            android:id="@+id/MyButton"
+            android:text="@string/showAzs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/MainDownload"
-            android:layout_marginRight="0.0dp" />
-        <Button
-            android:text="Hi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/HiButton" />
-        <Button
-            android:text="@string/Request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/menuButton" />
+            android:id="@+id/showStationsBtn" />
         <Button
             android:text="@string/testMenuButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/testMenuButton" />
+        <Button
+            android:text="@string/route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/routeBtn" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
