@@ -1840,8 +1840,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0018
 			public const int disableHome = 2131427352;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int doneButton = 2131427445;
+			// aapt resource value: 0x7f0b0076
+			public const int doneButton = 2131427446;
 			
 			// aapt resource value: 0x7f0b004e
 			public const int edit_query = 2131427406;
@@ -1909,8 +1909,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0016
 			public const int listMode = 2131427350;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int listViewTestMenu = 2131427444;
+			// aapt resource value: 0x7f0b0075
+			public const int listViewMenu = 2131427445;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int list_item = 2131427379;
@@ -1920,6 +1920,9 @@ namespace AndroidFuelUp
 			
 			// aapt resource value: 0x7f0b0067
 			public const int media_actions = 2131427431;
+			
+			// aapt resource value: 0x7f0b0074
+			public const int menuLayout = 2131427444;
 			
 			// aapt resource value: 0x7f0b0025
 			public const int middle = 2131427365;
@@ -2444,7 +2447,7 @@ namespace AndroidFuelUp
 			public const int route = 2131034166;
 			
 			// aapt resource value: 0x7f05003e
-			public const int servisex = 2131034174;
+			public const int services = 2131034174;
 			
 			// aapt resource value: 0x7f050034
 			public const int showAzs = 2131034164;

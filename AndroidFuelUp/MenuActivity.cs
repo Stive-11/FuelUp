@@ -17,7 +17,7 @@ namespace AndroidFuelUp
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ServicesMenu);
 
-            var menuListView = FindViewById<ListView>(Resource.Id.listViewTestMenu);
+            var menuListView = FindViewById<ListView>(Resource.Id.listViewMenu);
             menuListView.Adapter = new ArrayAdapter<string>(this,
                 Android.Resource.Layout.SimpleListItemMultipleChoice, InfoStore.Services.ToArray());
 
@@ -29,7 +29,7 @@ namespace AndroidFuelUp
             {
                 var checkedList = new List<string>();
                 var arrayServices = InfoStore.Services.ToArray();
-                var sparseArray = FindViewById<ListView>(Resource.Id.listViewTestMenu).CheckedItemPositions;
+                var sparseArray = menuListView.CheckedItemPositions;
 
                 for (var i = 0; i < sparseArray.Size(); i++)
                 {
@@ -45,11 +45,20 @@ namespace AndroidFuelUp
                     Android.Widget.ToastLength.Short).Show();
             };
 
-
             Button noneServiceButton = FindViewById<Button>(Resource.Id.noneButton);
             noneServiceButton.Click += delegate
             {
                 menuListView.ClearChoices();
+                menuListView.RequestLayout();
+            };
+
+            Button allServiceButton = FindViewById<Button>(Resource.Id.allButton);
+            allServiceButton.Click += delegate
+            {
+                for (int i = 0; i < InfoStore.Services.ToArray().Length; i++)
+                {
+                    menuListView.SetItemChecked(i, true);
+                }
             };
         }
     }
