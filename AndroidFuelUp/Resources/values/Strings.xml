@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="MainDownload">Main</string>
-    <string name="ApplicationName">FuelUp</string>
-    <string name="ImgBtnAccess">Accsess Btn is clicked!</string>
-    <string name="ImgBtnStaition">Station Btn is clicked!</string>
-    <string name="ImgBtnBusinesssCenter">Business Center Btn is clicked!</string>
-    <string name="ImgBtnMoney">Money Btn is clicked!</string>
-  <string name="Request">Post</string>
-  <string name="testMenuButton">TEST MENU</string>
+  <string name="ApplicationName">FuelUp</string>
+  
+  <string name="showAzs">STATIONS</string>
+  <string name="testMenuButton">SERVICES</string>
+  <string name="route">ROUTE</string>
   <string name="noneButton">NONE</string>
   <string name="allButton">ALL</string>
-  <string name="servisex">SERVICES</string>
   <string name="doneButton">DONE</string>
+  
+  
+  <string name="ImgBtnAccess">Accsess Btn is clicked!</string>
+  <string name="ImgBtnStaition">Station Btn is clicked!</string>
+  <string name="ImgBtnBusinesssCenter">Business Center Btn is clicked!</string>
+  <string name="ImgBtnMoney">Money Btn is clicked!</string>
+  <string name="servisex">SERVICES</string>
 
-    <string name="google_maps_key">AIzaSyBh30rQjww49Ag3lYn2Dcl-WrH0hdFfN34</string>
+  <string name="google_maps_key">AIzaSyBh30rQjww49Ag3lYn2Dcl-WrH0hdFfN34</string>
 </resources>

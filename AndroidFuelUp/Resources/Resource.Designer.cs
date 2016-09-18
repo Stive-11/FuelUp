@@ -1735,14 +1735,8 @@ namespace AndroidFuelUp
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b005d
-			public const int HiButton = 2131427421;
-			
-			// aapt resource value: 0x7f0b005c
-			public const int MyButton = 2131427420;
-			
-			// aapt resource value: 0x7f0b0065
-			public const int action0 = 2131427429;
+			// aapt resource value: 0x7f0b0064
+			public const int action0 = 2131427428;
 			
 			// aapt resource value: 0x7f0b004c
 			public const int action_bar = 2131427404;
@@ -1768,8 +1762,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b004d
 			public const int action_context_bar = 2131427405;
 			
-			// aapt resource value: 0x7f0b0069
-			public const int action_divider = 2131427433;
+			// aapt resource value: 0x7f0b0068
+			public const int action_divider = 2131427432;
 			
 			// aapt resource value: 0x7f0b0002
 			public const int action_menu_divider = 2131427330;
@@ -1798,8 +1792,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b003b
 			public const int alertTitle = 2131427387;
 			
-			// aapt resource value: 0x7f0b0073
-			public const int allButton = 2131427443;
+			// aapt resource value: 0x7f0b0072
+			public const int allButton = 2131427442;
 			
 			// aapt resource value: 0x7f0b0026
 			public const int always = 2131427366;
@@ -1813,14 +1807,14 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0036
 			public const int buttonPanel = 2131427382;
 			
-			// aapt resource value: 0x7f0b0066
-			public const int cancel_action = 2131427430;
+			// aapt resource value: 0x7f0b0065
+			public const int cancel_action = 2131427429;
 			
 			// aapt resource value: 0x7f0b0044
 			public const int checkbox = 2131427396;
 			
-			// aapt resource value: 0x7f0b006c
-			public const int chronometer = 2131427436;
+			// aapt resource value: 0x7f0b006b
+			public const int chronometer = 2131427435;
 			
 			// aapt resource value: 0x7f0b0027
 			public const int collapseActionView = 2131427367;
@@ -1846,23 +1840,23 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0018
 			public const int disableHome = 2131427352;
 			
-			// aapt resource value: 0x7f0b0076
-			public const int doneButton = 2131427446;
+			// aapt resource value: 0x7f0b0075
+			public const int doneButton = 2131427445;
 			
 			// aapt resource value: 0x7f0b004e
 			public const int edit_query = 2131427406;
 			
-			// aapt resource value: 0x7f0b0062
-			public const int edittextFinishPoint = 2131427426;
-			
 			// aapt resource value: 0x7f0b0061
-			public const int edittextStartPoint = 2131427425;
+			public const int edittextFinishPoint = 2131427425;
+			
+			// aapt resource value: 0x7f0b0060
+			public const int edittextStartPoint = 2131427424;
 			
 			// aapt resource value: 0x7f0b0024
 			public const int end = 2131427364;
 			
-			// aapt resource value: 0x7f0b0071
-			public const int end_padder = 2131427441;
+			// aapt resource value: 0x7f0b0070
+			public const int end_padder = 2131427440;
 			
 			// aapt resource value: 0x7f0b0030
 			public const int expand_activities_button = 2131427376;
@@ -1870,8 +1864,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0043
 			public const int expanded_menu = 2131427395;
 			
-			// aapt resource value: 0x7f0b0063
-			public const int frameLayout1 = 2131427427;
+			// aapt resource value: 0x7f0b0062
+			public const int frameLayout1 = 2131427426;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int home = 2131427332;
@@ -1894,41 +1888,38 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0031
 			public const int image = 2131427377;
 			
-			// aapt resource value: 0x7f0b0070
-			public const int info = 2131427440;
+			// aapt resource value: 0x7f0b006f
+			public const int info = 2131427439;
 			
 			// aapt resource value: 0x7f0b0015
 			public const int light = 2131427349;
 			
-			// aapt resource value: 0x7f0b006a
-			public const int line1 = 2131427434;
+			// aapt resource value: 0x7f0b0069
+			public const int line1 = 2131427433;
 			
-			// aapt resource value: 0x7f0b006e
-			public const int line3 = 2131427438;
+			// aapt resource value: 0x7f0b006d
+			public const int line3 = 2131427437;
 			
 			// aapt resource value: 0x7f0b005b
 			public const int linearLayout1 = 2131427419;
 			
-			// aapt resource value: 0x7f0b0060
-			public const int linearLayoutStartFinish = 2131427424;
+			// aapt resource value: 0x7f0b005f
+			public const int linearLayoutStartFinish = 2131427423;
 			
 			// aapt resource value: 0x7f0b0016
 			public const int listMode = 2131427350;
 			
-			// aapt resource value: 0x7f0b0075
-			public const int listViewTestMenu = 2131427445;
+			// aapt resource value: 0x7f0b0074
+			public const int listViewTestMenu = 2131427444;
 			
 			// aapt resource value: 0x7f0b0033
 			public const int list_item = 2131427379;
 			
-			// aapt resource value: 0x7f0b0064
-			public const int map = 2131427428;
+			// aapt resource value: 0x7f0b0063
+			public const int map = 2131427427;
 			
-			// aapt resource value: 0x7f0b0068
-			public const int media_actions = 2131427432;
-			
-			// aapt resource value: 0x7f0b005e
-			public const int menuButton = 2131427422;
+			// aapt resource value: 0x7f0b0067
+			public const int media_actions = 2131427431;
 			
 			// aapt resource value: 0x7f0b0025
 			public const int middle = 2131427365;
@@ -1942,8 +1933,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b000a
 			public const int none = 2131427338;
 			
-			// aapt resource value: 0x7f0b0074
-			public const int noneButton = 2131427444;
+			// aapt resource value: 0x7f0b0073
+			public const int noneButton = 2131427443;
 			
 			// aapt resource value: 0x7f0b000b
 			public const int normal = 2131427339;
@@ -1959,6 +1950,9 @@ namespace AndroidFuelUp
 			
 			// aapt resource value: 0x7f0b0046
 			public const int radio = 2131427398;
+			
+			// aapt resource value: 0x7f0b005e
+			public const int routeBtn = 2131427422;
 			
 			// aapt resource value: 0x7f0b000c
 			public const int satellite = 2131427340;
@@ -2017,6 +2011,9 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b001b
 			public const int showHome = 2131427355;
 			
+			// aapt resource value: 0x7f0b005c
+			public const int showStationsBtn = 2131427420;
+			
 			// aapt resource value: 0x7f0b001c
 			public const int showTitle = 2131427356;
 			
@@ -2038,8 +2035,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b0011
 			public const int standard = 2131427345;
 			
-			// aapt resource value: 0x7f0b0067
-			public const int status_bar_latest_event_content = 2131427431;
+			// aapt resource value: 0x7f0b0066
+			public const int status_bar_latest_event_content = 2131427430;
 			
 			// aapt resource value: 0x7f0b0057
 			public const int submit_area = 2131427415;
@@ -2050,23 +2047,23 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f0b000d
 			public const int terrain = 2131427341;
 			
-			// aapt resource value: 0x7f0b005f
-			public const int testMenuButton = 2131427423;
+			// aapt resource value: 0x7f0b005d
+			public const int testMenuButton = 2131427421;
 			
-			// aapt resource value: 0x7f0b006f
-			public const int text = 2131427439;
+			// aapt resource value: 0x7f0b006e
+			public const int text = 2131427438;
 			
-			// aapt resource value: 0x7f0b006d
-			public const int text2 = 2131427437;
+			// aapt resource value: 0x7f0b006c
+			public const int text2 = 2131427436;
 			
 			// aapt resource value: 0x7f0b003f
 			public const int textSpacerNoButtons = 2131427391;
 			
-			// aapt resource value: 0x7f0b0072
-			public const int textView1 = 2131427442;
+			// aapt resource value: 0x7f0b0071
+			public const int textView1 = 2131427441;
 			
-			// aapt resource value: 0x7f0b006b
-			public const int time = 2131427435;
+			// aapt resource value: 0x7f0b006a
+			public const int time = 2131427434;
 			
 			// aapt resource value: 0x7f0b0035
 			public const int title = 2131427381;
@@ -2266,26 +2263,20 @@ namespace AndroidFuelUp
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050034
-			public const int ApplicationName = 2131034164;
-			
-			// aapt resource value: 0x7f050035
-			public const int ImgBtnAccess = 2131034165;
-			
-			// aapt resource value: 0x7f050037
-			public const int ImgBtnBusinesssCenter = 2131034167;
-			
-			// aapt resource value: 0x7f050038
-			public const int ImgBtnMoney = 2131034168;
-			
-			// aapt resource value: 0x7f050036
-			public const int ImgBtnStaition = 2131034166;
-			
 			// aapt resource value: 0x7f050033
-			public const int MainDownload = 2131034163;
+			public const int ApplicationName = 2131034163;
 			
-			// aapt resource value: 0x7f050039
-			public const int Request = 2131034169;
+			// aapt resource value: 0x7f05003a
+			public const int ImgBtnAccess = 2131034170;
+			
+			// aapt resource value: 0x7f05003c
+			public const int ImgBtnBusinesssCenter = 2131034172;
+			
+			// aapt resource value: 0x7f05003d
+			public const int ImgBtnMoney = 2131034173;
+			
+			// aapt resource value: 0x7f05003b
+			public const int ImgBtnStaition = 2131034171;
 			
 			// aapt resource value: 0x7f05001f
 			public const int abc_action_bar_home_description = 2131034143;
@@ -2344,8 +2335,8 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f050031
 			public const int abc_toolbar_collapse_description = 2131034161;
 			
-			// aapt resource value: 0x7f05003c
-			public const int allButton = 2131034172;
+			// aapt resource value: 0x7f050038
+			public const int allButton = 2131034168;
 			
 			// aapt resource value: 0x7f050001
 			public const int auth_google_play_services_client_facebook_display_name = 2131034113;
@@ -2440,23 +2431,29 @@ namespace AndroidFuelUp
 			// aapt resource value: 0x7f05001e
 			public const int common_signin_button_text_long = 2131034142;
 			
-			// aapt resource value: 0x7f05003e
-			public const int doneButton = 2131034174;
+			// aapt resource value: 0x7f050039
+			public const int doneButton = 2131034169;
 			
 			// aapt resource value: 0x7f05003f
 			public const int google_maps_key = 2131034175;
 			
-			// aapt resource value: 0x7f05003b
-			public const int noneButton = 2131034171;
+			// aapt resource value: 0x7f050037
+			public const int noneButton = 2131034167;
 			
-			// aapt resource value: 0x7f05003d
-			public const int servisex = 2131034173;
+			// aapt resource value: 0x7f050036
+			public const int route = 2131034166;
+			
+			// aapt resource value: 0x7f05003e
+			public const int servisex = 2131034174;
+			
+			// aapt resource value: 0x7f050034
+			public const int showAzs = 2131034164;
 			
 			// aapt resource value: 0x7f050032
 			public const int status_bar_notification_info_overflow = 2131034162;
 			
-			// aapt resource value: 0x7f05003a
-			public const int testMenuButton = 2131034170;
+			// aapt resource value: 0x7f050035
+			public const int testMenuButton = 2131034165;
 			
 			static String()
 			{

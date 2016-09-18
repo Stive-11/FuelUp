@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var styles = String(require('./about.component.scss'));
 var AboutComponent = (function () {
     function AboutComponent() {
         this.message = "Hello from About";
@@ -18,7 +19,8 @@ var AboutComponent = (function () {
     AboutComponent = __decorate([
         core_1.Component({
             selector: 'about',
-            template: require('./about.component.html')
+            template: require('./about.component.html'),
+            styles: [styles],
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);

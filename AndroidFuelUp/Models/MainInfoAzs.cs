@@ -14,4 +14,16 @@ namespace AndroidFuelUp.Models
         public double? latitude { set; get; }
         public double? longitude { set; get; }
     }
+
+    public class StationForMap
+    {
+        public Ñoordinates coordinates { set; get; }
+        public string operatorName { set; get; }
+
+        public StationForMap(Ñoordinates coord, string oName)
+        {
+            coordinates = coord;
+            operatorName = oName;
+        }
+    }
 }
