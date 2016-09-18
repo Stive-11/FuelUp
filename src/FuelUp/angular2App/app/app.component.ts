@@ -2,6 +2,7 @@
 import { Router } from '@angular/router';
 import {ImgComponent} from "./image.component";
 let styles = String(require('./app.component.scss'));
+declare var jQuery: any;
 
 @Component({
     selector: 'my-app',
@@ -10,9 +11,15 @@ let styles = String(require('./app.component.scss'));
 })
 
 
-export class AppComponent {
+export class AppComponent implements OnInit{
     home: string = "На главную";
     about: string = "О сайте";
     constructor(private router: Router) {
+    }
+
+    ngOnInit() {
+        jQuery(".menu-opener").click(function () {
+            jQuery(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
+        });
     }
 }

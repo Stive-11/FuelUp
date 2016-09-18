@@ -1,12 +1,11 @@
-<!--<script type="text/javascript">//<![CDATA[
-    $(window).load(function(){
-      $("[data-toggle]").click(function() {
-        var toggle_el = $(this).data("toggle");
-        $(toggle_el).toggleClass("open-sidebar");
-      });
+<script type="text/javascript">
+    $(".menu-opener").click(function () {
+        console.log('click!');
+        $(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
+        
     });
 
-</script>-->
+</script>
 <div class="container-fluid wrapper">
 <div class="row-fluid columns content">
  <nav class="navbar navbar-inverse custom">
@@ -37,11 +36,9 @@
         <filtres></filtres>
     </div>
     <div class="col-sm-12 content-area">
-        <a href="#" data-toggle=".moved" id="sidebar-toggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </a>
+        <nav class="menu-opener">
+            <div class="menu-opener-inner"></div>
+        </nav>
         <router-outlet></router-outlet>     
     </div>
   </div>
