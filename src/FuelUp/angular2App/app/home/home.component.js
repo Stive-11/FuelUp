@@ -23,7 +23,6 @@ var HomeComponent = (function () {
         this.cord2 = { latitude: this.lat1, longitude: this.lng1 };
         this.markers = [this.cord1, this.cord2];
         this.zoom = 8;
-        this.message = "Hello from HomeComponent constructor";
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
