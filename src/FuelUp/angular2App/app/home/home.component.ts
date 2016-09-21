@@ -8,6 +8,7 @@ import Stationinterface = require("../http/station.interface");
 import Httpservice = require("../http/http.service");
 import Coordinatesinterface = require("../http/coordinates.interface");
 let styles = String(require('./home.component.scss'));
+declare var jQuery: any;
 
 
 @Component({
@@ -34,9 +35,7 @@ export class HomeComponent implements OnInit {
     allStations: Stationinterface.Station[];
 
 
-    constructor(private _httpService: Httpservice.HTTPService) {
-        this.message = "Hello from HomeComponent constructor";
-    }
+    constructor(private _httpService: Httpservice.HTTPService) {}
 
     ngOnInit() {
         //this._dataService
@@ -48,7 +47,8 @@ export class HomeComponent implements OnInit {
         this._httpService.getAllStations()
             .subscribe(allStations => this.allStations = allStations);
 
-        document.getElementById("gMap").style.height = "90vh";
+        //document.getElementById("gMap").style.height = "90vh";
+        jQuery("#gMap").height("90vh");
         // console.info("allStation - " + this.allStations.length);
 
     }
