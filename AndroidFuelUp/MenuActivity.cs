@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace AndroidFuelUp
 {
-    [Activity(Label = "TestMenuActivity")]
+    [Activity(Label = "MenuActivity")]
     public class MenuActivity : Activity
     {
         private List<string> resault = new List<string>();
@@ -38,11 +38,16 @@ namespace AndroidFuelUp
                         checkedList.Add(arrayServices[sparseArray.KeyAt(i)]);
                 }
 
-                var resaultStr = $"{ServiceDecoder.GetServicesCod(checkedList)}";
+                InfoStore.SelectedServiceCod = ServiceDecoder.GetServicesCod(checkedList);
+
+                var resaultStr = $"{InfoStore.SelectedServiceCod}";
 
                 Android.Widget.Toast.MakeText(this,
                     resaultStr,
                     Android.Widget.ToastLength.Short).Show();
+
+                StartActivity(typeof(MainActivity));
+
             };
 
             Button noneServiceButton = FindViewById<Button>(Resource.Id.noneButton);

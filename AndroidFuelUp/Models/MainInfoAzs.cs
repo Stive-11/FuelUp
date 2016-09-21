@@ -1,3 +1,5 @@
+using Java.Lang;
+
 namespace AndroidFuelUp.Models
 {
     public class MainInfoAzs
@@ -19,11 +21,13 @@ namespace AndroidFuelUp.Models
     {
         public Ñoordinates coordinates { set; get; }
         public string operatorName { set; get; }
+        public long? codServices { set; get; }
 
-        public StationForMap(Ñoordinates coord, string oName)
+        public StationForMap(Ñoordinates coord, string oName, long? cServices)
         {
             coordinates = coord;
             operatorName = oName;
+            codServices = cServices;
         }
     }
 }
