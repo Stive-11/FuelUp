@@ -16,6 +16,7 @@ var ImgComponent = (function () {
         this.currentServices = [];
     }
     ImgComponent.prototype.toggleImage = function (image) {
+        jQuery(image).toggleClass("imagePressed");
         if (image.class == "imageUnpressed") {
             image.class = "imagePressed";
             this.currentServices.push(image.id);
