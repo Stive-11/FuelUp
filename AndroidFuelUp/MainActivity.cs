@@ -5,11 +5,13 @@ using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using AndroidFuelUp.Core;
 using AndroidFuelUp.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;using System.Text;
+using System.Net.Http;
+using System.Text;
 
 namespace AndroidFuelUp
 {
@@ -33,11 +35,9 @@ namespace AndroidFuelUp
             Button showStationsButton = FindViewById<Button>(Resource.Id.showStationsBtn);
             showStationsButton.Click += delegate
             {
-                GetInfoFromServer();
+               // GetInfoFromServer();
                 ShowAllStationOnMap();
             };
-
-           
 
             Button routeButton = FindViewById<Button>(Resource.Id.routeBtn);
             routeButton.Click += delegate
@@ -58,6 +58,7 @@ namespace AndroidFuelUp
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                 {
                     Toast.MakeText(this, edittextStartPoint.Text, ToastLength.Short).Show();
+                    InfoStore.StartPoint = edittextStartPoint.Text;
                     e.Handled = true;
                 }
             };
@@ -69,6 +70,7 @@ namespace AndroidFuelUp
                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
                 {
                     Toast.MakeText(this, edittextFinishPoint.Text, ToastLength.Short).Show();
+                    InfoStore.FinishPoint = edittextFinishPoint.Text;
                     e.Handled = true;
                 }
             };
@@ -93,8 +95,6 @@ namespace AndroidFuelUp
             mMap.UiSettings.CompassEnabled = true;
         }
 
-        
-
         public async void GetInfoFromServer()
         {
             try
@@ -114,8 +114,10 @@ namespace AndroidFuelUp
                     InfoStore.InfoAzs.AddRange(infoAboutAzs);
                     foreach (var tempStation in infoAboutAzs)
                     {
-                        InfoStore.StationsOnMap.Add(new StationForMap(tempStation.coordinates, tempStation.operatorName));
+                        InfoStore.StationsOnMap.Add(new StationForMap(tempStation.coordinates, tempStation.operatorName, tempStation.codServices));
                     }
+                    //Выбираем все доступные сервисы для переменной фильтра
+                    InfoStore.SelectedServiceCod = ServiceDecoder.GetServicesCod(InfoStore.Services);
                 }
                 else
                 {
@@ -142,7 +144,12 @@ namespace AndroidFuelUp
 
                 using (HttpClient client = new HttpClient())
                 {
-                    var pointsPathesRequest = new Requests.PathStrings() { startPoint = "Minsk", finishPoint = "Brest" };
+                    var pointsPathesRequest = new Requests.PathStrings()
+                    {
+                        startPoint = InfoStore.StartPoint,
+                        finishPoint = InfoStore.FinishPoint
+                    };
+
                     var json = JsonConvert.SerializeObject(pointsPathesRequest);
                     HttpResponseMessage response = await client.PostAsync(postStringServicesUrl, new StringContent(json, Encoding.UTF8, "application/json"));
 
@@ -230,7 +237,13 @@ namespace AndroidFuelUp
         //Отображение на карте всех станций из базы данных
         public void ShowAllStationOnMap()
         {
-            foreach (var station in InfoStore.StationsOnMap)
+            Android.Widget.Toast.MakeText(this,
+                     InfoStore.SelectedServiceCod.ToString(),
+                     Android.Widget.ToastLength.Long).Show();
+
+            StationFilter.GetStationsForMap((long)InfoStore.SelectedServiceCod);
+
+            foreach (var station in StationFilter.StationsOnMapWithFilter)
             {
                 if (station.coordinates.latitude != null && station.coordinates.longitude != null)
                     MakeStationOnMap(new LatLng((double)station.coordinates.latitude,

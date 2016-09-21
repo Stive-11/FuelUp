@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ServiceDecoder.cs" />
+    <Compile Include="Core\StationFilter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\InfoStore.cs" />
     <Compile Include="Models\MainInfoAzs.cs" />
