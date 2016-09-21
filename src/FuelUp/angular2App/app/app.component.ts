@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {ImgComponent} from "./image.component";
 let styles = String(require('./app.component.scss'));
 declare var jQuery: any;
+import './rxjs-operators';
 
 @Component({
     selector: 'my-app',

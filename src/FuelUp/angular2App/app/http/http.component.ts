@@ -25,7 +25,7 @@ export class HTTPComponent implements OnInit {
     constructor(private _httpService: HTTPService) { }
     ngOnInit() {
         console.log('onInit');
-        this._httpService.getAllStations();
+        //this._httpService.getStations();
 
         //.subscribe(data => this.getData = JSON.stringify(data), error => alert(error), () => console.log('finished'));
 

@@ -18,7 +18,6 @@ var app_routes_1 = require('./app.routes');
 var http_1 = require('@angular/http');
 var home_component_1 = require('./home/home.component');
 var about_component_1 = require('./about/about.component');
-var testDataService_1 = require('./services/testDataService');
 var core_2 = require('angular2-google-maps/core');
 var image_component_1 = require("./image.component");
 var http_component_1 = require("./http/http.component");
@@ -44,7 +43,6 @@ var AppModule = (function () {
                 http_component_1.HTTPComponent
             ],
             providers: [
-                testDataService_1.TestDataService,
                 app_constants_1.Configuration
             ],
             bootstrap: [app_component_1.AppComponent]

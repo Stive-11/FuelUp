@@ -9,7 +9,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
-import { TestDataService } from './services/testDataService';
+//import { TestDataService } from './services/testDataService';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import {SebmGoogleMapMarker} from 'angular2-google-maps/core';
 import {ImgComponent} from "./image.component";
@@ -35,7 +35,7 @@ import {HTTPComponent} from "./http/http.component";
         HTTPComponent
     ],
     providers: [
-        TestDataService,
+       // TestDataService,
         Configuration
     ],
     bootstrap:    [AppComponent]

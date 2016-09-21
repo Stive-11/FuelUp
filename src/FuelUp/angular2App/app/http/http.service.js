@@ -12,19 +12,27 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require('rxjs/add/operator/map');
 var app_constants_1 = require('../app.constants');
+var Observable_1 = require('rxjs/Observable');
 var HTTPService = (function () {
     function HTTPService(_http, _configuration) {
         this._http = _http;
         this._configuration = _configuration;
         this.getAllStationsURL = _configuration.Server + _configuration.URLgetMainInfo;
     }
-    HTTPService.prototype.getCurrentTime = function () {
-        return this._http.get('http://localhost:5000/api/GetServiceTypes')
-            .map(function (res) { return res.json(); });
-    };
     HTTPService.prototype.getAllStations = function () {
         return this._http.get(this.getAllStationsURL)
-            .map(function (res) { return res.json().data; });
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    HTTPService.prototype.extractData = function (res) {
+        var body = res.json();
+        return body.data || {};
+    };
+    HTTPService.prototype.handleError = function (error) {
+        var errMsg = (error.message) ? error.message :
+            error.status ? error.status + " - " + error.statusText : 'Server error';
+        console.error(errMsg);
+        return Observable_1.Observable.throw(errMsg);
     };
     HTTPService.prototype.postJSON = function () {
         var json = JSON.stringify({ val1: 'test', var2: 2 });

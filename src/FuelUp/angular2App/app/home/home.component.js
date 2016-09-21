@@ -9,33 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var testDataService_1 = require('../services/testDataService');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var HomeComponent = (function () {
     function HomeComponent(_httpService) {
         this._httpService = _httpService;
+        this.zoom = 8;
         this.lat = 53.8840092;
         this.lng = 27.4548901;
-        this.lat1 = 53.8940092;
-        this.lng1 = 27.4648901;
-        this.cord1 = { latitude: this.lat, longitude: this.lng };
-        this.cord2 = { latitude: this.lat1, longitude: this.lng1 };
-        this.markers = [this.cord1, this.cord2];
-        this.zoom = 8;
+        this.mode = 'Observable';
     }
-    HomeComponent.prototype.ngOnInit = function () {
+    ;
+    HomeComponent.prototype.getStations = function () {
         var _this = this;
         this._httpService.getAllStations()
-            .subscribe(function (allStations) { return _this.allStations = allStations; });
-        document.getElementById("gMap").style.height = "97.4vh";
+            .subscribe(function (allStations) { return _this.allStations = allStations; }, function (error) { return _this.errorMessage = error; });
+    };
+    ;
+    HomeComponent.prototype.ngOnInit = function () {
+        this.getStations();
+        jQuery("#gMap").height("90vh");
     };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'homecomponent',
-            template: require('./home.component.html'),
+            template: "<ul>\n    <li>\n            hehsjhksjhfksjd\n    </li>\n     </ul>",
             styles: [styles],
-            providers: [testDataService_1.TestDataService, Httpservice.HTTPService]
+            providers: [Httpservice.HTTPService]
         }), 
         __metadata('design:paramtypes', [Httpservice.HTTPService])
     ], HomeComponent);
