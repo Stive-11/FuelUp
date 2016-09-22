@@ -23,12 +23,8 @@ var HomeComponent = (function () {
     HomeComponent.prototype.getStations = function () {
         var _this = this;
         this._httpService.getAllStations()
-            .subscribe(function (allStations) { return _this.allStations = allStations; }, function (error) { return _this.errorMessage = error; });
-    };
-    ;
-    HomeComponent.prototype.ngOnInit = function () {
-        this.getStations();
-        jQuery("#gMap").height("90vh");
+            .subscribe(function (allStations) { return _this.allStations = allStations; });
+        document.getElementById("gMap").style.height = "97.4vh";
     };
     HomeComponent = __decorate([
         core_1.Component({
