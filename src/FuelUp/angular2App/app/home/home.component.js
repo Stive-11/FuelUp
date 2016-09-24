@@ -15,21 +15,28 @@ var HomeComponent = (function () {
     function HomeComponent(_httpService) {
         this._httpService = _httpService;
         this.zoom = 8;
+        this.mode = 'Observable';
         this.lat = 53.8840092;
         this.lng = 27.4548901;
-        this.mode = 'Observable';
     }
     ;
     HomeComponent.prototype.getStations = function () {
         var _this = this;
+        console.info("this is getStations method start to work");
         this._httpService.getAllStations()
-            .subscribe(function (allStations) { return _this.allStations = allStations; });
-        document.getElementById("gMap").style.height = "97.4vh";
+            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
+        console.info("this is getStations method end of work");
+        console.info('Station:' + this.stations);
+    };
+    ;
+    HomeComponent.prototype.ngOnInit = function () {
+        this.getStations();
+        jQuery("#gMap").height("90vh");
     };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'homecomponent',
-            template: "<ul>\n    <li>\n            hehsjhksjhfksjd\n    </li>\n     </ul>",
+            template: "<h1>my stations</h1>\n                <ul>\n                <li *ngFor=\"let station of stations\">\n                    {{station.name}}\n                </li>\n              </ul>\n               <div class=\"error\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n",
             styles: [styles],
             providers: [Httpservice.HTTPService]
         }), 

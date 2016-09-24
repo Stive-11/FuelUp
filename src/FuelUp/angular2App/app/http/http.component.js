@@ -16,7 +16,6 @@ var HTTPComponent = (function () {
     }
     HTTPComponent.prototype.ngOnInit = function () {
         console.log('onInit');
-        this._httpService.getAllStations();
     };
     HTTPComponent.prototype.onTestPost = function () {
         var _this = this;
@@ -26,7 +25,7 @@ var HTTPComponent = (function () {
     HTTPComponent = __decorate([
         core_1.Component({
             selector: 'http-test',
-            template: "\n        <button (click)=\"onTestGet()\">Test GET</button>\n        <p>Output: {{getData}}</p>\n        <button (click)=\"onTestPost()\">Test POST</button>\n        <p>Output: {{postData}}</p>    \n    ",
+            template: "\n        <button (click)=\"onTestGet()\">Test GET</button>\n        <p>Output: {{getData}}</p>\n        <button (click)=\"onTestPost()\">Test POST</button>\n        <p>Output: {{postData}}</p>  \n   \n    ",
             providers: [http_service_1.HTTPService]
         }), 
         __metadata('design:paramtypes', [http_service_1.HTTPService])

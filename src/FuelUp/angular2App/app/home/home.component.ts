@@ -46,8 +46,8 @@ export class HomeComponent implements OnInit {
    
 
 
-    constructor(private _httpService: Httpservice.HTTPService) { };
-
+    constructor(private _httpService: Httpservice.HTTPService) { }
+    
     getStations() {
         console.info("this is getStations method start to work");
         this._httpService.getAllStations()

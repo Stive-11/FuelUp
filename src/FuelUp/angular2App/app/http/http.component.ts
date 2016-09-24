@@ -11,7 +11,8 @@ import { OnInit } from '@angular/core';
         <button (click)="onTestGet()">Test GET</button>
         <p>Output: {{getData}}</p>
         <button (click)="onTestPost()">Test POST</button>
-        <p>Output: {{postData}}</p>    
+        <p>Output: {{postData}}</p>  
+   
     `,
     providers: [HTTPService]
 })
