@@ -33,7 +33,7 @@ var AppModule = (function () {
                 app_routes_1.routing,
                 http_1.HttpModule,
                 http_1.JsonpModule,
-                core_2.AgmCoreModule.forRoot()
+                core_2.AgmCoreModule.forRoot({ apiKey: 'AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y' })
             ],
             declarations: [
                 app_component_1.AppComponent,

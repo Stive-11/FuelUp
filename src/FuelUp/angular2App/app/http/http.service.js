@@ -26,7 +26,7 @@ var HTTPService = (function () {
     };
     HTTPService.prototype.extractData = function (res) {
         var body = res.json();
-        return body.data || {};
+        return body || {};
     };
     HTTPService.prototype.handleError = function (error) {
         var errMsg = (error.message) ? error.message :

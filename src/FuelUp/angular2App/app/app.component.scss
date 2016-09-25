@@ -43,13 +43,15 @@ a:hover {color:aliceblue;}
 
 .col-sm-12
 {
-    padding: 0px!important;
+    padding: 0px;
     height: 100%;
 }
 .columns {
     height: 100%; 
     position: relative;}
-
+.btn {border-radius:0;
+      margin: -3px 0 5px 29%;
+}
 .sidenav{
     overflow-y: scroll;
     position:absolute;
@@ -107,22 +109,7 @@ footer {
     left:16.6%;
     top:0;
 }
-/*.menu-opener-inner {
-    background: #fff;
-    height: .6rem;
-    //margin-left: .76rem;
-    //margin-top: 2.75rem;
-    margin: 2.75rem 0 2rem .76rem;
-    width: 4.5rem;
-}
-.menu-opener-inner::before, .menu-opener-inner::after {
-    background: white;
-    content: '';
-    display: block;
-    height: .6rem;
-    width: 4.5rem;
-    //margin: .2rem 0;
-}*/
+
 .menu-opener-inner {
     background: #fff;
     height: .4rem;

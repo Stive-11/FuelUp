@@ -3,12 +3,18 @@
     .filters li:hover{
         background-color:black;
     }
-    .filters li, img {
-         width:65px;
-         height:65px;
-    }
     .filters li {
-        margin-bottom:8px;
+         width:100%;
+         height:100%;
+         margin-bottom:1px;
+    }
+    /*.filters li:nth-child(11n){
+        margin-top:-5px;
+        margin-bottom:5px;
+    }*/
+    .filters img{
+        width:99%;
+        height:99%;
     }
     ul {
     -moz-column-count: 3; /* Firefox */

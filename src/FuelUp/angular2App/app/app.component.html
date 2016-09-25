@@ -1,11 +1,11 @@
-<script type="text/javascript">
+<!--<script type="text/javascript">
     $(".menu-opener").click(function () {
         console.log('click!');
         $(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
         
     });
 
-</script>
+</script>-->
 <div class="container-fluid wrapper">
 <div class="row-fluid columns content">
  <nav class="navbar navbar-inverse custom">
@@ -23,7 +23,7 @@
 </nav>
     <div class="moved">
     <div class="col-sm-2 sidenav menu" id="menu">
-        <form class="form-horizontal" style="margin-left:9px; margin-top:5px;">
+        <form class="form-horizontal" style="margin: 5px 0 0 5px;">
             <div class="form-group">
                 <div class="col-xs-12">
                     <input class="form-control" name="from" placeholder="FROM" required="" type="text">
@@ -33,6 +33,7 @@
                 </div>
             </div>
         </form>
+        <button type="button" class="btn btn-success">{{button}}</button>
         <filtres></filtres>
     </div>
     <div class="col-sm-12 content-area">

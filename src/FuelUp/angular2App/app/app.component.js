@@ -17,6 +17,7 @@ var AppComponent = (function () {
         this.router = router;
         this.home = "На главную";
         this.about = "О сайте";
+        this.button = "Поехали";
     }
     AppComponent.prototype.ngOnInit = function () {
         jQuery(".menu-opener").click(function () {

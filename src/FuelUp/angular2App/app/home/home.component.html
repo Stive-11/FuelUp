@@ -1,4 +1,7 @@
 <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" id="gMap">
-    <sebm-google-map-marker *ngFor="let item of markers" [latitude]="item.latitude" [longitude]="item.longitude" [label]="'M'">
+    <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude">
+        <sebm-google-map-info-window [disableAutoPan]="true">
+            <strong>{{station.name}}</strong>
+        </sebm-google-map-info-window>
     </sebm-google-map-marker>
 </sebm-google-map>

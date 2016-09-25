@@ -24,7 +24,7 @@ import {HTTPComponent} from "./http/http.component";
         routing,
         HttpModule,
         JsonpModule,
-        AgmCoreModule.forRoot()
+        AgmCoreModule.forRoot({ apiKey: 'AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y' })
         
     ],
     declarations: [

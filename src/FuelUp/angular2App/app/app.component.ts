@@ -15,6 +15,7 @@ import './rxjs-operators';
 export class AppComponent implements OnInit{
     home: string = "На главную";
     about: string = "О сайте";
+    button: string = "Поехали";
     constructor(private router: Router) {
     }
 

@@ -19,14 +19,10 @@ var HomeComponent = (function () {
         this.lat = 53.8840092;
         this.lng = 27.4548901;
     }
-    ;
     HomeComponent.prototype.getStations = function () {
         var _this = this;
-        console.info("this is getStations method start to work");
         this._httpService.getAllStations()
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
-        console.info("this is getStations method end of work");
-        console.info('Station:' + this.stations);
     };
     ;
     HomeComponent.prototype.ngOnInit = function () {
@@ -36,7 +32,7 @@ var HomeComponent = (function () {
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'homecomponent',
-            template: "<h1>my stations</h1>\n                <ul>\n                <li *ngFor=\"let station of stations\">\n                    {{station.name}}\n                </li>\n              </ul>\n               <div class=\"error\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n",
+            template: require('./home.component.html'),
             styles: [styles],
             providers: [Httpservice.HTTPService]
         }), 
