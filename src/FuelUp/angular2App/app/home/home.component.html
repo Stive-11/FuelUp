@@ -1,5 +1,5 @@
 <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" id="gMap">
-    <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude">
+    <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude" [iconUrl]="'assets/pin.png'">
         <sebm-google-map-info-window [disableAutoPan]="true">
             <strong>{{station.name}}</strong>
         </sebm-google-map-info-window>
