@@ -1,3 +1,5 @@
+<input id="addressFrom" type="text" />
+<input id="addressTo" type="text" />
 <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" id="gMap">
     <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude" [iconUrl]="'assets/pin.png'">
         <sebm-google-map-info-window [disableAutoPan]="true">
@@ -5,3 +7,4 @@
         </sebm-google-map-info-window>
     </sebm-google-map-marker>
 </sebm-google-map>
+

@@ -12,8 +12,9 @@ var core_1 = require('@angular/core');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var HomeComponent = (function () {
-    function HomeComponent(_httpService) {
+    function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
+        this.zone = zone;
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;
@@ -26,8 +27,27 @@ var HomeComponent = (function () {
     };
     ;
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.getStations();
-        jQuery("#gMap").height("90vh");
+        jQuery("#gMap").height("85vh");
+        var autocompleteFrom;
+        var autocompleteTo;
+        var from = jQuery('#addressFrom')[0];
+        var to = document.getElementById("addressTo");
+        autocompleteFrom = new google.maps.places.Autocomplete(from, {});
+        autocompleteTo = new google.maps.places.Autocomplete(to, {});
+        google.maps.event.addListener(autocompleteFrom, 'place_changed', function () {
+            _this.zone.run(function () {
+                var place = autocompleteFrom.getPlace();
+                console.log(place);
+            });
+        });
+        google.maps.event.addListener(autocompleteTo, 'place_changed', function () {
+            _this.zone.run(function () {
+                var place = autocompleteTo.getPlace();
+                console.log(place);
+            });
+        });
     };
     HomeComponent = __decorate([
         core_1.Component({
@@ -36,7 +56,7 @@ var HomeComponent = (function () {
             styles: [styles],
             providers: [Httpservice.HTTPService]
         }), 
-        __metadata('design:paramtypes', [Httpservice.HTTPService])
+        __metadata('design:paramtypes', [Httpservice.HTTPService, core_1.NgZone])
     ], HomeComponent);
     return HomeComponent;
 }());

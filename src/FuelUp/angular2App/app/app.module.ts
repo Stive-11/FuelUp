@@ -14,8 +14,10 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import {SebmGoogleMapMarker} from 'angular2-google-maps/core';
 import {ImgComponent} from "./image.component";
 import {HTTPComponent} from "./http/http.component";
+import { MapsAPILoader, NoOpMapsAPILoader} from 'angular2-google-maps/core';
+//import { Component, NgZone } from '@angular/core';
 
-
+//{ apiKey: 'AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y', libraries: ['places'] }
 @NgModule({
     imports: [
         BrowserModule,
@@ -24,7 +26,7 @@ import {HTTPComponent} from "./http/http.component";
         routing,
         HttpModule,
         JsonpModule,
-        AgmCoreModule.forRoot({ apiKey: 'AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y' })
+        AgmCoreModule.forRoot()
         
     ],
     declarations: [
@@ -36,7 +38,8 @@ import {HTTPComponent} from "./http/http.component";
     ],
     providers: [
        // TestDataService,
-        Configuration
+        Configuration,
+        { provide: MapsAPILoader, useClass: NoOpMapsAPILoader }
     ],
     bootstrap:    [AppComponent]
 })

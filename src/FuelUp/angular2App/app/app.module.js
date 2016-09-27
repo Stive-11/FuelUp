@@ -21,6 +21,7 @@ var about_component_1 = require('./about/about.component');
 var core_2 = require('angular2-google-maps/core');
 var image_component_1 = require("./image.component");
 var http_component_1 = require("./http/http.component");
+var core_3 = require('angular2-google-maps/core');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +34,7 @@ var AppModule = (function () {
                 app_routes_1.routing,
                 http_1.HttpModule,
                 http_1.JsonpModule,
-                core_2.AgmCoreModule.forRoot({ apiKey: 'AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y' })
+                core_2.AgmCoreModule.forRoot()
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -43,7 +44,8 @@ var AppModule = (function () {
                 http_component_1.HTTPComponent
             ],
             providers: [
-                app_constants_1.Configuration
+                app_constants_1.Configuration,
+                { provide: core_3.MapsAPILoader, useClass: core_3.NoOpMapsAPILoader }
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
