@@ -24,13 +24,29 @@ namespace FuelUp.Api
         // POST: api/getFiltredStations
         [HttpPost]
         [Route("api/getFiltredStations")]
-        public ActionResult GetMainInfo( [FromBody] Requests.Filter filter)
+        public ActionResult GetFiltredStations( [FromBody] Requests.Filter filter)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             var info = _getInfo.GetFilteredInfo(filter.filters);
+            var json = JsonConvert.SerializeObject(info);
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            return Ok(json);
+
+        }
+
+        // POST: api/getAllStationsWithFilter
+        [HttpPost]
+        [Route("api/getAllStationsWithFilter")]
+        public ActionResult GetAllStationsWithFilter([FromBody] Requests.Filter filter)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var info = _getInfo.GetAllStationsWithFilterInfo(filter.filters);
             var json = JsonConvert.SerializeObject(info);
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);

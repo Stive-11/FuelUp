@@ -10,5 +10,6 @@ namespace FuelUp.Services
     {
         IEnumerable<MainInfoAzs> GetMainInfo();
         IEnumerable<MainInfoAzs> GetFilteredInfo(long filters);
+        IEnumerable<MainInfoAzs> GetAllStationsWithFilterInfo(long filters);
     }
 }
