@@ -24,5 +24,11 @@ namespace FuelUp.Models.ApiModels
         {
             public long serviceCod { set; get; }
         }
+
+        public class Filter
+        {
+            public long filters { set; get; }
+        }
+
     }
 }

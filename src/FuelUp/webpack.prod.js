@@ -107,7 +107,8 @@ module.exports = {
         }),
 
         new CopyWebpackPlugin([
-            { from: './angular2App/images/*.*', to: "assets/", flatten: true }
+            { from: './angular2App/images/*.*', to: "assets/", flatten: true },
+            { from: './angular2App/images/favicon.ico', to: "./", flatten: true }
         ])
     ]
 };
