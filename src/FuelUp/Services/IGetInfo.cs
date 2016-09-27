@@ -9,5 +9,6 @@ namespace FuelUp.Services
     public interface IGetInfo
     {
         IEnumerable<MainInfoAzs> GetMainInfo();
+        IEnumerable<MainInfoAzs> GetFilteredInfo(long filters);
     }
 }

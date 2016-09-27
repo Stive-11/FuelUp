@@ -34,6 +34,23 @@ namespace FuelUp.Services
             return stations;
         }
 
-
+        public IEnumerable<MainInfoAzs> GetFilteredInfo(long filters)
+        {
+            var stations = _context.Stations
+                .Where(x=> ((long) x.Services & filters) == filters)
+                .Select(x => new MainInfoAzs()
+                {
+                    codFuels = x.Fuels,
+                    codServices = x.Services,
+                    coordinates = new Сoordinates()
+                    {
+                        latitude = x.GPSN,
+                        longitude = x.GPSE
+                    },
+                    name = x.Name,
+                    operatorName = x.Operator.NameRU
+                });
+            return stations;
+        }
     }
 }
