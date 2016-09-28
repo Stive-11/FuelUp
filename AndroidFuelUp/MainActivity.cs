@@ -97,42 +97,47 @@ namespace AndroidFuelUp
 
         public async void GetInfoFromServer()
         {
-            try
+            if (InfoStore.InfoAzsWithFilter.Count < 2)
             {
-                string getInfoUrl = "http://193.124.57.9:2000/api/GetMainInfo";
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync(getInfoUrl);
+                try
+                {
+                    string getInfoUrl = "http://193.124.57.9:2000/api/GetMainInfo";
+                    HttpClient client = new HttpClient();
+                    HttpResponseMessage response = await client.GetAsync(getInfoUrl);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    Android.Widget.Toast.MakeText(this,
-                      "SuccesGetMainInfoRespponse",
-                      Android.Widget.ToastLength.Short).Show();
-                    var json = await response.Content.ReadAsStringAsync();
-                    var infoAboutAzs = JsonConvert.DeserializeObject<List<MainInfoAzs>>(json);
-                    InfoStore.InfoAzs.Clear();
-                    InfoStore.InfoAzs.AddRange(infoAboutAzs);
-                    foreach (var tempStation in infoAboutAzs)
+                    if (response.IsSuccessStatusCode)
                     {
-                        InfoStore.StationsOnMap.Add(new StationForMap(tempStation.coordinates, tempStation.operatorName, tempStation.codServices));
+                        Android.Widget.Toast.MakeText(this,
+                            "SuccesGetMainInfoRespponse",
+                            Android.Widget.ToastLength.Short).Show();
+                        var json = await response.Content.ReadAsStringAsync();
+                        var infoAboutAzs = JsonConvert.DeserializeObject<List<MainInfoAzs>>(json);
+                        InfoStore.InfoAzs.Clear();
+                        InfoStore.InfoAzs.AddRange(infoAboutAzs);
+                        foreach (var tempStation in infoAboutAzs)
+                        {
+                            InfoStore.StationsOnMap.Add(new StationForMap(tempStation.coordinates,
+                                tempStation.operatorName, tempStation.codServices));
+                        }
+                        //Выбираем все доступные сервисы для переменной фильтра
+                        InfoStore.SelectedServiceCod = ServiceDecoder.GetServicesCod(InfoStore.Services);
                     }
-                    //Выбираем все доступные сервисы для переменной фильтра
-                    InfoStore.SelectedServiceCod = ServiceDecoder.GetServicesCod(InfoStore.Services);
+                    else
+                    {
+                        Android.Widget.Toast.MakeText(this,
+                            "ERROR Http Respponse",
+                            Android.Widget.ToastLength.Short).Show();
+                    }
                 }
-                else
+                catch (System.Exception ex)
                 {
-                    Android.Widget.Toast.MakeText(this,
-                      "ERROR Http Respponse",
-                      Android.Widget.ToastLength.Short).Show();
+                    var strError = $"{ex.ToString()} {ex.Message} {ex.StackTrace} ";
+                    //Android.Widget.Toast.MakeText(this,
+                    //      strError,
+                    //      Android.Widget.ToastLength.Long).Show();
                 }
             }
-            catch (System.Exception ex)
-            {
-                var strError = $"{ex.ToString()} {ex.Message} {ex.StackTrace} ";
-                //Android.Widget.Toast.MakeText(this,
-                //      strError,
-                //      Android.Widget.ToastLength.Long).Show();
-            }
+
         }
 
         public async void SendInfoToServer()
@@ -157,13 +162,18 @@ namespace AndroidFuelUp
                     {
                         Android.Widget.Toast.MakeText(this,
                           await response.Content.ReadAsStringAsync(),
-                          Android.Widget.ToastLength.Short).Show();
+                          Android.Widget.ToastLength.Long).Show();
+
+                        var routeJson = await response.Content.ReadAsStringAsync();
+                        var infoAboutAzs = JsonConvert.DeserializeObject<OneDirectionTwoPoints>(routeJson);
+
+                        string str = await response.Content.ReadAsStringAsync();
                     }
                     else
                     {
                         Android.Widget.Toast.MakeText(this,
                           "ERROR Http Response",
-                          Android.Widget.ToastLength.Short).Show();
+                          Android.Widget.ToastLength.Long).Show();
                     }
                 }
             }
@@ -172,7 +182,7 @@ namespace AndroidFuelUp
                 var errormessage = $"{ex.Message} \n {ex.StackTrace}";
                 Android.Widget.Toast.MakeText(this,
                       errormessage,
-                      Android.Widget.ToastLength.Short).Show();
+                      Android.Widget.ToastLength.Long).Show();
             }
         }
 
@@ -243,13 +253,24 @@ namespace AndroidFuelUp
 
             StationFilter.GetStationsForMap((long)InfoStore.SelectedServiceCod);
 
-            foreach (var station in StationFilter.StationsOnMapWithFilter)
+            //foreach (var station in StationFilter.StationsOnMapWithFilter)
+            //{
+            //    if (station.coordinates.latitude != null && station.coordinates.longitude != null)
+            //        MakeStationOnMap(new LatLng((double)station.coordinates.latitude,
+            //                (double)station.coordinates.longitude),
+            //            station.operatorName);
+            //}
+
+            foreach (var station in InfoStore.StationsOnMap)
             {
                 if (station.coordinates.latitude != null && station.coordinates.longitude != null)
                     MakeStationOnMap(new LatLng((double)station.coordinates.latitude,
                             (double)station.coordinates.longitude),
                         station.operatorName);
             }
+
+
+
         }
     }
 }

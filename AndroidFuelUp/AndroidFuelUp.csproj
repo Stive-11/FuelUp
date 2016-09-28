@@ -84,6 +84,7 @@
     <Compile Include="Models\InfoStore.cs" />
     <Compile Include="Models\MainInfoAzs.cs" />
     <Compile Include="Models\Requests.cs" />
+    <Compile Include="Models\OneDirectionTwoPoints.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\MenuItemAdapter.cs" />

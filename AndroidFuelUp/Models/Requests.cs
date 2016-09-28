@@ -27,5 +27,10 @@ namespace AndroidFuelUp.Models
             public Ñoordinates finishPoint { set; get; }
         }
 
+        public class Filter
+        {
+            public long filters { get; set; }
+        }
+
     }
 }
