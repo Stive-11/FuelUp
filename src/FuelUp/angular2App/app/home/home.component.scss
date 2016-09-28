@@ -3,3 +3,123 @@
 }
 #gMap { position: relative;
 }
+.col-sm-12
+{
+    padding: 0px;
+    height: 100%;
+}
+.columns {
+    height: 100%; 
+    position: relative;}
+                    
+.sidenav{
+    overflow-y: scroll;
+    position:absolute;
+    z-index:1;
+    background-color: #f1f1f1;
+    height: 90vh;
+    left:-100%;
+    position: absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.sidenav.active {
+    left:0;
+}
+.way {background-color: #555;
+      padding:10px 20px;
+}
+.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .sidenav, .sidenav.active {
+    -webkit-transition: 250ms all;
+    transition: 250ms all;
+}
+.menu-opener {
+    cursor: pointer;
+    height: 44px;
+    width: 44px;
+    position: absolute;
+    top: 10%;
+    left: 1%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index:6;
+    background: #CC3133;
+}
+.menu-opener:hover{
+    background: #902023;
+}
+.menu-opener.active { 
+    background: #902023;
+    left:16.6%;
+    top:0;
+}
+
+.menu-opener-inner {
+    background: #fff;
+    height: .4rem;
+    margin-left: 1rem;
+    margin-top: 2rem;
+    width: 2.5rem;
+}
+.menu-opener-inner::before, .menu-opener-inner::after {
+    background: white;
+    content: '';
+    display: block;
+    height: .4rem;
+    width: 2.5rem;
+}
+.menu-opener-inner::before {
+    -webkit-transform: translateY(-0.75rem);
+    -ms-transform: translateY(-0.75rem);
+    transform: translateY(-0.75rem);
+}
+.menu-opener-inner::after {
+    -webkit-transform: translateY(0.25rem);
+    -ms-transform: translateY(0.25rem);
+    transform: translateY(0.25rem);
+}
+.menu-opener-inner.active {
+    background: transparent;
+}
+.menu-opener-inner.active::before {
+    -webkit-transform: translateY(0rem) rotate(-45deg);
+    -ms-transform: translateY(0rem) rotate(-45deg);
+    transform: translateY(0rem) rotate(-45deg);
+}
+.menu-opener-inner.active::after {
+    -webkit-transform: translateY(-0.4rem) translateX(0rem) rotate(45deg);
+    -ms-transform: translateY(-0.4rem) translateX(0rem) rotate(45deg);
+    transform: translateY(-0.4rem) translateX(0rem) rotate(45deg);
+}
+.menu-inner {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 90%;
+    list-style-type: none;
+    margin: 0;
+    margin-left: 1rem;
+    padding: 0;
+}
+.btn {
+    //border-radius:0;
+    margin-left:1px;
+    display:inline-block;
+}
+.form-control {
+    width:150px;
+    margin-right:20px;
+    display:inline-block;
+}
+
+

@@ -19,6 +19,7 @@ declare var google: any;
 })
 
 export class HomeComponent implements OnInit {
+    button: string = "Поехали";
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
@@ -37,13 +38,15 @@ export class HomeComponent implements OnInit {
     };
   
     ngOnInit() {
-        this.getStations();
-        jQuery("#gMap").height("85vh");
+        jQuery(".menu-opener").click(function () {
+            jQuery(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
+        });
+        jQuery("#gMap").height("83vh");
+        this.getStations(); 
         var autocompleteFrom: any;
         var autocompleteTo: any;
         var from = jQuery('#addressFrom')[0];
-        //var from = document.getElementById("addressFrom");
-        var to = document.getElementById("addressTo");
+        var to = jQuery('#addressTo')[0];
         autocompleteFrom = new google.maps.places.Autocomplete(from, {});
         autocompleteTo = new google.maps.places.Autocomplete(to, {});
         google.maps.event.addListener(autocompleteFrom, 'place_changed', () => {
