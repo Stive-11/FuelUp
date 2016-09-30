@@ -6,7 +6,7 @@ namespace FuelUp.Services
 {
     public class GoogleMapDirections : IGoogleMap
     {
-        private string _apiKey = string.Empty;
+        private string _apiKey = "AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y";
 
         public OneDirectionTwoPoints.RootObject GetDirectionWithoutPoints(Requests.PathStrings points)
         {

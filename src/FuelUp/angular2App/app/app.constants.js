@@ -14,6 +14,7 @@ var Configuration = (function () {
         this.Server = window.location.protocol + "//" + window.location.host;
         this.URLgetMainInfo = "/api/GetMainInfo";
         this.URLgetServiceTypes = "/api/GetServiceTypes";
+        this.URLgetPath = "/api/Pathes/coordinatsPath";
     }
     Configuration = __decorate([
         core_1.Injectable(), 

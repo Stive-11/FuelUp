@@ -1,12 +1,16 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import {AgmCoreModule} from 'angular2-google-maps/core';
 import {SebmGoogleMapMarker, SebmGoogleMapInfoWindow, GoogleMapsAPIWrapper} from 'angular2-google-maps/core';
 import { MapsAPILoader, NoOpMapsAPILoader} from 'angular2-google-maps/core';
 import Httpservice = require("../http/http.service");
 let styles = String(require('./home.component.scss'));
 import {Station} from '../http/station.interface';
+import {PathPoints} from '../http/pathpoints.interface';
+import {Coordinates} from "../http/coordinates.interface";
+//import Pathpointsinterface = require("../http/pathpoints.interface");
+//import PathPoints = Pathpointsinterface.PathPoints;
 declare var jQuery: any;
 declare var google: any;
 
@@ -27,7 +31,8 @@ export class HomeComponent implements OnInit {
     stations: Station[];
     lat: number = 53.8840092;
     lng: number = 27.4548901;
-
+    private stPoint: Coordinates = new Coordinates();
+    private finPoint: Coordinates = new Coordinates();
     constructor(private _httpService: Httpservice.HTTPService, private zone: NgZone) { }
     
     getStations() {
@@ -36,6 +41,12 @@ export class HomeComponent implements OnInit {
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     };
+    getPath(stPoint, finPoint) {
+        if (!stPoint || !finPoint) { return; }
+        this._httpService.getPath(this.stPoint, this.finPoint)
+            .subscribe(
+            error => this.errorMessage = <any>error);
+    }
   
     ngOnInit() {
         jQuery(".menu-opener").click(function () {
@@ -52,14 +63,25 @@ export class HomeComponent implements OnInit {
         google.maps.event.addListener(autocompleteFrom, 'place_changed', () => {
             this.zone.run(() => {
                 var place = autocompleteFrom.getPlace();
-                console.log(place);
+
+                this.stPoint.latitude = place.geometry.location.lat();
+                this.stPoint.longitude = place.geometry.location.lng();
+                
             });
         });
         google.maps.event.addListener(autocompleteTo, 'place_changed', () => {
             this.zone.run(() => {
                 var place = autocompleteTo.getPlace();
-                console.log(place);
+                
+                this.finPoint.latitude = place.geometry.location.lat();
+                this.finPoint.longitude = place.geometry.location.lng();
+            
             });
         });
+   
+    }
+
+    onClick(event) {
+        this.getPath(this.stPoint, this.finPoint);
     }
 }

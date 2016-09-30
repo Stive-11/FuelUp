@@ -11,14 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
+var coordinates_interface_1 = require("../http/coordinates.interface");
 var HomeComponent = (function () {
     function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
         this.zone = zone;
+        this.button = "�������";
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;
         this.lng = 27.4548901;
+        this.stPoint = new coordinates_interface_1.Coordinates();
+        this.finPoint = new coordinates_interface_1.Coordinates();
     }
     HomeComponent.prototype.getStations = function () {
         var _this = this;
@@ -26,28 +30,44 @@ var HomeComponent = (function () {
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     ;
+    HomeComponent.prototype.getPath = function (stPoint, finPoint) {
+        var _this = this;
+        if (!stPoint || !finPoint) {
+            return;
+        }
+        this._httpService.getPath(this.stPoint, this.finPoint)
+            .subscribe(function (error) { return _this.errorMessage = error; });
+    };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
+        jQuery(".menu-opener").click(function () {
+            jQuery(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
+        });
+        jQuery("#gMap").height("83vh");
         this.getStations();
-        jQuery("#gMap").height("85vh");
         var autocompleteFrom;
         var autocompleteTo;
         var from = jQuery('#addressFrom')[0];
-        var to = document.getElementById("addressTo");
+        var to = jQuery('#addressTo')[0];
         autocompleteFrom = new google.maps.places.Autocomplete(from, {});
         autocompleteTo = new google.maps.places.Autocomplete(to, {});
         google.maps.event.addListener(autocompleteFrom, 'place_changed', function () {
             _this.zone.run(function () {
                 var place = autocompleteFrom.getPlace();
-                console.log(place);
+                _this.stPoint.latitude = place.geometry.location.lat();
+                _this.stPoint.longitude = place.geometry.location.lng();
             });
         });
         google.maps.event.addListener(autocompleteTo, 'place_changed', function () {
             _this.zone.run(function () {
                 var place = autocompleteTo.getPlace();
-                console.log(place);
+                _this.finPoint.latitude = place.geometry.location.lat();
+                _this.finPoint.longitude = place.geometry.location.lng();
             });
         });
+    };
+    HomeComponent.prototype.onClick = function (event) {
+        this.getPath(this.stPoint, this.finPoint);
     };
     HomeComponent = __decorate([
         core_1.Component({

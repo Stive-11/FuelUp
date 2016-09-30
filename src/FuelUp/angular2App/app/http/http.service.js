@@ -18,6 +18,7 @@ var HTTPService = (function () {
         this._http = _http;
         this._configuration = _configuration;
         this.getAllStationsURL = _configuration.Server + _configuration.URLgetMainInfo;
+        this.getPathsURL = _configuration.Server + _configuration.URLgetPath;
     }
     HTTPService.prototype.getAllStations = function () {
         return this._http.get(this.getAllStationsURL)
@@ -26,6 +27,7 @@ var HTTPService = (function () {
     };
     HTTPService.prototype.extractData = function (res) {
         var body = res.json();
+        console.info(body);
         return body || {};
     };
     HTTPService.prototype.handleError = function (error) {
@@ -41,6 +43,16 @@ var HTTPService = (function () {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return this._http.post('http://validate.jsontest.com', params, { headers: headers })
             .map(function (res) { return res.json(); });
+    };
+    HTTPService.prototype.getPath = function (stPoint, finPoint) {
+        var str1 = JSON.stringify(stPoint);
+        var str2 = JSON.stringify(finPoint);
+        var body = '{"startPoint":' + str1 + ',"finishPoint":' + str2 + '}';
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.post(this.getPathsURL, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
     };
     HTTPService = __decorate([
         core_1.Injectable(), 

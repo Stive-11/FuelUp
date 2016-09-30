@@ -17,12 +17,8 @@ var AppComponent = (function () {
         this.router = router;
         this.home = "На главную";
         this.about = "О сайте";
-        this.button = "Поехали";
     }
     AppComponent.prototype.ngOnInit = function () {
-        jQuery(".menu-opener").click(function () {
-            jQuery(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
-        });
     };
     AppComponent = __decorate([
         core_1.Component({
