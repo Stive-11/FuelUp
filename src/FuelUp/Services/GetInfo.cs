@@ -57,7 +57,7 @@ namespace FuelUp.Services
         public IEnumerable<MainInfoAzs> GetAllStationsWithFilterInfo(long filters)
         {
             var stations = _context.Stations
-                .Where(x => ((long)x.Services | filters) == filters)
+                .Where(x => ((long)x.Services & filters) != 0 || 0 == filters)
                 .Select(x => new MainInfoAzs()
                 {
                     codFuels = x.Fuels,
