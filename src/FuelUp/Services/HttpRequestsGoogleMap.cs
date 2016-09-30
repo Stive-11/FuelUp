@@ -77,7 +77,7 @@ namespace FuelUp.Services
 
         private static string GetAdressFromCoordinates(Сoordinates coordinates)
         {
-            return $"{coordinates.latitude},{coordinates.longitude}";
+            return $"{DoubleToString(coordinates.latitude)},{DoubleToString(coordinates.longitude)}";
         }
 
         private static string GetRequestAdressTwoPoints(Requests.PathCoordinats coordinats)
@@ -95,6 +95,11 @@ namespace FuelUp.Services
                 resultString += $"{GetAdressFromCoordinates(waypoint)}|";
             }
             return resultString.Remove(resultString.Length - 1, 1);
+        }
+
+        private static string DoubleToString(double? x)
+        {
+            return x.ToString().Replace(',', '.');
         }
     }
 }
