@@ -20,7 +20,6 @@ var home_component_1 = require('./home/home.component');
 var about_component_1 = require('./about/about.component');
 var core_2 = require('angular2-google-maps/core');
 var image_component_1 = require("./image.component");
-var http_component_1 = require("./http/http.component");
 var core_3 = require('angular2-google-maps/core');
 var AppModule = (function () {
     function AppModule() {
@@ -40,8 +39,7 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 about_component_1.AboutComponent,
                 home_component_1.HomeComponent,
-                image_component_1.ImgComponent,
-                http_component_1.HTTPComponent
+                image_component_1.ImgComponent
             ],
             providers: [
                 app_constants_1.Configuration,

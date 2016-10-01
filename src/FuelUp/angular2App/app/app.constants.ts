@@ -7,5 +7,7 @@ export class Configuration {
     public Server: string = window.location.protocol + "//" + window.location.host;
     public URLgetMainInfo: string = "/api/GetMainInfo";
     public URLgetServiceTypes: string = "/api/GetServiceTypes";
-    public URLgetPath: string =  "/api/Pathes/coordinatsPath";
+    public URLgetPath: string = "/api/Pathes/coordinatsPath";
+    //public URLgetFiltered: string = "/api/getAllStationsWithFilter";
+    public URLgetFiltered: string = "/api/getFiltredStations";
 }
