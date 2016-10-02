@@ -1,4 +1,4 @@
-﻿import {Component} from '@angular/core';
+﻿import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {Image} from './image.interface';
 import Httpservice = require("./http/http.service");
@@ -31,6 +31,7 @@ export class ImgComponent {
     public servicesCode: number = 0;
     public errorMessage: string;
     constructor(private _httpService: Httpservice.HTTPService) { }
+    @Output() notify = new EventEmitter<number>();
     public toggleImage(image) {
         jQuery(image).toggleClass("imagePressed");
         if (image.class == "imageUnpressed") {
@@ -43,14 +44,9 @@ export class ImgComponent {
             console.info("Code: " + this.servicesCode);
         }    
     }
-    getFiltered(servicesCode) {
-        if (!servicesCode || servicesCode==0) { return; }
-        this._httpService.getFiltres(this.servicesCode)
-            .subscribe(
-            error => this.errorMessage = <any>error);
-    }
+    
     onClick(event) {
-        this.getFiltered(this.servicesCode);
+        this.notify.emit(this.servicesCode);
     }
 }
 

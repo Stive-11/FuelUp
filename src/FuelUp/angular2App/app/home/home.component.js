@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var coordinates_interface_1 = require("../http/coordinates.interface");
+var image_component_1 = require('../image.component');
 var HomeComponent = (function () {
-    function HomeComponent(_httpService, zone) {
+    function HomeComponent(_httpService, zone, imgComponent) {
         this._httpService = _httpService;
         this.zone = zone;
+        this.imgComponent = imgComponent;
         this.button = "Поехали";
         this.zoom = 8;
         this.mode = 'Observable';
@@ -68,6 +70,8 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.onClick = function (event) {
         this.getPath(this.stPoint, this.finPoint);
+        this.test = this.imgComponent.servicesCode;
+        console.info("test: " + this.test);
     };
     HomeComponent = __decorate([
         core_1.Component({
@@ -76,7 +80,7 @@ var HomeComponent = (function () {
             styles: [styles],
             providers: [Httpservice.HTTPService]
         }), 
-        __metadata('design:paramtypes', [Httpservice.HTTPService, core_1.NgZone])
+        __metadata('design:paramtypes', [Httpservice.HTTPService, core_1.NgZone, image_component_1.ImgComponent])
     ], HomeComponent);
     return HomeComponent;
 }());

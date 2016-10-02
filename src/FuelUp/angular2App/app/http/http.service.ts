@@ -33,7 +33,7 @@ export class HTTPService {
        
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
+        console.error(errMsg); // log to console
         return Observable.throw(errMsg);
     }
     postJSON() {
@@ -55,7 +55,7 @@ export class HTTPService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    getFiltres(filters: number) {
+    getFiltres(filters: number): Observable<Station[]> {
         let body = JSON.stringify({ filters });    
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

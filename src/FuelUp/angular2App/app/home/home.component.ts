@@ -9,6 +9,7 @@ let styles = String(require('./home.component.scss'));
 import {Station} from '../http/station.interface';
 import {PathPoints} from '../http/pathpoints.interface';
 import {Coordinates} from "../http/coordinates.interface";
+//import {ImgComponent} from '../image.component';
 declare var jQuery: any;
 declare var google: any;
 
@@ -17,7 +18,8 @@ declare var google: any;
     selector: 'homecomponent',
     template: require('./home.component.html'),
     styles: [styles],    
-    providers: [Httpservice.HTTPService]
+    providers: [Httpservice.HTTPService],
+    //directives: [ImgComponent]
 })
 
 export class HomeComponent implements OnInit {
@@ -25,6 +27,8 @@ export class HomeComponent implements OnInit {
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
+    public servicesCode: number;
+    test: number;
     mode = 'Observable';
     stations: Station[];
     lat: number = 53.8840092;
@@ -45,6 +49,13 @@ export class HomeComponent implements OnInit {
             .subscribe(
             error => this.errorMessage = <any>error);
     }
+    getFiltered(servicesCode) {
+        if (!servicesCode || servicesCode == 0) { return; }
+        this._httpService.getFiltres(this.servicesCode)
+            .subscribe(
+            stations => this.stations = stations,
+            error => this.errorMessage = <any>error);
+    }
   
     ngOnInit() {
         jQuery(".menu-opener").click(function () {
@@ -61,7 +72,6 @@ export class HomeComponent implements OnInit {
         google.maps.event.addListener(autocompleteFrom, 'place_changed', () => {
             this.zone.run(() => {
                 var place = autocompleteFrom.getPlace();
-
                 this.stPoint.latitude = place.geometry.location.lat();
                 this.stPoint.longitude = place.geometry.location.lng();
                 
@@ -69,8 +79,7 @@ export class HomeComponent implements OnInit {
         });
         google.maps.event.addListener(autocompleteTo, 'place_changed', () => {
             this.zone.run(() => {
-                var place = autocompleteTo.getPlace();
-                
+                var place = autocompleteTo.getPlace();           
                 this.finPoint.latitude = place.geometry.location.lat();
                 this.finPoint.longitude = place.geometry.location.lng();
             
@@ -81,5 +90,11 @@ export class HomeComponent implements OnInit {
 
     onClick(event) {
         this.getPath(this.stPoint, this.finPoint);
+        //this.test = this.imgComponent.servicesCode;
+        //console.info("test: " + this.test);
+    }
+    onNotify(code: number): void {
+        this.servicesCode = code;
+        this.getFiltered(this.servicesCode);
     }
 }

@@ -33,7 +33,7 @@ var ImgComponent = (function () {
     };
     ImgComponent.prototype.getFiltered = function (servicesCode) {
         var _this = this;
-        if (!servicesCode) {
+        if (!servicesCode || servicesCode == 0) {
             return;
         }
         this._httpService.getFiltres(this.servicesCode)
@@ -45,7 +45,7 @@ var ImgComponent = (function () {
     ImgComponent = __decorate([
         core_1.Component({
             selector: 'filtres',
-            template: " \n     <button type=\"button\" (click)=\"onClick($event)\" class=\"btn btn-success\">{{apply}}</button>\n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div data-title=\"{{image.title}}\" (click)=\"toggleImage(image)\" class=\"{{image.class}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n   \n  ",
+            template: " \n     <button type=\"button\" (click)=\"onClick($event)\" class=\"btn btn-success apply\">{{apply}}</button>\n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div data-title=\"{{image.title}}\" (click)=\"toggleImage(image)\" class=\"{{image.class}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n   \n  ",
             styles: ["require('./image.component.scss')"],
             providers: [Httpservice.HTTPService]
         }), 
