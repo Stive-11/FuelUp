@@ -16,7 +16,7 @@ var HomeComponent = (function () {
     function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
         this.zone = zone;
-        this.button = "�������";
+        this.button = "Поехали";
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;

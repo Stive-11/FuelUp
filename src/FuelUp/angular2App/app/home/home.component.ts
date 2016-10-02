@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+Ôªøimport { Observable } from 'rxjs/Observable';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import {AgmCoreModule} from 'angular2-google-maps/core';
@@ -9,8 +9,6 @@ let styles = String(require('./home.component.scss'));
 import {Station} from '../http/station.interface';
 import {PathPoints} from '../http/pathpoints.interface';
 import {Coordinates} from "../http/coordinates.interface";
-//import Pathpointsinterface = require("../http/pathpoints.interface");
-//import PathPoints = Pathpointsinterface.PathPoints;
 declare var jQuery: any;
 declare var google: any;
 
@@ -23,7 +21,7 @@ declare var google: any;
 })
 
 export class HomeComponent implements OnInit {
-    button: string = "œÓÂı‡ÎË";
+    button: string = "–ü–æ–µ—Ö–∞–ª–∏";
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
