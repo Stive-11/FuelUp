@@ -99,8 +99,8 @@ namespace AndroidFuelUp
                     if (response.IsSuccessStatusCode)
                     {
                         Android.Widget.Toast.MakeText(this,
-                          await response.Content.ReadAsStringAsync(),
-                          Android.Widget.ToastLength.Short).Show();
+                          "Please wait...",
+                          Android.Widget.ToastLength.Long).Show();
 
                         var jsonFromServer = await response.Content.ReadAsStringAsync();
                         var infoAboutAzs = JsonConvert.DeserializeObject<List<MainInfoAzs>>(jsonFromServer);

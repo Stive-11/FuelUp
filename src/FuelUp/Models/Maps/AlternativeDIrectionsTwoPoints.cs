@@ -53,24 +53,6 @@ namespace FuelUp.Models.Maps
             public double lng { get; set; }
         }
 
-        public class Distance2
-        {
-            public string text { get; set; }
-            public int value { get; set; }
-        }
-
-        public class Duration2
-        {
-            public string text { get; set; }
-            public int value { get; set; }
-        }
-
-        public class EndLocation2
-        {
-            public double lat { get; set; }
-            public double lng { get; set; }
-        }
-
         public class Polyline
         {
             public string points { get; set; }
@@ -84,9 +66,9 @@ namespace FuelUp.Models.Maps
 
         public class Step
         {
-            public Distance2 distance { get; set; }
-            public Duration2 duration { get; set; }
-            public EndLocation2 end_location { get; set; }
+            public Distance distance { get; set; }
+            public Duration duration { get; set; }
+            public EndLocation end_location { get; set; }
             public string html_instructions { get; set; }
             public Polyline polyline { get; set; }
             public StartLocation2 start_location { get; set; }

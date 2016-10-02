@@ -35,7 +35,7 @@ namespace AndroidFuelUp
             Button showStationsButton = FindViewById<Button>(Resource.Id.showStationsBtn);
             showStationsButton.Click += delegate
             {
-               // GetInfoFromServer();
+                // GetInfoFromServer();
                 ShowAllStationOnMap();
             };
 
@@ -43,6 +43,7 @@ namespace AndroidFuelUp
             routeButton.Click += delegate
             {
                 SendInfoToServer();
+                ShowRouteOnMap();
             };
 
             Button serviceMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
@@ -137,7 +138,6 @@ namespace AndroidFuelUp
                     //      Android.Widget.ToastLength.Long).Show();
                 }
             }
-
         }
 
         public async void SendInfoToServer()
@@ -165,7 +165,7 @@ namespace AndroidFuelUp
                           Android.Widget.ToastLength.Long).Show();
 
                         var routeJson = await response.Content.ReadAsStringAsync();
-                        var infoAboutAzs = JsonConvert.DeserializeObject<OneDirectionTwoPoints>(routeJson);
+                        var infoAboutAzs = JsonConvert.DeserializeObject<OneDirectionTwoPoints.Route>(routeJson);
 
                         string str = await response.Content.ReadAsStringAsync();
                     }
@@ -251,7 +251,7 @@ namespace AndroidFuelUp
                      InfoStore.SelectedServiceCod.ToString(),
                      Android.Widget.ToastLength.Long).Show();
 
-            StationFilter.GetStationsForMap((long)InfoStore.SelectedServiceCod);
+            //StationFilter.GetStationsForMap((long)InfoStore.SelectedServiceCod);
 
             //foreach (var station in StationFilter.StationsOnMapWithFilter)
             //{
@@ -268,6 +268,26 @@ namespace AndroidFuelUp
                             (double)station.coordinates.longitude),
                         station.operatorName);
             }
+        }
+
+
+
+        public void ShowRouteOnMap()
+        {
+
+            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(5);
+
+            newRoute.Add(new LatLng(53.90481399999999, 27.5611699));
+            newRoute.Add(new LatLng(53.9061253, 27.563965));
+            newRoute.Add(new LatLng(53.90481399999999, 27.5611699));
+            newRoute.Add(new LatLng(53.90432, 27.5663348));
+            newRoute.Add(new LatLng(53.9061253, 27.563965));
+            newRoute.Add(new LatLng(53.9080704, 27.5745946));
+            newRoute.Add(new LatLng(53.90432, 27.5663348));
+            newRoute.Add(new LatLng(55.7563174,37.6170465));
+           
+            mMap.AddPolyline(newRoute);
+
 
 
 
