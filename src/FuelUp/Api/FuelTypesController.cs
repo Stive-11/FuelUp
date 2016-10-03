@@ -1,18 +1,15 @@
 using FuelUp.Models.DB;
 using FuelUp.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
-using Newtonsoft.Json;
 
 namespace FuelUp.Controllers
 {
     //[EnableCors("")]
     [Produces("application/json")]
-    
     public class FuelTypesController : Controller
     {
         private readonly FuelUpContext _context;
@@ -27,10 +24,8 @@ namespace FuelUp.Controllers
             _getInfo = getInfo;
         }
 
-
-
         // GET: api/FuelTypes/5
-        
+
         [HttpGet("{id}")]
         [Route("api/FuelTypes")]
         public async Task<IActionResult> GetFuelTypes(int id)
@@ -46,8 +41,8 @@ namespace FuelUp.Controllers
             {
                 return NotFound();
             }
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            
+            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
             return Ok(fuelTypes);
         }
 
@@ -62,14 +57,14 @@ namespace FuelUp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var serviceTypes = _context.ServiceTypes.Select(x=> x);
+            var serviceTypes = _context.ServiceTypes.Select(x => x);
 
             if (serviceTypes == null)
             {
                 return NotFound();
             }
             var json = JsonConvert.SerializeObject(serviceTypes);
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);
         }
 
@@ -84,7 +79,7 @@ namespace FuelUp.Controllers
             }
             var info = _getInfo.GetMainInfo();
             var json = JsonConvert.SerializeObject(info);
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);
         }
     }

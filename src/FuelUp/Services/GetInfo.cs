@@ -2,7 +2,6 @@
 using FuelUp.Models.DB;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace FuelUp.Services
 {
@@ -38,7 +37,7 @@ namespace FuelUp.Services
         public IEnumerable<MainInfoAzs> GetFilteredInfo(long filters)
         {
             var stations = _context.Stations
-                .Where(x=> ((long) x.Services & filters) == filters)
+                .Where(x => ((long)x.Services & filters) == filters)
                 .Select(x => new MainInfoAzs()
                 {
                     codFuels = x.Fuels,

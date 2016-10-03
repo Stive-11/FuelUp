@@ -12,12 +12,10 @@ var core_1 = require('@angular/core');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var coordinates_interface_1 = require("../http/coordinates.interface");
-var image_component_1 = require('../image.component');
 var HomeComponent = (function () {
-    function HomeComponent(_httpService, zone, imgComponent) {
+    function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
         this.zone = zone;
-        this.imgComponent = imgComponent;
         this.button = "Поехали";
         this.zoom = 8;
         this.mode = 'Observable';
@@ -39,6 +37,14 @@ var HomeComponent = (function () {
         }
         this._httpService.getPath(this.stPoint, this.finPoint)
             .subscribe(function (error) { return _this.errorMessage = error; });
+    };
+    HomeComponent.prototype.getFiltered = function (servicesCode) {
+        var _this = this;
+        if (!servicesCode || servicesCode == 0) {
+            return;
+        }
+        this._httpService.getFiltres(this.servicesCode)
+            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -70,17 +76,19 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.onClick = function (event) {
         this.getPath(this.stPoint, this.finPoint);
-        this.test = this.imgComponent.servicesCode;
-        console.info("test: " + this.test);
+    };
+    HomeComponent.prototype.onNotify = function (code) {
+        this.servicesCode = code;
+        this.getFiltered(this.servicesCode);
     };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'homecomponent',
             template: require('./home.component.html'),
             styles: [styles],
-            providers: [Httpservice.HTTPService]
+            providers: [Httpservice.HTTPService],
         }), 
-        __metadata('design:paramtypes', [Httpservice.HTTPService, core_1.NgZone, image_component_1.ImgComponent])
+        __metadata('design:paramtypes', [Httpservice.HTTPService, core_1.NgZone])
     ], HomeComponent);
     return HomeComponent;
 }());

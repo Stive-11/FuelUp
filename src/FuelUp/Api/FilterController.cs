@@ -16,15 +16,15 @@ namespace FuelUp.Api
             FuelUpContext context,
             IGetInfo getInfo
             )
-                {
-                    _context = context;
-                    _getInfo = getInfo;
-                }
+        {
+            _context = context;
+            _getInfo = getInfo;
+        }
 
         // POST: api/getFiltredStations
         [HttpPost]
         [Route("api/getFiltredStations")]
-        public ActionResult GetFiltredStations( [FromBody] Requests.Filter filter)
+        public ActionResult GetFiltredStations([FromBody] Requests.Filter filter)
         {
             if (!ModelState.IsValid)
             {
@@ -32,9 +32,8 @@ namespace FuelUp.Api
             }
             var info = _getInfo.GetFilteredInfo(filter.filters);
             var json = JsonConvert.SerializeObject(info);
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);
-
         }
 
         // POST: api/getAllStationsWithFilter
@@ -48,10 +47,8 @@ namespace FuelUp.Api
             }
             var info = _getInfo.GetAllStationsWithFilterInfo(filter.filters);
             var json = JsonConvert.SerializeObject(info);
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);
-
         }
-
     }
 }
