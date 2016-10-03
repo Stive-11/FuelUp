@@ -1,7 +1,6 @@
 using FuelUp.Models.ApiModels;
 using FuelUp.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace FuelUp.Api
 {
@@ -9,6 +8,7 @@ namespace FuelUp.Api
     public class PathesController : Controller
     {
         private readonly IGoogleMap _googleMap;
+
         public PathesController(
             IGoogleMap googleMap
             )

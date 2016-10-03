@@ -4,7 +4,7 @@ namespace FuelUp.Models.Maps
 {
     public class OneDirectionTwoPoints
     {
-        public class GeocodedWaypoint
+        public class GeocodedWaypoints
         {
             public string geocoder_status { get; set; }
             public string place_id { get; set; }
@@ -101,7 +101,7 @@ namespace FuelUp.Models.Maps
 
         public class RootObject
         {
-            public List<GeocodedWaypoint> geocoded_waypoints { get; set; }
+            public List<GeocodedWaypoints> geocoded_waypoints { get; set; }
             public List<Route> routes { get; set; }
             public string status { get; set; }
         }
