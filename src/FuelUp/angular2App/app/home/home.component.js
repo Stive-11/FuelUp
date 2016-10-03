@@ -16,6 +16,8 @@ var HomeComponent = (function () {
     function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
         this.zone = zone;
+        this.imgComponent = imgComponent;
+        this.button = "Поехали";
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;
@@ -36,14 +38,6 @@ var HomeComponent = (function () {
         }
         this._httpService.getPath(this.stPoint, this.finPoint)
             .subscribe(function (error) { return _this.errorMessage = error; });
-    };
-    HomeComponent.prototype.getFiltered = function (servicesCode) {
-        var _this = this;
-        if (servicesCode == 0) {
-            this.getStations();
-        }
-        this._httpService.getFiltres(this.servicesCode)
-            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -87,7 +81,7 @@ var HomeComponent = (function () {
             selector: 'homecomponent',
             template: require('./home.component.html'),
             styles: [styles],
-            providers: [Httpservice.HTTPService]
+            providers: [Httpservice.HTTPService],
         }), 
         __metadata('design:paramtypes', [Httpservice.HTTPService, core_1.NgZone])
     ], HomeComponent);
