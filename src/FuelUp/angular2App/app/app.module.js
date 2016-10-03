@@ -21,6 +21,8 @@ var about_component_1 = require('./about/about.component');
 var core_2 = require('angular2-google-maps/core');
 var image_component_1 = require("./image.component");
 var core_3 = require('angular2-google-maps/core');
+var services_1 = require('angular2-google-maps/core/services');
+var my_map_control_component_1 = require("./home/my-map-control.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,9 +41,11 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 about_component_1.AboutComponent,
                 home_component_1.HomeComponent,
-                image_component_1.ImgComponent
+                image_component_1.ImgComponent,
+                my_map_control_component_1.MyMapControlComponent
             ],
             providers: [
+                services_1.GoogleMapsAPIWrapper,
                 app_constants_1.Configuration,
                 { provide: core_3.MapsAPILoader, useClass: core_3.NoOpMapsAPILoader }
             ],

@@ -26,7 +26,7 @@ export class HTTPService {
     }
     private extractData(res: Response) {
         let body = res.json();
-        console.info(body);
+        //console.info(body);
         return body || {};
     }
     private handleError(error: any) {
@@ -36,14 +36,14 @@ export class HTTPService {
         console.error(errMsg); // log to console
         return Observable.throw(errMsg);
     }
-    postJSON() {
-        var json = JSON.stringify({ val1: 'test', var2: 2 });
-        var params = 'json=' + json;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return this._http.post('http://validate.jsontest.com', params, { headers: headers })
-            .map(res => res.json());
-    }
+    //postJSON() {
+    //    var json = JSON.stringify({ val1: 'test', var2: 2 });
+    //    var params = 'json=' + json;
+    //    var headers = new Headers();
+    //    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //    return this._http.post('http://validate.jsontest.com', params, { headers: headers })
+    //        .map(res => res.json());
+    //}
     getPath(stPoint: Coordinates, finPoint: Coordinates): Observable<Coordinates[]> {
         var str1 = JSON.stringify(stPoint);
         var str2 = JSON.stringify(finPoint);

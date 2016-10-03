@@ -17,6 +17,7 @@ var ImgComponent = (function () {
         this.apply = "Применить фильтры";
         this.images = IMAGES;
         this.servicesCode = 0;
+        this.notify = new core_1.EventEmitter();
     }
     ImgComponent.prototype.toggleImage = function (image) {
         jQuery(image).toggleClass("imagePressed");
@@ -31,17 +32,13 @@ var ImgComponent = (function () {
             console.info("Code: " + this.servicesCode);
         }
     };
-    ImgComponent.prototype.getFiltered = function (servicesCode) {
-        var _this = this;
-        if (!servicesCode || servicesCode == 0) {
-            return;
-        }
-        this._httpService.getFiltres(this.servicesCode)
-            .subscribe(function (error) { return _this.errorMessage = error; });
-    };
     ImgComponent.prototype.onClick = function (event) {
-        this.getFiltered(this.servicesCode);
+        this.notify.emit(this.servicesCode);
     };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], ImgComponent.prototype, "notify", void 0);
     ImgComponent = __decorate([
         core_1.Component({
             selector: 'filtres',

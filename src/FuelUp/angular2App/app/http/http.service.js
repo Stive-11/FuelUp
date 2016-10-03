@@ -28,7 +28,6 @@ var HTTPService = (function () {
     };
     HTTPService.prototype.extractData = function (res) {
         var body = res.json();
-        console.info(body);
         return body || {};
     };
     HTTPService.prototype.handleError = function (error) {
@@ -36,14 +35,6 @@ var HTTPService = (function () {
             error.status ? error.status + " - " + error.statusText : 'Server error';
         console.error(errMsg);
         return Observable_1.Observable.throw(errMsg);
-    };
-    HTTPService.prototype.postJSON = function () {
-        var json = JSON.stringify({ val1: 'test', var2: 2 });
-        var params = 'json=' + json;
-        var headers = new http_1.Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        return this._http.post('http://validate.jsontest.com', params, { headers: headers })
-            .map(function (res) { return res.json(); });
     };
     HTTPService.prototype.getPath = function (stPoint, finPoint) {
         var str1 = JSON.stringify(stPoint);
