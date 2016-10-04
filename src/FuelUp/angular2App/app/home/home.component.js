@@ -16,7 +16,8 @@ var HomeComponent = (function () {
     function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
         this.zone = zone;
-        this.button = "РџРѕРµС…Р°Р»Рё";
+        this.imgComponent = imgComponent;
+        this.button = "Поехали";
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;
@@ -38,18 +39,10 @@ var HomeComponent = (function () {
         this._httpService.getPath(this.stPoint, this.finPoint)
             .subscribe(function (error) { return _this.errorMessage = error; });
     };
-    HomeComponent.prototype.getFiltered = function (servicesCode) {
-        var _this = this;
-        if (!servicesCode || servicesCode == 0) {
-            return;
-        }
-        this._httpService.getFiltres(this.servicesCode)
-            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
-    };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         jQuery(".menu-opener").click(function () {
-            jQuery(".menu-opener, .menu-opener-inner, .sidenav").toggleClass("active");
+            jQuery(".menu-opener, .menu-opener-inner, .sidenav, .way").toggleClass("active");
         });
         jQuery("#gMap").height("83vh");
         this.getStations();
@@ -59,6 +52,8 @@ var HomeComponent = (function () {
         var to = jQuery('#addressTo')[0];
         autocompleteFrom = new google.maps.places.Autocomplete(from, {});
         autocompleteTo = new google.maps.places.Autocomplete(to, {});
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
         google.maps.event.addListener(autocompleteFrom, 'place_changed', function () {
             _this.zone.run(function () {
                 var place = autocompleteFrom.getPlace();

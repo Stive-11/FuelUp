@@ -43,7 +43,7 @@ namespace AndroidFuelUp
             routeButton.Click += delegate
             {
                 SendInfoToServer();
-                ShowRouteOnMap();
+               
             };
 
             Button serviceMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
@@ -165,7 +165,12 @@ namespace AndroidFuelUp
                           Android.Widget.ToastLength.Long).Show();
 
                         var routeJson = await response.Content.ReadAsStringAsync();
-                        var infoAboutAzs = JsonConvert.DeserializeObject<OneDirectionTwoPoints.Route>(routeJson);
+                        var routeInfo = JsonConvert.DeserializeObject<OneDirectionTwoPoints.RootObject>(routeJson);
+                        InfoStore.RouteInfo = routeInfo;
+
+
+                        // Show current route on map
+                        ShowRouteOnMap();
 
                         string str = await response.Content.ReadAsStringAsync();
                     }
@@ -270,27 +275,33 @@ namespace AndroidFuelUp
             }
         }
 
-
-
         public void ShowRouteOnMap()
         {
+            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(10);
 
-            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(5);
+            //Adding start point to route
+            newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].start_location.lat,
+                InfoStore.RouteInfo.routes[0].legs[0].start_location.lng));
 
-            newRoute.Add(new LatLng(53.90481399999999, 27.5611699));
-            newRoute.Add(new LatLng(53.9061253, 27.563965));
-            newRoute.Add(new LatLng(53.90481399999999, 27.5611699));
-            newRoute.Add(new LatLng(53.90432, 27.5663348));
-            newRoute.Add(new LatLng(53.9061253, 27.563965));
-            newRoute.Add(new LatLng(53.9080704, 27.5745946));
-            newRoute.Add(new LatLng(53.90432, 27.5663348));
-            newRoute.Add(new LatLng(55.7563174,37.6170465));
-           
+            
+
+            //Adding midpoints to route
+            var stringOfRoutePoints = "m|_hIethgDASEUOc@Oe@a@_AKQGGGAK?{@MKEIIyAsBaBkCaBkCU[sDwDeEiEoGsGSSMQIOQW{CsFcAmBo@mAiDiG{@aB_@oAmHgVcBsFgDqL}CkJ{@wCs@eC}@yCQq@Ou@CQWaBaCgPcBke@KmCUmEI_A{AyIiDoS[iB[eBqEkXSmASkAiGg^}@{FkCiNMs@m@gD{BeMiCgOc@aCs@uDuCyOwC{OcBeJmAwG{DeTeBoJeCiNqD{RIc@iEcVcF}XuAoGk@_Dc@oB{@oEsEiT]cBo@{CmBaJsBuJ[kAyDuQWuAm@{CyCgNwAwGwCoNyEyTsFuVcBcIiEiSaJgb@YsAe@yB}G}[y@yD}@iEaBiIGWUiAmD}OqCiLmB{GqCmJ{AuEeBwEi@uAg@qA{Noa@yCmIyBcGsC}HcGoP";
+
+            var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(stringOfRoutePoints);
+
+            foreach (var pointToMap in listOfCurrentCoord)
+            {
+                newRoute.Add(new LatLng((double)pointToMap.latitude,
+                    (double)pointToMap.longitude));
+            }
+
+
+            //Adding finish point to route
+            newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].end_location.lat,
+                InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
+
             mMap.AddPolyline(newRoute);
-
-
-
-
         }
     }
 }

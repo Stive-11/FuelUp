@@ -31,7 +31,7 @@
 .way {background-color: #555;
       padding:10px 20px;
 }
-.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .sidenav, .sidenav.active {
+.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .sidenav, .sidenav.active, .way, .way.active {
     -webkit-transition: 250ms all;
     transition: 250ms all;
 }
@@ -58,6 +58,12 @@
     top:0;
 }
 
+.way.active {
+    //position:relative;
+    //top:-59px;
+    //z-index:1;
+    //visibility:hidden;
+}
 .menu-opener-inner {
     background: #fff;
     height: .4rem;

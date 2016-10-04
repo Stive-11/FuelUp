@@ -15,6 +15,15 @@ namespace AndroidFuelUp.Models
         public static string StartPoint { get; set; }
         public static string FinishPoint { get; set; }
 
+        public static Ñoordinates CoordStartPoint { get; set; }
+
+        public static Ñoordinates CoordFinishPoint { get; set; }
+
+
+        public static List<string> StringsOfRoutePoint { get; set; }
+
+        public static OneDirectionTwoPoints.RootObject RouteInfo { get; set; }
+
         static InfoStore()
         {
             Services = new List<string>() { string.Empty };
@@ -25,6 +34,12 @@ namespace AndroidFuelUp.Models
             SelectedServiceCod = new long();
             StartPoint = string.Empty;
             FinishPoint = string.Empty;
+            StringsOfRoutePoint= new List<string>() { string.Empty };
+            CoordFinishPoint=new Ñoordinates();
+            CoordStartPoint=new Ñoordinates();
+            RouteInfo=new OneDirectionTwoPoints.RootObject();
+
+
         }
     }
 }
