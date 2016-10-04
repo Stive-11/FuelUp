@@ -30,5 +30,15 @@ namespace FuelUp.Models.ApiModels
             public long filters { set; get; }
         }
 
+        public class PathCoordinatsWithFilter : PathCoordinats
+        {
+            public long filters { set; get; }
+        }
+
+        public class PathStringsWithFilter : PathStrings
+        {
+            public long filters { set; get; }
+        }
+
     }
 }
