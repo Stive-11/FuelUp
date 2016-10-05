@@ -43,7 +43,6 @@ namespace AndroidFuelUp
             routeButton.Click += delegate
             {
                 SendInfoToServer();
-                ShowRouteOnMap();
             };
 
             Button serviceMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
@@ -165,7 +164,12 @@ namespace AndroidFuelUp
                           Android.Widget.ToastLength.Long).Show();
 
                         var routeJson = await response.Content.ReadAsStringAsync();
-                        var infoAboutAzs = JsonConvert.DeserializeObject<OneDirectionTwoPoints.Route>(routeJson);
+                        var routeInfo = JsonConvert.DeserializeObject<OneDirectionTwoPoints.RootObject>(routeJson);
+                        InfoStore.RouteInfo = routeInfo;
+
+                        // Show current route on map
+                        ShowRouteOnMap();
+                        ShowStartFinishPointOnMap();
 
                         string str = await response.Content.ReadAsStringAsync();
                     }
@@ -251,16 +255,7 @@ namespace AndroidFuelUp
                      InfoStore.SelectedServiceCod.ToString(),
                      Android.Widget.ToastLength.Long).Show();
 
-            //StationFilter.GetStationsForMap((long)InfoStore.SelectedServiceCod);
-
-            //foreach (var station in StationFilter.StationsOnMapWithFilter)
-            //{
-            //    if (station.coordinates.latitude != null && station.coordinates.longitude != null)
-            //        MakeStationOnMap(new LatLng((double)station.coordinates.latitude,
-            //                (double)station.coordinates.longitude),
-            //            station.operatorName);
-            //}
-
+            
             foreach (var station in InfoStore.StationsOnMap)
             {
                 if (station.coordinates.latitude != null && station.coordinates.longitude != null)
@@ -270,27 +265,66 @@ namespace AndroidFuelUp
             }
         }
 
-
-
         public void ShowRouteOnMap()
         {
+            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(7);
 
-            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(5);
+            //Adding start point to route
+            newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].start_location.lat,
+                InfoStore.RouteInfo.routes[0].legs[0].start_location.lng));
 
-            newRoute.Add(new LatLng(53.90481399999999, 27.5611699));
-            newRoute.Add(new LatLng(53.9061253, 27.563965));
-            newRoute.Add(new LatLng(53.90481399999999, 27.5611699));
-            newRoute.Add(new LatLng(53.90432, 27.5663348));
-            newRoute.Add(new LatLng(53.9061253, 27.563965));
-            newRoute.Add(new LatLng(53.9080704, 27.5745946));
-            newRoute.Add(new LatLng(53.90432, 27.5663348));
-            newRoute.Add(new LatLng(55.7563174,37.6170465));
-           
+            //Adding midpoints to route in common
+            //var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(InfoStore.RouteInfo.routes[0].overview_polyline.points);
+
+            //foreach (var pointToMap in listOfCurrentCoord)
+            //{
+            //    newRoute.Add(new LatLng((double)pointToMap.latitude,
+            //        (double)pointToMap.longitude));
+            //}
+
+
+            //Adding midpoints 
+            foreach (var currentPoints in InfoStore.RouteInfo.routes[0].legs[0].steps)
+            {
+                var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(currentPoints.polyline.points);
+                foreach (var pointToMap in listOfCurrentCoord)
+                {
+                    newRoute.Add(new LatLng((double)pointToMap.latitude,
+                        (double)pointToMap.longitude));
+                }
+            }
+
+
+
+            //Adding finish point to route
+            newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].end_location.lat,
+                InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
+
             mMap.AddPolyline(newRoute);
+        }
 
+        public void ShowStartFinishPointOnMap()
+        {
+            mMap.MapType = GoogleMap.MapTypeNormal;
 
+            MarkerOptions startMarkerOptions = new MarkerOptions();
+            MarkerOptions finishMarkerOptions = new MarkerOptions();
+            //Set coord of start point
+            startMarkerOptions.SetPosition(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].start_location.lat,
+               InfoStore.RouteInfo.routes[0].legs[0].start_location.lng));
+            //Set coord of end point
+            finishMarkerOptions.SetPosition(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].end_location.lat,
+               InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
+            //Set name to and/start point
+            startMarkerOptions.SetTitle(InfoStore.RouteInfo.routes[0].legs[0].start_address);
+            finishMarkerOptions.SetTitle(InfoStore.RouteInfo.routes[0].legs[0].end_address);
+            
+            //Set the marker of point
+            startMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker());
+            finishMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker());
 
-
+           mMap.AddMarker(startMarkerOptions);
+            mMap.AddMarker(finishMarkerOptions);
         }
     }
 }

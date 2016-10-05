@@ -8,7 +8,9 @@ namespace FuelUp.Services
         OneDirectionTwoPoints.RootObject GetDirectionWithoutPoints(Requests.PathStrings points);
 
         string GetStringDirectionWithoutPoints(Requests.PathStrings points);
+
         OneDirectionTwoPoints.RootObject GetDirectionWithoutPoints(Requests.PathCoordinats pointsPathesRequest);
+
         string GetStringDirectionWithoutPoints(Requests.PathCoordinats pointsPathesRequest);
     }
 }

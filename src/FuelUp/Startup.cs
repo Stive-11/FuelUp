@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using FuelUp.Models.ApiModels;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace FuelUp
@@ -56,6 +57,12 @@ namespace FuelUp
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<IGetInfo, GetInfo>();
             services.AddScoped<IGoogleMap, GoogleMapDirections>();
+
+            services.AddScoped<Сoordinates>(sp => new Сoordinates()
+            {
+                latitude = double.Parse(Configuration["Distance:Latitude"]),
+                longitude = double.Parse(Configuration["Distance:Longitude"])
+            });
 
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
