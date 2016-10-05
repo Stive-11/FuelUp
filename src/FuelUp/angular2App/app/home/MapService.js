@@ -9,21 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var styles = String(require('./about.component.scss'));
-var AboutComponent = (function () {
-    function AboutComponent() {
+var Subject_1 = require('rxjs/Subject');
+var MapService = (function () {
+    function MapService() {
+        this.missionAnnouncedSource = new Subject_1.Subject();
+        this.missionConfirmedSource = new Subject_1.Subject();
+        this.missionAnnounced$ = this.missionAnnouncedSource.asObservable();
+        this.missionConfirmed$ = this.missionConfirmedSource.asObservable();
     }
-    AboutComponent.prototype.ngOnInit = function () {
+    MapService.prototype.announceMission = function (mission) {
+        this.missionAnnouncedSource.next(mission);
     };
-    AboutComponent = __decorate([
-        core_1.Component({
-            selector: 'about',
-            template: require('./about.component.html'),
-            styles: [styles],
-        }), 
+    MapService.prototype.confirmMission = function (astronaut) {
+        this.missionConfirmedSource.next(astronaut);
+    };
+    MapService = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AboutComponent);
-    return AboutComponent;
+    ], MapService);
+    return MapService;
 }());
-exports.AboutComponent = AboutComponent;
-//# sourceMappingURL=about.component.js.map
+exports.MapService = MapService;
+//# sourceMappingURL=MapService.js.map

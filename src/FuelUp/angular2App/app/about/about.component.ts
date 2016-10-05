@@ -7,15 +7,13 @@ let styles = String(require('./about.component.scss'));
     styles: [styles], 
 })
 
-export class AboutComponent implements OnInit {
+export class AboutComponent  {
 
-    public message: string;
+    //public message: string;
 
-    constructor() {
-        this.message = "Hello from About";
-    }
+    //constructor() {}
 
-    ngOnInit() {
+    //ngOnInit() {
        
-    }
+    //}
 }

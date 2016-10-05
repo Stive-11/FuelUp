@@ -1,5 +1,5 @@
 ﻿import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Input, Output, EventEmitter } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import {SebmGoogleMapMarker, SebmGoogleMapInfoWindow, GoogleMapsAPIWrapper} from 'angular2-google-maps/core';
@@ -22,6 +22,8 @@ declare var google: any;
 })
 
 export class HomeComponent implements OnInit {
+    @Output() stPoint: Coordinates;
+    @Output() finPoint: Coordinates;
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
@@ -31,8 +33,8 @@ export class HomeComponent implements OnInit {
     stations: Station[];
     lat: number = 53.8840092;
     lng: number = 27.4548901;
-    private stPoint: Coordinates = new Coordinates();
-    private finPoint: Coordinates = new Coordinates();
+    //private  = new Coordinates();
+    //private finPoint: Coordinates = new Coordinates();
     constructor(private _httpService: Httpservice.HTTPService, private zone: NgZone) { }
     
     getStations() {
@@ -69,10 +71,6 @@ export class HomeComponent implements OnInit {
         var to = jQuery('#addressTo')[0];
         autocompleteFrom = new google.maps.places.Autocomplete(from, {});
         autocompleteTo = new google.maps.places.Autocomplete(to, {});
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        //var map = jQuery('#gMap');
-        //directionsDisplay.setMap(map);
         google.maps.event.addListener(autocompleteFrom, 'place_changed', () => {
             this.zone.run(() => {
                 var place = autocompleteFrom.getPlace();
@@ -86,26 +84,12 @@ export class HomeComponent implements OnInit {
                 var place = autocompleteTo.getPlace();           
                 this.finPoint.latitude = place.geometry.location.lat();
                 this.finPoint.longitude = place.geometry.location.lng();
-                //calculateAndDisplayRoute(directionsService, directionsDisplay);
             });
         });
-       
-        //function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        //    directionsService.route({
-        //        origin: document.getElementById('start').value,
-        //        destination: document.getElementById('end').value,
-        //        travelMode: google.maps.TravelMode.DRIVING
-        //    }, function (response, status) {
-        //        if (status === google.maps.DirectionsStatus.OK) {
-        //            directionsDisplay.setDirections(response);
-        //        } else {
-        //            window.alert('Directions request failed due to ' + status);
-        //        }
-        //    });
-        //}
     }
     onClick(event) {
-        this.getPath(this.stPoint, this.finPoint);
+        //this.getPath(this.stPoint, this.finPoint);
+        //this.mapCtrl.buildRoute();
         
     }
     onNotify(code: number): void {
