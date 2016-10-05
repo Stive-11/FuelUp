@@ -43,7 +43,6 @@ namespace AndroidFuelUp
             routeButton.Click += delegate
             {
                 SendInfoToServer();
-               
             };
 
             Button serviceMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
@@ -168,9 +167,9 @@ namespace AndroidFuelUp
                         var routeInfo = JsonConvert.DeserializeObject<OneDirectionTwoPoints.RootObject>(routeJson);
                         InfoStore.RouteInfo = routeInfo;
 
-
                         // Show current route on map
                         ShowRouteOnMap();
+                        ShowStartFinishPointOnMap();
 
                         string str = await response.Content.ReadAsStringAsync();
                     }
@@ -256,16 +255,7 @@ namespace AndroidFuelUp
                      InfoStore.SelectedServiceCod.ToString(),
                      Android.Widget.ToastLength.Long).Show();
 
-            //StationFilter.GetStationsForMap((long)InfoStore.SelectedServiceCod);
-
-            //foreach (var station in StationFilter.StationsOnMapWithFilter)
-            //{
-            //    if (station.coordinates.latitude != null && station.coordinates.longitude != null)
-            //        MakeStationOnMap(new LatLng((double)station.coordinates.latitude,
-            //                (double)station.coordinates.longitude),
-            //            station.operatorName);
-            //}
-
+            
             foreach (var station in InfoStore.StationsOnMap)
             {
                 if (station.coordinates.latitude != null && station.coordinates.longitude != null)
@@ -277,24 +267,33 @@ namespace AndroidFuelUp
 
         public void ShowRouteOnMap()
         {
-            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(10);
+            var newRoute = new PolylineOptions().Visible(true).InvokeColor(Color.BlueViolet).InvokeWidth(7);
 
             //Adding start point to route
             newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].start_location.lat,
                 InfoStore.RouteInfo.routes[0].legs[0].start_location.lng));
 
-            
+            //Adding midpoints to route in common
+            //var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(InfoStore.RouteInfo.routes[0].overview_polyline.points);
 
-            //Adding midpoints to route
-            var stringOfRoutePoints = "m|_hIethgDASEUOc@Oe@a@_AKQGGGAK?{@MKEIIyAsBaBkCaBkCU[sDwDeEiEoGsGSSMQIOQW{CsFcAmBo@mAiDiG{@aB_@oAmHgVcBsFgDqL}CkJ{@wCs@eC}@yCQq@Ou@CQWaBaCgPcBke@KmCUmEI_A{AyIiDoS[iB[eBqEkXSmASkAiGg^}@{FkCiNMs@m@gD{BeMiCgOc@aCs@uDuCyOwC{OcBeJmAwG{DeTeBoJeCiNqD{RIc@iEcVcF}XuAoGk@_Dc@oB{@oEsEiT]cBo@{CmBaJsBuJ[kAyDuQWuAm@{CyCgNwAwGwCoNyEyTsFuVcBcIiEiSaJgb@YsAe@yB}G}[y@yD}@iEaBiIGWUiAmD}OqCiLmB{GqCmJ{AuEeBwEi@uAg@qA{Noa@yCmIyBcGsC}HcGoP";
+            //foreach (var pointToMap in listOfCurrentCoord)
+            //{
+            //    newRoute.Add(new LatLng((double)pointToMap.latitude,
+            //        (double)pointToMap.longitude));
+            //}
 
-            var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(stringOfRoutePoints);
 
-            foreach (var pointToMap in listOfCurrentCoord)
+            //Adding midpoints 
+            foreach (var currentPoints in InfoStore.RouteInfo.routes[0].legs[0].steps)
             {
-                newRoute.Add(new LatLng((double)pointToMap.latitude,
-                    (double)pointToMap.longitude));
+                var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(currentPoints.polyline.points);
+                foreach (var pointToMap in listOfCurrentCoord)
+                {
+                    newRoute.Add(new LatLng((double)pointToMap.latitude,
+                        (double)pointToMap.longitude));
+                }
             }
+
 
 
             //Adding finish point to route
@@ -302,6 +301,30 @@ namespace AndroidFuelUp
                 InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
 
             mMap.AddPolyline(newRoute);
+        }
+
+        public void ShowStartFinishPointOnMap()
+        {
+            mMap.MapType = GoogleMap.MapTypeNormal;
+
+            MarkerOptions startMarkerOptions = new MarkerOptions();
+            MarkerOptions finishMarkerOptions = new MarkerOptions();
+            //Set coord of start point
+            startMarkerOptions.SetPosition(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].start_location.lat,
+               InfoStore.RouteInfo.routes[0].legs[0].start_location.lng));
+            //Set coord of end point
+            finishMarkerOptions.SetPosition(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].end_location.lat,
+               InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
+            //Set name to and/start point
+            startMarkerOptions.SetTitle(InfoStore.RouteInfo.routes[0].legs[0].start_address);
+            finishMarkerOptions.SetTitle(InfoStore.RouteInfo.routes[0].legs[0].end_address);
+            
+            //Set the marker of point
+            startMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker());
+            finishMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker());
+
+           mMap.AddMarker(startMarkerOptions);
+            mMap.AddMarker(finishMarkerOptions);
         }
     }
 }
