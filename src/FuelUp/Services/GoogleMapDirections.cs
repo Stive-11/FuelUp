@@ -1,12 +1,18 @@
 ﻿using FuelUp.Models.ApiModels;
 using FuelUp.Models.Maps;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace FuelUp.Services
 {
     public class GoogleMapDirections : IGoogleMap
     {
-        private string _apiKey = "AIzaSyAkWj_SbGsQB4xu8dH0v7PvCP2jz9yt24Y";
+        private readonly string _apiKey;
+
+        public GoogleMapDirections(GoogleApiKey googleApiKey)
+        {
+            _apiKey = googleApiKey.Key;
+        }
 
         public OneDirectionTwoPoints.RootObject GetDirectionWithoutPoints(Requests.PathStrings points)
         {
@@ -33,6 +39,34 @@ namespace FuelUp.Services
         {
             var requestSender = new HttpRequestsGoogleMap(_apiKey);
             var responceString = requestSender.GetRouteTwoAdress(pointsPathesRequest).Result;
+            return responceString;
+        }
+
+        public OneDirectionTwoPoints.RootObject GetDirectionWithWayPoints(Requests.PathStrings points, IEnumerable<Coordinates> wayPoints)
+        {
+            var requestSender = new HttpRequestsGoogleMap(_apiKey);
+            var responceString = requestSender.GetRouteTwoAdress(points, wayPoints).Result;
+            return JsonConvert.DeserializeObject<OneDirectionTwoPoints.RootObject>(responceString);
+        }
+
+        public string GetStringDirectionWithWayPoints(Requests.PathStrings points, IEnumerable<Coordinates> wayPoints)
+        {
+            var requestSender = new HttpRequestsGoogleMap(_apiKey);
+            var responceString = requestSender.GetRouteTwoAdress(points, wayPoints).Result;
+            return responceString;
+        }
+
+        public OneDirectionTwoPoints.RootObject GetDirectionWithWayPoints(Requests.PathCoordinats pointsPathesRequest, IEnumerable<Coordinates> wayPoints)
+        {
+            var requestSender = new HttpRequestsGoogleMap(_apiKey);
+            var responceString = requestSender.GetRouteTwoAdress(pointsPathesRequest, wayPoints).Result;
+            return JsonConvert.DeserializeObject<OneDirectionTwoPoints.RootObject>(responceString);
+        }
+
+        public string GetStringDirectionWithWayPoints(Requests.PathCoordinats pointsPathesRequest, IEnumerable<Coordinates> wayPoints)
+        {
+            var requestSender = new HttpRequestsGoogleMap(_apiKey);
+            var responceString = requestSender.GetRouteTwoAdress(pointsPathesRequest, wayPoints).Result;
             return responceString;
         }
     }

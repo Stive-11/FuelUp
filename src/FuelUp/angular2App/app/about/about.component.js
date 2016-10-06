@@ -13,8 +13,6 @@ var styles = String(require('./about.component.scss'));
 var AboutComponent = (function () {
     function AboutComponent() {
     }
-    AboutComponent.prototype.ngOnInit = function () {
-    };
     AboutComponent = __decorate([
         core_1.Component({
             selector: 'about',

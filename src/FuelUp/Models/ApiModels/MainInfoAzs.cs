@@ -3,7 +3,7 @@
     public class MainInfoAzs
     {
         public string name { set; get; }
-        public Сoordinates coordinates { set; get; }
+        public Coordinates coordinates { set; get; }
         public int? codFuels { set; get; }
         public int? codServices { set; get; }
         public string operatorName { set; get; }
@@ -43,7 +43,7 @@
         }
     }
 
-    public class Сoordinates
+    public class Coordinates
     {
         public double? latitude { set; get; }
         public double? longitude { set; get; }

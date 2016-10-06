@@ -21,7 +21,7 @@ namespace FuelUp.Services
             return await SendRequest(url);
         }
 
-        public async Task<string> GetRouteTwoAdress(Requests.PathStrings paths, IEnumerable<Сoordinates> waypoints)
+        public async Task<string> GetRouteTwoAdress(Requests.PathStrings paths, IEnumerable<Coordinates> waypoints)
         {
             var url = GetRequestAdressTwoPoints(paths.startPoint, paths.finishPoint);
             url = AddWaypoints(waypoints, url);
@@ -40,7 +40,7 @@ namespace FuelUp.Services
             return await SendRequest(url);
         }
 
-        public async Task<string> GetRouteTwoAdress(Requests.PathCoordinats paths, IEnumerable<Сoordinates> waypoints)
+        public async Task<string> GetRouteTwoAdress(Requests.PathCoordinats paths, IEnumerable<Coordinates> waypoints)
         {
             var url = GetRequestAdressTwoPoints(paths);
             url = AddWaypoints(waypoints, url);
@@ -75,7 +75,7 @@ namespace FuelUp.Services
             return $"{ url }&alternatives=true";
         }
 
-        private static string GetAdressFromCoordinates(Сoordinates coordinates)
+        private static string GetAdressFromCoordinates(Coordinates coordinates)
         {
             return $"{DoubleToString(coordinates.latitude)},{DoubleToString(coordinates.longitude)}";
         }
@@ -87,14 +87,14 @@ namespace FuelUp.Services
             return $"{GetRequestAdressTwoPoints(startAdress, finishAdress)}";
         }
 
-        private string AddWaypoints(IEnumerable<Сoordinates> waypoints, string url)
+        private static string AddWaypoints(IEnumerable<Coordinates> waypoints, string url)
         {
-            var resultString = $"{url}&waypoints=";
+            var resultString = $"{url}&waypoints=optimize:true";
             foreach (var waypoint in waypoints)
             {
-                resultString += $"{GetAdressFromCoordinates(waypoint)}|";
+                resultString += $"|{GetAdressFromCoordinates(waypoint)}";
             }
-            return resultString.Remove(resultString.Length - 1, 1);
+            return resultString/*.Remove(resultString.Length - 1, 1)*/;
         }
 
         private static string DoubleToString(double? x)

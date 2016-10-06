@@ -9,10 +9,10 @@ namespace FuelUp.Services
     {
         private readonly OneDirectionTwoPoints.RootObject _path;
         private readonly IEnumerable<MainInfoAzs> _stations;
-        private readonly Сoordinates _distance;
+        private readonly Coordinates _distance;
         private readonly List<Bound> _bounds;
 
-        public CheckStationForPath(OneDirectionTwoPoints.RootObject path, Сoordinates distance, IEnumerable<MainInfoAzs> stations)
+        public CheckStationForPath(OneDirectionTwoPoints.RootObject path, Coordinates distance, IEnumerable<MainInfoAzs> stations)
         {
             _path = path;
             _stations = stations;
@@ -36,12 +36,12 @@ namespace FuelUp.Services
             var bounds = new List<Bound>();
             foreach (var step in _path.routes[0].legs[0].steps)
             {
-                var point1 = new Сoordinates()
+                var point1 = new Coordinates()
                 {
                     latitude = step.start_location.lat,
                     longitude = step.start_location.lng
                 };
-                var point2 = new Сoordinates()
+                var point2 = new Coordinates()
                 {
                     latitude = step.end_location.lat,
                     longitude = step.end_location.lng
@@ -53,17 +53,17 @@ namespace FuelUp.Services
 
         private class Bound
         {
-            private readonly Сoordinates _leftBound;
-            private readonly Сoordinates _rightBound;
+            private readonly Coordinates _leftBound;
+            private readonly Coordinates _rightBound;
 
-            public Bound(Сoordinates point1, Сoordinates point2, Сoordinates distance)
+            public Bound(Coordinates point1, Coordinates point2, Coordinates distance)
             {
-                _leftBound = new Сoordinates()
+                _leftBound = new Coordinates()
                 {
                     latitude = point1.latitude < point2.latitude ? point1.latitude : point2.latitude,
                     longitude = point1.longitude < point2.longitude ? point1.longitude : point2.longitude
                 };
-                _rightBound = new Сoordinates()
+                _rightBound = new Coordinates()
                 {
                     latitude = point1.latitude >= point2.latitude ? point1.latitude : point2.latitude,
                     longitude = point1.longitude >= point2.longitude ? point1.longitude : point2.longitude
@@ -75,7 +75,7 @@ namespace FuelUp.Services
                 _rightBound.longitude += distance.longitude;
             }
 
-            public bool IsInBound(Сoordinates point)
+            public bool IsInBound(Coordinates point)
             {
                 if (point.longitude == null || point.latitude == null)
                     return false;
