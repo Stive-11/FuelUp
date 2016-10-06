@@ -1,26 +1,25 @@
-﻿import {Component, OnInit} from '@angular/core';
+﻿import {Component, OnInit, Input} from '@angular/core';
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
+import {Coordinates} from "../http/coordinates.interface";
 declare var google: any;
+
 
 @Component({
     selector: 'my-map-control',
-    template: ''
+    template: '',
+    inputs: ['counterValue']
 })
 export class MyMapControlComponent {
+    @Input('stPoint') start: Coordinates = new Coordinates();
+    @Input('finPoint') end: Coordinates = new Coordinates();
     constructor(private wrapper: GoogleMapsAPIWrapper) {
-        this.wrapper.getNativeMap().then((m) => {
-            //console.log(google.maps);
-            this.buildRoute();
-        }
-        );
+        this.wrapper.getNativeMap().then((m) => {});
     }
     buildRoute() {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
-        //var start = new google.maps.LatLng(this.start.latitude, this.start.longitude);
-        //var end = new google.maps.LatLng(this.end.latitude, this.end.longitude);
-        var start = new google.maps.LatLng(55.75222, 37.61556);
-        var end = new google.maps.LatLng(52.22977, 21.01178);
+        var start = new google.maps.LatLng(this.start.latitude, this.start.longitude);
+        var end = new google.maps.LatLng(this.end.latitude, this.end.longitude);
         this.wrapper.getNativeMap().then(map => directionsDisplay.setMap(map));
         var bounds = new google.maps.LatLngBounds();
         bounds.extend(start);

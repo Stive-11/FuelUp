@@ -12,14 +12,20 @@ var core_1 = require('@angular/core');
 var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var coordinates_interface_1 = require("../http/coordinates.interface");
+var my_map_control_component_1 = require("./my-map-control.component");
+var core_2 = require('@angular/core');
 var HomeComponent = (function () {
     function HomeComponent(_httpService, zone) {
         this._httpService = _httpService;
         this.zone = zone;
+        this.stPoint = new coordinates_interface_1.Coordinates();
+        this.finPoint = new coordinates_interface_1.Coordinates();
+        this.master = 'Master';
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;
         this.lng = 27.4548901;
+        this.notify = new core_1.EventEmitter();
     }
     HomeComponent.prototype.getStations = function () {
         var _this = this;
@@ -27,14 +33,6 @@ var HomeComponent = (function () {
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     ;
-    HomeComponent.prototype.getPath = function (stPoint, finPoint) {
-        var _this = this;
-        if (!stPoint || !finPoint) {
-            return;
-        }
-        this._httpService.getPath(this.stPoint, this.finPoint)
-            .subscribe(function (error) { return _this.errorMessage = error; });
-    };
     HomeComponent.prototype.getFiltered = function (servicesCode) {
         var _this = this;
         if (servicesCode == 0) {
@@ -72,6 +70,7 @@ var HomeComponent = (function () {
         });
     };
     HomeComponent.prototype.onClick = function (event) {
+        this.controlComponent.buildRoute();
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;
@@ -79,12 +78,12 @@ var HomeComponent = (function () {
     };
     __decorate([
         core_1.Output(), 
-        __metadata('design:type', coordinates_interface_1.Coordinates)
-    ], HomeComponent.prototype, "stPoint", void 0);
+        __metadata('design:type', Object)
+    ], HomeComponent.prototype, "notify", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', coordinates_interface_1.Coordinates)
-    ], HomeComponent.prototype, "finPoint", void 0);
+        core_2.ViewChild(my_map_control_component_1.MyMapControlComponent), 
+        __metadata('design:type', my_map_control_component_1.MyMapControlComponent)
+    ], HomeComponent.prototype, "controlComponent", void 0);
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'homecomponent',

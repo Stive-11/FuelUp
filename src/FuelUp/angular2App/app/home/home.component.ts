@@ -10,6 +10,7 @@ import {Station} from '../http/station.interface';
 import {PathPoints} from '../http/pathpoints.interface';
 import {Coordinates} from "../http/coordinates.interface";
 import {MyMapControlComponent} from "./my-map-control.component";
+import { AfterViewInit, ViewChild } from '@angular/core';
 declare var jQuery: any;
 declare var google: any;
 
@@ -21,9 +22,10 @@ declare var google: any;
     providers: [Httpservice.HTTPService]
 })
 
-export class HomeComponent implements OnInit {
-    @Output() stPoint: Coordinates;
-    @Output() finPoint: Coordinates;
+export class HomeComponent implements OnInit  {
+    stPoint: Coordinates = new Coordinates();
+    finPoint: Coordinates = new Coordinates();
+    master: string = 'Master';
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
@@ -33,9 +35,11 @@ export class HomeComponent implements OnInit {
     stations: Station[];
     lat: number = 53.8840092;
     lng: number = 27.4548901;
-    //private  = new Coordinates();
-    //private finPoint: Coordinates = new Coordinates();
+    @Output() notify = new EventEmitter<Coordinates>();
+    @ViewChild(MyMapControlComponent)
+    private controlComponent: MyMapControlComponent;
     constructor(private _httpService: Httpservice.HTTPService, private zone: NgZone) { }
+
     
     getStations() {
         this._httpService.getAllStations()
@@ -43,12 +47,12 @@ export class HomeComponent implements OnInit {
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     };
-    getPath(stPoint, finPoint) {
-        if (!stPoint || !finPoint) { return; }
-        this._httpService.getPath(this.stPoint, this.finPoint)
-            .subscribe(
-            error => this.errorMessage = <any>error);
-    }
+    //getPath(stPoint, finPoint) {
+    //    if (!stPoint || !finPoint) { return; }
+    //    this._httpService.getPath(this.stPoint, this.finPoint)
+    //        .subscribe(
+    //        error => this.errorMessage = <any>error);
+    //}
     getFiltered(servicesCode) {
         if (servicesCode == 0) {
             this.getStations(); 
@@ -76,7 +80,6 @@ export class HomeComponent implements OnInit {
                 var place = autocompleteFrom.getPlace();
                 this.stPoint.latitude = place.geometry.location.lat();
                 this.stPoint.longitude = place.geometry.location.lng();
-                
             });
         });
         google.maps.event.addListener(autocompleteTo, 'place_changed', () => {
@@ -87,10 +90,11 @@ export class HomeComponent implements OnInit {
             });
         });
     }
-    onClick(event) {
-        //this.getPath(this.stPoint, this.finPoint);
-        //this.mapCtrl.buildRoute();
-        
+    //onClick(event) {
+    //    //this.getPath(this.stPoint, this.finPoint);
+    //}
+    onClick(event) {    
+        this.controlComponent.buildRoute();
     }
     onNotify(code: number): void {
         this.servicesCode = code;

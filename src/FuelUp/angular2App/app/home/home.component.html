@@ -9,7 +9,7 @@
         <form class="way">
             <input class="form-control" placeholder="ОТКУДА" id="addressFrom" type="text" />
             <input class="form-control" placeholder="КУДА" id="addressTo" type="text" />
-            <button type="button" (click)="control.buildRoute()" class="btn btn-success">Поехали</button></form>
+            <button type="button" (click)="onClick($event)" class="btn btn-success">Поехали</button></form>
             <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" id="gMap">
                 <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude" [iconUrl]="'assets/pin.png'">
                     <sebm-google-map-info-window [disableAutoPan]="true">
@@ -17,7 +17,7 @@
                         <!--<p>Услуги: {{station.codServices}}</p>-->
                     </sebm-google-map-info-window>
                 </sebm-google-map-marker>
-                    <my-map-control #control></my-map-control>
+                    <my-map-control [stPoint]="stPoint" [finPoint]="finPoint"></my-map-control>
             </sebm-google-map>
 </div>
 

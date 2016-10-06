@@ -7,13 +7,4 @@ let styles = String(require('./about.component.scss'));
     styles: [styles], 
 })
 
-export class AboutComponent  {
-
-    //public message: string;
-
-    //constructor() {}
-
-    //ngOnInit() {
-       
-    //}
-}
+export class AboutComponent  {}

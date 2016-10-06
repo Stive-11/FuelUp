@@ -10,19 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var core_2 = require('angular2-google-maps/core');
+var coordinates_interface_1 = require("../http/coordinates.interface");
 var MyMapControlComponent = (function () {
     function MyMapControlComponent(wrapper) {
-        var _this = this;
         this.wrapper = wrapper;
-        this.wrapper.getNativeMap().then(function (m) {
-            _this.buildRoute();
-        });
+        this.start = new coordinates_interface_1.Coordinates();
+        this.end = new coordinates_interface_1.Coordinates();
+        this.wrapper.getNativeMap().then(function (m) { });
     }
     MyMapControlComponent.prototype.buildRoute = function () {
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
-        var start = new google.maps.LatLng(55.75222, 37.61556);
-        var end = new google.maps.LatLng(52.22977, 21.01178);
+        var start = new google.maps.LatLng(this.start.latitude, this.start.longitude);
+        var end = new google.maps.LatLng(this.end.latitude, this.end.longitude);
         this.wrapper.getNativeMap().then(function (map) { return directionsDisplay.setMap(map); });
         var bounds = new google.maps.LatLngBounds();
         bounds.extend(start);
@@ -39,10 +39,19 @@ var MyMapControlComponent = (function () {
             }
         });
     };
+    __decorate([
+        core_1.Input('stPoint'), 
+        __metadata('design:type', coordinates_interface_1.Coordinates)
+    ], MyMapControlComponent.prototype, "start", void 0);
+    __decorate([
+        core_1.Input('finPoint'), 
+        __metadata('design:type', coordinates_interface_1.Coordinates)
+    ], MyMapControlComponent.prototype, "end", void 0);
     MyMapControlComponent = __decorate([
         core_1.Component({
             selector: 'my-map-control',
-            template: ''
+            template: '',
+            inputs: ['counterValue']
         }), 
         __metadata('design:paramtypes', [core_2.GoogleMapsAPIWrapper])
     ], MyMapControlComponent);
