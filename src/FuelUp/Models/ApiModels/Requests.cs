@@ -16,8 +16,8 @@ namespace FuelUp.Models.ApiModels
 
         public class PathCoordinats
         {
-            public Сoordinates startPoint { set; get; }
-            public Сoordinates finishPoint { set; get; }
+            public Coordinates startPoint { set; get; }
+            public Coordinates finishPoint { set; get; }
         }
 
         public class PathCoordinatsWithServiceCod :PathCoordinats
@@ -40,5 +40,14 @@ namespace FuelUp.Models.ApiModels
             public long filters { set; get; }
         }
 
+        public class PathCoordinatsWithFilterAndWaypoints : PathCoordinatsWithFilter
+        {
+            public List<Coordinates> wayPoints { set; get; }
+        }
+
+        public class PathStringsWithFilterAndWaypoints : PathStringsWithFilter
+        {
+            public List<Coordinates> wayPoints { set; get; }
+        }
     }
 }

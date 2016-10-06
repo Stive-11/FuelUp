@@ -1,21 +1,20 @@
+using System.Linq;
+using System.Threading.Tasks;
 using FuelUp.Models.DB;
 using FuelUp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace FuelUp.Controllers
+namespace FuelUp.Api
 {
-    //[EnableCors("")]
     [Produces("application/json")]
-    public class FuelTypesController : Controller
+    public class GetInfoController : Controller
     {
         private readonly FuelUpContext _context;
         private readonly IGetInfo _getInfo;
 
-        public FuelTypesController(
+        public GetInfoController(
             FuelUpContext context,
             IGetInfo getInfo
             )
@@ -41,12 +40,10 @@ namespace FuelUp.Controllers
             {
                 return NotFound();
             }
-            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
-
             return Ok(fuelTypes);
         }
 
-        // GET: api/FuelTypes/5
+        // GET: api/GetServiceTypes
 
         [HttpGet]
         [Route("api/GetServiceTypes")]
@@ -64,7 +61,6 @@ namespace FuelUp.Controllers
                 return NotFound();
             }
             var json = JsonConvert.SerializeObject(serviceTypes);
-            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);
         }
 
@@ -79,7 +75,6 @@ namespace FuelUp.Controllers
             }
             var info = _getInfo.GetMainInfo();
             var json = JsonConvert.SerializeObject(info);
-            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return Ok(json);
         }
     }

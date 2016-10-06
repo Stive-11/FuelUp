@@ -6,10 +6,10 @@ namespace FuelUp.Services
 {
     public static class PolylineDecode
     {
-        public static List<Сoordinates> DecodePolylinePoints(string encodedPoints)
+        public static List<Coordinates> DecodePolylinePoints(string encodedPoints)
         {
             if (string.IsNullOrEmpty(encodedPoints)) return null;
-            var poly = new List<Сoordinates>();
+            var poly = new List<Coordinates>();
             var polylinechars = encodedPoints.ToCharArray();
             var index = 0;
 
@@ -50,7 +50,7 @@ namespace FuelUp.Services
                         break;
 
                     currentLng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
-                    var p = new Сoordinates
+                    var p = new Coordinates
                     {
                         latitude = Convert.ToDouble(currentLat)/100000.0,
                         longitude = Convert.ToDouble(currentLng)/100000.0

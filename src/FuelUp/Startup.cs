@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using FuelUp.Models.ApiModels;
+using FuelUp.Models.Maps;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace FuelUp
@@ -58,23 +59,16 @@ namespace FuelUp
             services.AddScoped<IGetInfo, GetInfo>();
             services.AddScoped<IGoogleMap, GoogleMapDirections>();
 
-            services.AddScoped<Сoordinates>(sp => new Сoordinates()
+            services.AddScoped<Coordinates>(sp => new Coordinates()
             {
                 latitude = double.Parse(Configuration["Distance:Latitude"]),
                 longitude = double.Parse(Configuration["Distance:Longitude"])
             });
-
-            var corsBuilder = new CorsPolicyBuilder();
-            corsBuilder.AllowAnyHeader();
-            corsBuilder.AllowAnyMethod();
-            corsBuilder.AllowAnyOrigin();
-            corsBuilder.AllowCredentials();
-            
-
-            services.AddCors(options =>
+            services.AddScoped<GoogleApiKey>(sp => new GoogleApiKey()
             {
-                options.AddPolicy("AllowAll", corsBuilder.Build());
+                Key = Configuration["GoogleApiKey"]
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,7 +108,6 @@ namespace FuelUp
 
             app.UseIdentity();
 
-            app.UseCors("AllowAll");
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>

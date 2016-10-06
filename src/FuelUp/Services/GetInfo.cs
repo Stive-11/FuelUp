@@ -22,7 +22,7 @@ namespace FuelUp.Services
             {
                 codFuels = x.Fuels,
                 codServices = x.Services,
-                coordinates = new Сoordinates()
+                coordinates = new Coordinates()
                 {
                     latitude = x.GPSN,
                     longitude = x.GPSE
@@ -42,7 +42,7 @@ namespace FuelUp.Services
                 {
                     codFuels = x.Fuels,
                     codServices = x.Services,
-                    coordinates = new Сoordinates()
+                    coordinates = new Coordinates()
                     {
                         latitude = x.GPSN,
                         longitude = x.GPSE
@@ -61,7 +61,7 @@ namespace FuelUp.Services
                 {
                     codFuels = x.Fuels,
                     codServices = x.Services,
-                    coordinates = new Сoordinates()
+                    coordinates = new Coordinates()
                     {
                         latitude = x.GPSN,
                         longitude = x.GPSE

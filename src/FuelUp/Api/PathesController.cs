@@ -10,12 +10,12 @@ namespace FuelUp.Api
     {
         private readonly IGoogleMap _googleMap;
         private readonly IGetInfo _getInfo;
-        private readonly Ñoordinates _distance;
+        private readonly Coordinates _distance;
 
         public PathesController(
             IGoogleMap googleMap,
             IGetInfo getInfo,
-            Ñoordinates distance
+            Coordinates distance
             )
         {
             _googleMap = googleMap;
@@ -79,6 +79,49 @@ namespace FuelUp.Api
                 return BadRequest(ModelState);
             }
             var path = _googleMap.GetDirectionWithoutPoints(pointsPathesRequest);
+            var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
+
+            var checkerStations = new CheckStationForPath(path, _distance, stations);
+            var result = new Responce.PathAndStations()
+            {
+                path = path,
+                stations = checkerStations.GetStations()
+            };
+            var returnString = JsonConvert.SerializeObject(result);
+            return Ok(returnString);
+        }
+
+        [Route("api/Pathes/stringsPathWithFiltersAndWayPoints")]
+        [HttpPost]
+        public IActionResult StringPathesWithFiltersAndWayPoints([FromBody] Requests.PathStringsWithFilterAndWaypoints pointsPathesRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var path = _googleMap.GetDirectionWithWayPoints(pointsPathesRequest, pointsPathesRequest.wayPoints);
+            var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
+
+            var checkerStations = new CheckStationForPath(path, _distance, stations);
+            var result = new Responce.PathAndStations()
+            {
+                path = path,
+                stations = checkerStations.GetStations()
+            };
+            var returnString = JsonConvert.SerializeObject(result);
+            return Ok(returnString);
+        }
+
+
+        [Route("api/Pathes/coordinatsPathWithFiltersAndWayPoints")]
+        [HttpPost]
+        public IActionResult CoordinatsPathWithFiltersAndWayPoints([FromBody] Requests.PathCoordinatsWithFilterAndWaypoints pointsPathesRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var path = _googleMap.GetDirectionWithWayPoints(pointsPathesRequest, pointsPathesRequest.wayPoints);
             var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
 
             var checkerStations = new CheckStationForPath(path, _distance, stations);
