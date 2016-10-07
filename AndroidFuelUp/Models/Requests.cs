@@ -32,5 +32,15 @@ namespace AndroidFuelUp.Models
             public long filters { get; set; }
         }
 
+        public class  PathStringsWithFilter
+        {
+            public string startPoint { set; get; }
+            public string finishPoint { set; get; }
+            public long filters { get; set; }
+
+
+        }
+
+
     }
 }
