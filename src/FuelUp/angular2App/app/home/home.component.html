@@ -20,9 +20,9 @@
         </sebm-google-map-marker>
         <my-map-control [stPoint]="stPoint" [finPoint]="finPoint"></my-map-control>
     </sebm-google-map>
-    <div class="route-info">
+    <div class="route-info" id="routeInfo">
         <strong>Информация о маршруте</strong>
-        <p>Расстояние:</p>
+        <p>Расстояние:{{time}}</p>
         <p>Время в пути:</p>
         <p>Количество заправок: </p>
     </div>

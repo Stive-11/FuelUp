@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit  {
     public message: string;
     public errorMessage: string;
     public servicesCode: number = 0;
+    time: string;
     mode = 'Observable';
     stations: Station[];
     lat: number = 53.8840092;
@@ -91,8 +92,10 @@ export class HomeComponent implements OnInit  {
     onClick(event) {
         jQuery(".route-info").addClass("visible");
         this.controlComponent.clearRoute();
-        this.controlComponent.buildRoute();
+        this.controlComponent.buildRoute();      
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
+        var info = document.getElementById('routeInfo');
+        info.innerHTML += 'Количество станций: '+this.stations.length + '<br><br>';
     }
     onNotify(code: number): void {
         this.servicesCode = code;

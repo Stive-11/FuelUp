@@ -6,7 +6,6 @@ import {Coordinates} from './coordinates.interface';
 import {Station} from './station.interface';
 import { Observable }     from 'rxjs/Observable';
 
-
 @Injectable()
 export class HTTPService {
     private getAllStationsURL: string;
