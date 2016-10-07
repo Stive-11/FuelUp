@@ -20,7 +20,6 @@ var HomeComponent = (function () {
         this.zone = zone;
         this.stPoint = new coordinates_interface_1.Coordinates();
         this.finPoint = new coordinates_interface_1.Coordinates();
-        this.master = 'Master';
         this.zoom = 8;
         this.mode = 'Observable';
         this.lat = 53.8840092;
@@ -33,6 +32,20 @@ var HomeComponent = (function () {
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     ;
+    HomeComponent.prototype.getStationsForRoute = function () {
+        var _this = this;
+        this._httpService.getAllStations()
+            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
+    };
+    ;
+    HomeComponent.prototype.getPath = function (stPoint, finPoint, servicesCode) {
+        var _this = this;
+        if (!stPoint || !finPoint || !servicesCode) {
+            return;
+        }
+        this._httpService.getPath(this.stPoint, this.finPoint, this.servicesCode)
+            .subscribe(function (error) { return _this.errorMessage = error; });
+    };
     HomeComponent.prototype.getFiltered = function (servicesCode) {
         var _this = this;
         if (servicesCode == 0) {
@@ -71,6 +84,7 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.onClick = function (event) {
         this.controlComponent.buildRoute();
+        this.getPath(this.stPoint, this.finPoint, this.servicesCode);
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;

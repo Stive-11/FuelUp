@@ -16,6 +16,7 @@ var Configuration = (function () {
         this.URLgetServiceTypes = "/api/GetServiceTypes";
         this.URLgetPath = "/api/Pathes/coordinatsPath";
         this.URLgetFiltered = "/api/getFiltredStations";
+        this.URLgetFiltersForRoute = "/api/Stations/coordinatsPathWithFilters";
     }
     Configuration = __decorate([
         core_1.Injectable(), 
