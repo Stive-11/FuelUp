@@ -17,6 +17,7 @@ var MyMapControlComponent = (function () {
         this.wrapper = wrapper;
         this.start = new coordinates_interface_1.Coordinates();
         this.end = new coordinates_interface_1.Coordinates();
+        this.distance = '';
         this.wrapper.getNativeMap().then(function (m) { });
     }
     MyMapControlComponent.prototype.buildRoute = function () {
@@ -36,7 +37,12 @@ var MyMapControlComponent = (function () {
         };
         directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
+                var info = document.getElementById('routeInfo');
+                info.innerHTML = '';
                 directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+                info.innerHTML += route.legs[0].distance.text + '<br><br>';
+                info.innerHTML += route.legs[0].duration.text;
             }
         });
     };

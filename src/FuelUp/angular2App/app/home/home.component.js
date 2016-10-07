@@ -82,6 +82,8 @@ var HomeComponent = (function () {
         this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
+        var info = document.getElementById('routeInfo');
+        info.innerHTML += 'Количество станций: ' + this.stations.length + '<br><br>';
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;
