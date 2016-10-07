@@ -21,6 +21,7 @@ var HomeComponent = (function () {
         this.stPoint = new coordinates_interface_1.Coordinates();
         this.finPoint = new coordinates_interface_1.Coordinates();
         this.zoom = 8;
+        this.servicesCode = 0;
         this.mode = 'Observable';
         this.lat = 53.8840092;
         this.lng = 27.4548901;
@@ -32,19 +33,13 @@ var HomeComponent = (function () {
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     ;
-    HomeComponent.prototype.getStationsForRoute = function () {
-        var _this = this;
-        this._httpService.getAllStations()
-            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
-    };
-    ;
     HomeComponent.prototype.getPath = function (stPoint, finPoint, servicesCode) {
         var _this = this;
-        if (!stPoint || !finPoint || !servicesCode) {
+        if (!stPoint || !finPoint) {
             return;
         }
         this._httpService.getPath(this.stPoint, this.finPoint, this.servicesCode)
-            .subscribe(function (error) { return _this.errorMessage = error; });
+            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     HomeComponent.prototype.getFiltered = function (servicesCode) {
         var _this = this;
@@ -83,12 +78,16 @@ var HomeComponent = (function () {
         });
     };
     HomeComponent.prototype.onClick = function (event) {
+        jQuery(".route-info").addClass("visible");
+        this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;
         this.getFiltered(this.servicesCode);
+    };
+    HomeComponent.prototype.mapClicked = function ($event) {
     };
     __decorate([
         core_1.Output(), 

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var core_2 = require('angular2-google-maps/core');
 var coordinates_interface_1 = require("../http/coordinates.interface");
+var directionsDisplay;
 var MyMapControlComponent = (function () {
     function MyMapControlComponent(wrapper) {
         this.wrapper = wrapper;
@@ -20,7 +21,7 @@ var MyMapControlComponent = (function () {
     }
     MyMapControlComponent.prototype.buildRoute = function () {
         var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsDisplay = new google.maps.DirectionsRenderer;
         var start = new google.maps.LatLng(this.start.latitude, this.start.longitude);
         var end = new google.maps.LatLng(this.end.latitude, this.end.longitude);
         this.wrapper.getNativeMap().then(function (map) { return directionsDisplay.setMap(map); });
@@ -39,6 +40,12 @@ var MyMapControlComponent = (function () {
             }
         });
     };
+    MyMapControlComponent.prototype.clearRoute = function () {
+        if (directionsDisplay != null) {
+            directionsDisplay.setMap(null);
+            directionsDisplay = null;
+        }
+    };
     __decorate([
         core_1.Input('stPoint'), 
         __metadata('design:type', coordinates_interface_1.Coordinates)
@@ -50,8 +57,7 @@ var MyMapControlComponent = (function () {
     MyMapControlComponent = __decorate([
         core_1.Component({
             selector: 'my-map-control',
-            template: '',
-            inputs: ['counterValue']
+            template: "",
         }), 
         __metadata('design:paramtypes', [core_2.GoogleMapsAPIWrapper])
     ], MyMapControlComponent);

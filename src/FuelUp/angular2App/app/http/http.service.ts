@@ -5,7 +5,6 @@ import { Configuration } from '../app.constants';
 import {Coordinates} from './coordinates.interface';
 import {Station} from './station.interface';
 import { Observable }     from 'rxjs/Observable';
-import {PathPoints} from './pathpoints.interface';
 
 @Injectable()
 export class HTTPService {
