@@ -7,8 +7,7 @@ let directionsDisplay: any;
 
 @Component({
     selector: 'my-map-control',
-    template: '',
-    inputs: ['counterValue']
+    template: ``,
 })
 export class MyMapControlComponent {
     @Input('stPoint') start: Coordinates = new Coordinates();
@@ -34,6 +33,7 @@ export class MyMapControlComponent {
         directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
+                //console.info(response.routes.legs.distance);
             }
         });
     }

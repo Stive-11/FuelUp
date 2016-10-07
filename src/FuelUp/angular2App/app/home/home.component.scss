@@ -57,6 +57,18 @@
     left:16.6%;
     top:0;
 }
+.route-info {
+    position:absolute;
+    bottom:10%;
+    right:5%;
+    background:rgba(255,255,255, 0.7);
+    border-radius:10px;
+    width: 300px;
+    height:auto;
+    text-align:center;
+    visibility:hidden;
+}
+.route-info.visible{visibility:visible;}
 
 .way.active {
     //position:relative;

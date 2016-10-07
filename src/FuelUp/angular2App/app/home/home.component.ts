@@ -7,7 +7,6 @@ import { MapsAPILoader, NoOpMapsAPILoader} from 'angular2-google-maps/core';
 import Httpservice = require("../http/http.service");
 let styles = String(require('./home.component.scss'));
 import {Station} from '../http/station.interface';
-import {PathPoints} from '../http/pathpoints.interface';
 import {Coordinates} from "../http/coordinates.interface";
 import {MyMapControlComponent} from "./my-map-control.component";
 import { AfterViewInit, ViewChild } from '@angular/core';
@@ -44,12 +43,7 @@ export class HomeComponent implements OnInit  {
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     };
-    //getStationsForRoute() {
-    //    this._httpService.getAllStation()
-    //        .subscribe(
-    //        stations => this.stations = stations,
-    //        error => this.errorMessage = <any>error);
-    //};
+
     getPath(stPoint, finPoint, servicesCode) {
         if (!stPoint || !finPoint) { return; }
         this._httpService.getPath(this.stPoint, this.finPoint, this.servicesCode)
@@ -95,6 +89,7 @@ export class HomeComponent implements OnInit  {
         });
     }
     onClick(event) {
+        jQuery(".route-info").addClass("visible");
         this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
@@ -102,5 +97,8 @@ export class HomeComponent implements OnInit  {
     onNotify(code: number): void {
         this.servicesCode = code;
         this.getFiltered(this.servicesCode);
+    }
+    mapClicked($event: MouseEvent) {
+        
     }
 }
