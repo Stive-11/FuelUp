@@ -10,4 +10,5 @@ export class Configuration {
     public URLgetPath: string = "/api/Pathes/coordinatsPath";
     //public URLgetFiltered: string = "/api/getAllStationsWithFilter";
     public URLgetFiltered: string = "/api/getFiltredStations";
+    public URLgetFiltersForRoute: string = "/api/Stations/coordinatsPathWithFilters";
 }

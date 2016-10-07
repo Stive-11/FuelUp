@@ -25,12 +25,10 @@ declare var google: any;
 export class HomeComponent implements OnInit  {
     stPoint: Coordinates = new Coordinates();
     finPoint: Coordinates = new Coordinates();
-    master: string = 'Master';
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
     public servicesCode: number;
-    test: number;
     mode = 'Observable';
     stations: Station[];
     lat: number = 53.8840092;
@@ -39,20 +37,25 @@ export class HomeComponent implements OnInit  {
     @ViewChild(MyMapControlComponent)
     private controlComponent: MyMapControlComponent;
     constructor(private _httpService: Httpservice.HTTPService, private zone: NgZone) { }
-
-    
+ 
     getStations() {
         this._httpService.getAllStations()
             .subscribe(
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     };
-    //getPath(stPoint, finPoint) {
-    //    if (!stPoint || !finPoint) { return; }
-    //    this._httpService.getPath(this.stPoint, this.finPoint)
-    //        .subscribe(
-    //        error => this.errorMessage = <any>error);
-    //}
+    getStationsForRoute() {
+        this._httpService.getAllStations()
+            .subscribe(
+            stations => this.stations = stations,
+            error => this.errorMessage = <any>error);
+    };
+    getPath(stPoint, finPoint, servicesCode) {
+        if (!stPoint || !finPoint || !servicesCode) { return; }
+        this._httpService.getPath(this.stPoint, this.finPoint, this.servicesCode)
+            .subscribe(
+            error => this.errorMessage = <any>error);
+    }
     getFiltered(servicesCode) {
         if (servicesCode == 0) {
             this.getStations(); 
@@ -90,11 +93,9 @@ export class HomeComponent implements OnInit  {
             });
         });
     }
-    //onClick(event) {
-    //    //this.getPath(this.stPoint, this.finPoint);
-    //}
     onClick(event) {    
         this.controlComponent.buildRoute();
+        this.getPath(this.stPoint, this.finPoint, this.servicesCode);
     }
     onNotify(code: number): void {
         this.servicesCode = code;
