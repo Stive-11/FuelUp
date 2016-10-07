@@ -90,40 +90,6 @@ namespace FuelUp.Api
             return Ok(returnString);
         }
 
-        [Route("api/Stations/stringsPathWithFilters")]
-        [HttpPost]
-        public IActionResult StringsPathWithFiltersOnlyStations([FromBody] Requests.PathStringsWithFilter pointsPathesRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var path = _googleMap.GetDirectionWithoutPoints(pointsPathesRequest);
-            var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
-
-            var checkerStations = new CheckStationForPath(path, _distance, stations);
-
-            var returnString = JsonConvert.SerializeObject(checkerStations.GetStations());
-            return Ok(returnString);
-        }
-
-        [Route("api/Stations/coordinatsPathWithFilters")]
-        [HttpPost]
-        public IActionResult CoordinatsPathesWithFiltersOnlyStations([FromBody] Requests.PathCoordinatsWithFilter pointsPathesRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var path = _googleMap.GetDirectionWithoutPoints(pointsPathesRequest);
-            var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
-
-            var checkerStations = new CheckStationForPath(path, _distance, stations);
-
-            var returnString = JsonConvert.SerializeObject(checkerStations.GetStations());
-            return Ok(returnString);
-        }
-
         [Route("api/Pathes/stringsPathWithFiltersAndWayPoints")]
         [HttpPost]
         public IActionResult StringPathesWithFiltersAndWayPoints([FromBody] Requests.PathStringsWithFilterAndWaypoints pointsPathesRequest)
@@ -163,6 +129,40 @@ namespace FuelUp.Api
                 stations = checkerStations.GetStations()
             };
             var returnString = JsonConvert.SerializeObject(result);
+            return Ok(returnString);
+        }
+
+        [Route("api/Stations/stringsPathWithFilters")]
+        [HttpPost]
+        public IActionResult StringsPathWithFiltersOnlyStations([FromBody] Requests.PathStringsWithFilter pointsPathesRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var path = _googleMap.GetDirectionWithoutPoints(pointsPathesRequest);
+            var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
+
+            var checkerStations = new CheckStationForPath(path, _distance, stations);
+
+            var returnString = JsonConvert.SerializeObject(checkerStations.GetStations());
+            return Ok(returnString);
+        }
+
+        [Route("api/Stations/coordinatsPathWithFilters")]
+        [HttpPost]
+        public IActionResult CoordinatsPathesWithFiltersOnlyStations([FromBody] Requests.PathCoordinatsWithFilter pointsPathesRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var path = _googleMap.GetDirectionWithoutPoints(pointsPathesRequest);
+            var stations = _getInfo.GetAllStationsWithFilterInfo(pointsPathesRequest.filters);
+
+            var checkerStations = new CheckStationForPath(path, _distance, stations);
+
+            var returnString = JsonConvert.SerializeObject(checkerStations.GetStations());
             return Ok(returnString);
         }
 
