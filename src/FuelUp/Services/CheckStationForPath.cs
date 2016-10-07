@@ -1,12 +1,15 @@
-﻿using FuelUp.Models.ApiModels;
+﻿using System;
+using FuelUp.Models.ApiModels;
 using FuelUp.Models.Maps;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
 
 namespace FuelUp.Services
 {
     public class CheckStationForPath
     {
+
         private readonly OneDirectionTwoPoints.RootObject _path;
         private readonly IEnumerable<MainInfoAzs> _stations;
         private readonly Coordinates _distance;
@@ -17,6 +20,7 @@ namespace FuelUp.Services
             _path = path;
             _stations = stations;
             _distance = distance;
+
             _bounds = CreateBounds();
         }
 
@@ -55,6 +59,8 @@ namespace FuelUp.Services
         {
             private readonly Coordinates _leftBound;
             private readonly Coordinates _rightBound;
+            private const double koef = 1.6;
+            private double _maxDistance = 0;
 
             public Bound(Coordinates point1, Coordinates point2, Coordinates distance)
             {
@@ -73,6 +79,7 @@ namespace FuelUp.Services
                 _leftBound.longitude -= distance.longitude;
                 _rightBound.latitude += distance.latitude;
                 _rightBound.longitude += distance.longitude;
+                _maxDistance = (double)(1.4 * (distance.latitude + distance.longitude * koef));
             }
 
             public bool IsInBound(Coordinates point)
@@ -83,7 +90,14 @@ namespace FuelUp.Services
                     return false;
                 if (point.longitude < _leftBound.longitude || point.longitude > _rightBound.longitude)
                     return false;
-                return true;
+                
+                var a = _leftBound.latitude - _rightBound.latitude;
+                var b = (_rightBound.longitude - _leftBound.longitude) * koef;
+                var c = (_leftBound.latitude * _rightBound.longitude - _rightBound.latitude * _leftBound.longitude);
+                var ab = (double) (a*a + b*b);
+                var d =(double) (a*point.latitude + b*point.longitude + c)/Math.Sqrt(ab);
+
+                return !(d > _maxDistance);
             }
         }
     }

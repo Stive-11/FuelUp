@@ -20,6 +20,7 @@ var HTTPService = (function () {
         this.getAllStationsURL = _configuration.Server + _configuration.URLgetMainInfo;
         this.getPathsURL = _configuration.Server + _configuration.URLgetPath;
         this.getFiltersURL = _configuration.Server + _configuration.URLgetFiltered;
+        this.getFiltersForRouteURL = _configuration.Server + _configuration.URLgetFiltersForRoute;
     }
     HTTPService.prototype.getAllStations = function () {
         return this._http.get(this.getAllStationsURL)
@@ -36,13 +37,13 @@ var HTTPService = (function () {
         console.error(errMsg);
         return Observable_1.Observable.throw(errMsg);
     };
-    HTTPService.prototype.getPath = function (stPoint, finPoint) {
+    HTTPService.prototype.getPath = function (stPoint, finPoint, filters) {
         var str1 = JSON.stringify(stPoint);
         var str2 = JSON.stringify(finPoint);
-        var body = '{"startPoint":' + str1 + ',"finishPoint":' + str2 + '}';
+        var body = '{"startPoint":' + str1 + ',"finishPoint":' + str2 + ',"filters":' + filters + '}';
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this._http.post(this.getPathsURL, body, options)
+        return this._http.post(this.getFiltersForRouteURL, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
