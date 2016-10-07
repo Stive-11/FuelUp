@@ -2,6 +2,7 @@
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 import {Coordinates} from "../http/coordinates.interface";
 declare var google: any;
+let directionsDisplay: any;
 
 
 @Component({
@@ -17,7 +18,7 @@ export class MyMapControlComponent {
     }
     buildRoute() {
         var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsDisplay = new google.maps.DirectionsRenderer;
         var start = new google.maps.LatLng(this.start.latitude, this.start.longitude);
         var end = new google.maps.LatLng(this.end.latitude, this.end.longitude);
         this.wrapper.getNativeMap().then(map => directionsDisplay.setMap(map));
@@ -35,6 +36,12 @@ export class MyMapControlComponent {
                 directionsDisplay.setDirections(response);
             }
         });
+    }
+    clearRoute() {
+        if (directionsDisplay != null) {
+            directionsDisplay.setMap(null);
+            directionsDisplay = null;
+        }
     }
 }
    

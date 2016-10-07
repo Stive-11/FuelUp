@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit  {
     zoom: number = 8;
     public message: string;
     public errorMessage: string;
-    public servicesCode: number;
+    public servicesCode: number = 0;
     mode = 'Observable';
     stations: Station[];
     lat: number = 53.8840092;
@@ -44,16 +44,17 @@ export class HomeComponent implements OnInit  {
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     };
-    getStationsForRoute() {
-        this._httpService.getAllStations()
-            .subscribe(
-            stations => this.stations = stations,
-            error => this.errorMessage = <any>error);
-    };
+    //getStationsForRoute() {
+    //    this._httpService.getAllStation()
+    //        .subscribe(
+    //        stations => this.stations = stations,
+    //        error => this.errorMessage = <any>error);
+    //};
     getPath(stPoint, finPoint, servicesCode) {
-        if (!stPoint || !finPoint || !servicesCode) { return; }
+        if (!stPoint || !finPoint) { return; }
         this._httpService.getPath(this.stPoint, this.finPoint, this.servicesCode)
             .subscribe(
+            stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     }
     getFiltered(servicesCode) {
@@ -93,7 +94,8 @@ export class HomeComponent implements OnInit  {
             });
         });
     }
-    onClick(event) {    
+    onClick(event) {
+        this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
     }
