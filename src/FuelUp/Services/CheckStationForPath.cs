@@ -61,6 +61,8 @@ namespace FuelUp.Services
             private readonly Coordinates _rightBound;
             private const double koef = 1.6;
             private double _maxDistance = 0;
+            private readonly Coordinates _point1;
+            private readonly Coordinates _point2;
 
             public Bound(Coordinates point1, Coordinates point2, Coordinates distance)
             {
@@ -80,9 +82,12 @@ namespace FuelUp.Services
                 _rightBound.latitude += distance.latitude;
                 _rightBound.longitude += distance.longitude;
                 _maxDistance = (double)(1.4 * (distance.latitude + distance.longitude * koef));
+
+                _point1 = point1;
+                _point2 = point2;
             }
 
-            public bool IsInBound(Coordinates point)
+            public bool IsInBound(Coordinates point )
             {
                 if (point.longitude == null || point.latitude == null)
                     return false;
@@ -91,13 +96,14 @@ namespace FuelUp.Services
                 if (point.longitude < _leftBound.longitude || point.longitude > _rightBound.longitude)
                     return false;
                 
-                var a = _leftBound.latitude - _rightBound.latitude;
-                var b = (_rightBound.longitude - _leftBound.longitude) * koef;
-                var c = (_leftBound.latitude * _rightBound.longitude - _rightBound.latitude * _leftBound.longitude);
-                var ab = (double) (a*a + b*b);
-                var d =(double) (a*point.latitude + b*point.longitude + c)/Math.Sqrt(ab);
-
-                return !(d > _maxDistance);
+                //var a = _leftBound.longitude - _rightBound.longitude;
+                //var b = (_rightBound.latitude - _leftBound.latitude) * koef ;
+                //var c = (_leftBound.latitude * _rightBound.longitude - _rightBound.latitude * _leftBound.longitude);
+                //var ab = (double) (a*a + b*b);
+                //var d =Math.Abs( (double) (a*point.latitude + b*point.longitude + c)/Math.Sqrt(ab));
+                //_maxDistance = 3;
+                //return (d < _maxDistance);
+                return true;
             }
         }
     }
