@@ -9,8 +9,8 @@
     <form class="way">
         <input class="form-control" placeholder="ОТКУДА" id="addressFrom" type="text" />
         <input class="form-control" placeholder="КУДА" id="addressTo" type="text" />
-        <button type="button" (click)="onClick($event)" class="btn btn-success">Поехали</button>
-    </form>
+        <button type="button" id="butt" (click)="onClick($event)" class="btn btn-success">Поехали</button>
+    </form><!---->
     <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" id="gMap" (markerClick)="closeInfo()">
         <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude" [iconUrl]="'assets/pin.png'">
             <sebm-google-map-info-window [disableAutoPan]="true">
@@ -20,11 +20,10 @@
         </sebm-google-map-marker>
         <my-map-control [stPoint]="stPoint" [finPoint]="finPoint"></my-map-control>
     </sebm-google-map>
-    <div class="route-info" id="routeInfo">
-        <strong>Информация о маршруте</strong>
-        <p>Расстояние:{{time}}</p>
-        <p>Время в пути:</p>
-        <p>Количество заправок: </p>
+    <div class="route-info">
+        <div id="routeInfo"></div>
+        <p id="count">Количество ближайших станций: {{count}}</p>
     </div>
+
 </div>
 

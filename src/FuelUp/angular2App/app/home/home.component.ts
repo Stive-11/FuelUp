@@ -25,12 +25,14 @@ export class HomeComponent implements OnInit  {
     stPoint: Coordinates = new Coordinates();
     finPoint: Coordinates = new Coordinates();
     zoom: number = 8;
+    count: number = 0;
     public message: string;
     public errorMessage: string;
     public servicesCode: number = 0;
-    time: string;
+
     mode = 'Observable';
     stations: Station[];
+   
     lat: number = 53.8840092;
     lng: number = 27.4548901;
     @Output() notify = new EventEmitter<Coordinates>();
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit  {
             .subscribe(
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
+     
     }
     getFiltered(servicesCode) {
         if (servicesCode == 0) {
@@ -88,15 +91,32 @@ export class HomeComponent implements OnInit  {
                 this.finPoint.longitude = place.geometry.location.lng();
             });
         });
+     
     }
+   
     onClick(event) {
         jQuery(".route-info").addClass("visible");
         this.controlComponent.clearRoute();
-        this.controlComponent.buildRoute();      
+        this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
-        var info = document.getElementById('routeInfo');
-        info.innerHTML += 'Количество станций: '+this.stations.length + '<br><br>';
+        //this.addCounter(this.stations);
+        setTimeout(() => {
+            this.count = this.stations.length;
+        }, 4000);
+       
     }
+    
+    //onClick(event) {
+    //    jQuery(".route-info").addClass("visible");
+    //    jQuery.when(this.renderPath()).then(this.addCounter(this.stations));
+    //}
+   
+    renderPath() {
+        this.controlComponent.clearRoute();
+        this.controlComponent.buildRoute();
+        this.getPath(this.stPoint, this.finPoint, this.servicesCode);
+    }
+
     onNotify(code: number): void {
         this.servicesCode = code;
         this.getFiltered(this.servicesCode);
@@ -104,4 +124,10 @@ export class HomeComponent implements OnInit  {
     mapClicked($event: MouseEvent) {
         
     }
+    addCounter(stations) {
+        console.info(stations);
+        console.info(stations.length)
+        var count = stations.length;
+        jQuery("#count").html("");
+        jQuery("#count").html("Количество заправок: " + count + "<br>"); }
 }

@@ -21,6 +21,7 @@ var HomeComponent = (function () {
         this.stPoint = new coordinates_interface_1.Coordinates();
         this.finPoint = new coordinates_interface_1.Coordinates();
         this.zoom = 8;
+        this.count = 0;
         this.servicesCode = 0;
         this.mode = 'Observable';
         this.lat = 53.8840092;
@@ -82,6 +83,7 @@ var HomeComponent = (function () {
         this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
+        this.count = this.stations.length;
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;

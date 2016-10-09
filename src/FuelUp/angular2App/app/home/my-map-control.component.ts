@@ -38,9 +38,9 @@ export class MyMapControlComponent {
                 info.innerHTML = '';
                 directionsDisplay.setDirections(response);
                 var route = response.routes[0];
-                info.innerHTML += route.legs[0].distance.text + '<br><br>';
-                info.innerHTML += route.legs[0].duration.text;
-                
+                info.innerHTML += '<p><strong>Информация о маршруте</strong></p>';
+                info.innerHTML += '<p>Расстояние: '+route.legs[0].distance.text + '</p>';
+                info.innerHTML += '<p>Время в пути: ' + route.legs[0].duration.text +'</p>';
             }
         });
     }

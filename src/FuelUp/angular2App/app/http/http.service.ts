@@ -60,13 +60,5 @@ export class HTTPService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    //getFiltersForRoute(filters: number): Observable<Station[]> {
-    //    let body = JSON.stringify({ filters });
-    //    let headers = new Headers({ 'Content-Type': 'application/json' });
-    //    let options = new RequestOptions({ headers: headers });
 
-    //    return this._http.post(this.getFiltersURL, body, options)
-    //        .map(this.extractData)
-    //        .catch(this.handleError);
-    //}
 }
