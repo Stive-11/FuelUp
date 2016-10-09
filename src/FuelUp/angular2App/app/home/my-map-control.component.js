@@ -14,19 +14,13 @@ var coordinates_interface_1 = require("../http/coordinates.interface");
 var directionsDisplay;
 var MyMapControlComponent = (function () {
     function MyMapControlComponent(wrapper) {
-        var _this = this;
         this.wrapper = wrapper;
         this.start = new coordinates_interface_1.Coordinates();
         this.end = new coordinates_interface_1.Coordinates();
-        this.count = 0;
         this.distance = '';
-        this.wrapper.getNativeMap().then(function (m) {
-            console.info(_this.count);
-        });
+        this.wrapper.getNativeMap().then(function (m) { });
     }
     MyMapControlComponent.prototype.buildRoute = function () {
-        var count = this.count;
-        console.info('from function: ' + count);
         var directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         var start = new google.maps.LatLng(this.start.latitude, this.start.longitude);
@@ -47,9 +41,9 @@ var MyMapControlComponent = (function () {
                 info.innerHTML = '';
                 directionsDisplay.setDirections(response);
                 var route = response.routes[0];
-                info.innerHTML += '<strong>Информация о маршруте</strong><br>';
-                info.innerHTML += 'Расстояние: ' + route.legs[0].distance.text + '<br>';
-                info.innerHTML += 'Время в пути: ' + route.legs[0].duration.text + '<br>';
+                info.innerHTML += '<p><strong>Информация о маршруте</strong></p>';
+                info.innerHTML += '<p>Расстояние: ' + route.legs[0].distance.text + '</p>';
+                info.innerHTML += '<p>Время в пути: ' + route.legs[0].duration.text + '</p>';
             }
         });
     };
@@ -67,10 +61,6 @@ var MyMapControlComponent = (function () {
         core_1.Input('finPoint'), 
         __metadata('design:type', coordinates_interface_1.Coordinates)
     ], MyMapControlComponent.prototype, "end", void 0);
-    __decorate([
-        core_1.Input('count'), 
-        __metadata('design:type', Number)
-    ], MyMapControlComponent.prototype, "count", void 0);
     MyMapControlComponent = __decorate([
         core_1.Component({
             selector: 'my-map-control',

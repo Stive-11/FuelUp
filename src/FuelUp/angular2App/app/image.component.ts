@@ -1,4 +1,4 @@
-﻿import {Component, EventEmitter, Input, Output} from '@angular/core';
+﻿import {Component, EventEmitter, Input, Output, OnChanges} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {Image} from './image.interface';
 import Httpservice = require("./http/http.service");
@@ -6,10 +6,16 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 declare var jQuery: any;
 let styles = String(require('./image.component.scss'));
 
+
+
 @Component({
     selector: 'filtres',
     template: ` 
-     <button type="button" (click)="onClick($event)" class="btn btn-success apply">{{apply}}</button>
+  <button type="button" (click)="onClick($event)" class="btn btn-success apply">Применить фильтры</button>
+  <!--<select (change)="getFilterType(state)" class="form-control my-ctrl">
+         <option *ngFor="let state of states" [value]="state">{{state}}</option>
+  </select>-->
+    <input type='checkbox'(change)="$event.target.checked? (hardSelection =  true) : (hardSelection = false)"> Жесткая фильтрация
   <ul class="filters"> 
     <li *ngFor="let image of images">
         <div data-title="{{image.title}}" (click)="toggleImage(image)" class="{{image.class}}"> 
@@ -26,30 +32,34 @@ let styles = String(require('./image.component.scss'));
 })
 
 export class ImgComponent {
+    private value: any = {};
     public apply: string = "Применить фильтры";
     public images = IMAGES;
     public servicesCode: number = 0;
     public errorMessage: string;
+    public hardSelection = false;
     constructor(private _httpService: Httpservice.HTTPService) { }
     @Output() notify = new EventEmitter<number>();
+    @Output() notify2 = new EventEmitter<boolean>();
     public toggleImage(image) {
         jQuery(image).toggleClass("imagePressed");
         if (image.class == "imageUnpressed") {
             image.class = "imagePressed";
-            this.servicesCode += image.code;
-            console.info("Code: " + this.servicesCode);
+            this.servicesCode += image.code;     
         } else {
             image.class = "imageUnpressed";
-            this.servicesCode -= image.code;
-            console.info("Code: " + this.servicesCode);
+            this.servicesCode -= image.code;        
         }    
     }
     
     onClick(event) {
-        this.notify.emit(this.servicesCode);
+        var code = this.servicesCode;
+        this.notify.emit(code); 
+        var hard = this.hardSelection;
+        this.notify2.emit(hard);
+        
     }
 }
-
 
 //IMAGES array implementing Image interface
 var IMAGES: Image[] = [

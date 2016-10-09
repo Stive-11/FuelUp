@@ -12,11 +12,13 @@ export class HTTPService {
     private getPathsURL: string;
     private getFiltersURL: string;
     private getFiltersForRouteURL: string;
+    private getSoftFiltersURL: string;
     constructor(private _http: Http, private _configuration: Configuration) {
         this.getAllStationsURL = _configuration.Server + _configuration.URLgetMainInfo;
         this.getPathsURL = _configuration.Server + _configuration.URLgetPath;
         this.getFiltersURL = _configuration.Server + _configuration.URLgetFiltered;
         this.getFiltersForRouteURL = _configuration.Server + _configuration.URLgetFiltersForRoute;
+        this.getSoftFiltersURL = _configuration.Server + _configuration.URLgetAllFiltered;
 
     }
    
@@ -51,12 +53,21 @@ export class HTTPService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    getFiltres(filters: number): Observable<Station[]> {
+    getHardFiltres(filters: number): Observable<Station[]> {
         let body = JSON.stringify({ filters });    
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
         return this._http.post(this.getFiltersURL, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    getSoftFiltres(filters: number): Observable<Station[]> {
+        let body = JSON.stringify({ filters });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post(this.getSoftFiltersURL, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

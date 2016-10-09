@@ -8,7 +8,7 @@ export class Configuration {
     public URLgetMainInfo: string = "/api/GetMainInfo";
     public URLgetServiceTypes: string = "/api/GetServiceTypes";
     public URLgetPath: string = "/api/Pathes/coordinatsPath";
-    //public URLgetFiltered: string = "/api/getAllStationsWithFilter";
+    public URLgetAllFiltered: string = "/api/getAllStationsWithFilter";
     public URLgetFiltered: string = "/api/getFiltredStations";
     public URLgetFiltersForRoute: string = "/api/Stations/coordinatsPathWithFilters";
 }

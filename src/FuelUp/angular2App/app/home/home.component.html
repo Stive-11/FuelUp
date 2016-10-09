@@ -1,6 +1,6 @@
 ﻿
 <div class="col-sm-2 sidenav menu" id="menu">
-    <filtres (notify)='onNotify($event)'></filtres>
+    <filtres (notify)='onNotify($event)' (notify2)='onNotify2($event)'></filtres>
 </div>
 <div class="col-sm-12 content-area">
     <nav class="menu-opener">
@@ -22,7 +22,7 @@
     </sebm-google-map>
     <div class="route-info">
         <div id="routeInfo"></div>
-        <p id="count">Количество ближайших станций: {{count}}</p>
+        <p id="count">Количество АЗС по пути: {{count}}</p>
     </div>
 
 </div>

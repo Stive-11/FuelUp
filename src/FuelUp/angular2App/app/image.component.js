@@ -14,35 +14,43 @@ var styles = String(require('./image.component.scss'));
 var ImgComponent = (function () {
     function ImgComponent(_httpService) {
         this._httpService = _httpService;
+        this.value = {};
         this.apply = "Применить фильтры";
         this.images = IMAGES;
         this.servicesCode = 0;
+        this.hardSelection = false;
         this.notify = new core_1.EventEmitter();
+        this.notify2 = new core_1.EventEmitter();
     }
     ImgComponent.prototype.toggleImage = function (image) {
         jQuery(image).toggleClass("imagePressed");
         if (image.class == "imageUnpressed") {
             image.class = "imagePressed";
             this.servicesCode += image.code;
-            console.info("Code: " + this.servicesCode);
         }
         else {
             image.class = "imageUnpressed";
             this.servicesCode -= image.code;
-            console.info("Code: " + this.servicesCode);
         }
     };
     ImgComponent.prototype.onClick = function (event) {
-        this.notify.emit(this.servicesCode);
+        var hard = this.hardSelection;
+        this.notify2.emit(hard);
+        var code = this.servicesCode;
+        this.notify.emit(code);
     };
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], ImgComponent.prototype, "notify", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], ImgComponent.prototype, "notify2", void 0);
     ImgComponent = __decorate([
         core_1.Component({
             selector: 'filtres',
-            template: " \n     <button type=\"button\" (click)=\"onClick($event)\" class=\"btn btn-success apply\">{{apply}}</button>\n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div data-title=\"{{image.title}}\" (click)=\"toggleImage(image)\" class=\"{{image.class}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n   \n  ",
+            template: " \n  <button type=\"button\" (click)=\"onClick($event)\" class=\"btn btn-success apply\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0444\u0438\u043B\u044C\u0442\u0440\u044B</button>\n  <!--<select (change)=\"getFilterType(state)\" class=\"form-control my-ctrl\">\n         <option *ngFor=\"let state of states\" [value]=\"state\">{{state}}</option>\n  </select>-->\n   <!--<input type='checkbox'(change)=\"hardSelection=true\">Hard-->\n    <input type='checkbox'(change)=\"$event.target.checked? (hardSelection =  true) : (hardSelection = false)\">Hard\n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div data-title=\"{{image.title}}\" (click)=\"toggleImage(image)\" class=\"{{image.class}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n   \n  ",
             styles: ["require('./image.component.scss')"],
             providers: [Httpservice.HTTPService]
         }), 

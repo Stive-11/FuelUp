@@ -13,6 +13,7 @@ var Httpservice = require("../http/http.service");
 var styles = String(require('./home.component.scss'));
 var coordinates_interface_1 = require("../http/coordinates.interface");
 var my_map_control_component_1 = require("./my-map-control.component");
+var image_component_1 = require("../image.component");
 var core_2 = require('@angular/core');
 var HomeComponent = (function () {
     function HomeComponent(_httpService, zone) {
@@ -23,10 +24,10 @@ var HomeComponent = (function () {
         this.zoom = 8;
         this.count = 0;
         this.servicesCode = 0;
+        this.hard = false;
         this.mode = 'Observable';
         this.lat = 53.8840092;
         this.lng = 27.4548901;
-        this.notify = new core_1.EventEmitter();
     }
     HomeComponent.prototype.getStations = function () {
         var _this = this;
@@ -79,22 +80,33 @@ var HomeComponent = (function () {
         });
     };
     HomeComponent.prototype.onClick = function (event) {
-        jQuery(".route-info").addClass("visible");
+        var _this = this;
         this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
-        this.count = this.stations.length;
+        setTimeout(function () {
+            _this.count = _this.stations.length;
+        }, 4000);
+        jQuery(".route-info").addClass("visible");
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;
         this.getFiltered(this.servicesCode);
     };
+    HomeComponent.prototype.onNotify2 = function (hard) {
+        this.hard = hard;
+        if (this.hard) {
+            console.info("eeee");
+        }
+        else
+            (console.info("ne eeee"));
+    };
     HomeComponent.prototype.mapClicked = function ($event) {
     };
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], HomeComponent.prototype, "notify", void 0);
+        core_2.ViewChild(image_component_1.ImgComponent), 
+        __metadata('design:type', image_component_1.ImgComponent)
+    ], HomeComponent.prototype, "imgComponent", void 0);
     __decorate([
         core_2.ViewChild(my_map_control_component_1.MyMapControlComponent), 
         __metadata('design:type', my_map_control_component_1.MyMapControlComponent)

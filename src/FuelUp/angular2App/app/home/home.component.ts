@@ -9,6 +9,7 @@ let styles = String(require('./home.component.scss'));
 import {Station} from '../http/station.interface';
 import {Coordinates} from "../http/coordinates.interface";
 import {MyMapControlComponent} from "./my-map-control.component";
+import {ImgComponent} from "../image.component";
 import { AfterViewInit, ViewChild } from '@angular/core';
 declare var jQuery: any;
 declare var google: any;
@@ -17,11 +18,11 @@ declare var google: any;
 @Component({
     selector: 'homecomponent',
     template: require('./home.component.html'),
-    styles: [styles],    
+    styles: [styles],
     providers: [Httpservice.HTTPService]
 })
 
-export class HomeComponent implements OnInit  {
+export class HomeComponent implements OnInit {
     stPoint: Coordinates = new Coordinates();
     finPoint: Coordinates = new Coordinates();
     zoom: number = 8;
@@ -29,17 +30,21 @@ export class HomeComponent implements OnInit  {
     public message: string;
     public errorMessage: string;
     public servicesCode: number = 0;
+    public hard: boolean = false;
 
     mode = 'Observable';
     stations: Station[];
-   
+
     lat: number = 53.8840092;
     lng: number = 27.4548901;
-    @Output() notify = new EventEmitter<Coordinates>();
+    //@Output() notify = new EventEmitter<Coordinates>();
+    @ViewChild(ImgComponent)
+    private imgComponent: ImgComponent;
     @ViewChild(MyMapControlComponent)
     private controlComponent: MyMapControlComponent;
+
     constructor(private _httpService: Httpservice.HTTPService, private zone: NgZone) { }
- 
+
     getStations() {
         this._httpService.getAllStations()
             .subscribe(
@@ -53,24 +58,33 @@ export class HomeComponent implements OnInit  {
             .subscribe(
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
-     
+
     }
-    getFiltered(servicesCode) {
+    getHardFiltered(servicesCode) {
         if (servicesCode == 0) {
-            this.getStations(); 
-        } 
-        this._httpService.getFiltres(this.servicesCode)
+            this.getStations();
+        }
+        this._httpService.getHardFiltres(this.servicesCode)
             .subscribe(
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
     }
-  
+    getSoftFiltered(servicesCode) {
+        if (servicesCode == 0) {
+            this.getStations();
+        }
+        this._httpService.getSoftFiltres(this.servicesCode)
+            .subscribe(
+            stations => this.stations = stations,
+            error => this.errorMessage = <any>error);
+    }
+
     ngOnInit() {
         jQuery(".menu-opener").click(function () {
             jQuery(".menu-opener, .menu-opener-inner, .sidenav, .way").toggleClass("active");
         });
         jQuery("#gMap").height("83vh");
-        this.getStations(); 
+        this.getStations();
         var autocompleteFrom: any;
         var autocompleteTo: any;
         var from = jQuery('#addressFrom')[0];
@@ -86,48 +100,39 @@ export class HomeComponent implements OnInit  {
         });
         google.maps.event.addListener(autocompleteTo, 'place_changed', () => {
             this.zone.run(() => {
-                var place = autocompleteTo.getPlace();           
+                var place = autocompleteTo.getPlace();
                 this.finPoint.latitude = place.geometry.location.lat();
                 this.finPoint.longitude = place.geometry.location.lng();
             });
         });
-     
+
     }
-   
+
     onClick(event) {
-        jQuery(".route-info").addClass("visible");
         this.controlComponent.clearRoute();
         this.controlComponent.buildRoute();
-        this.getPath(this.stPoint, this.finPoint, this.servicesCode);
-        //this.addCounter(this.stations);
+        this.getPath(this.stPoint, this.finPoint, this.servicesCode);      
         setTimeout(() => {
             this.count = this.stations.length;
         }, 4000);
-       
+        jQuery(".route-info").addClass("visible");
+
     }
-    
+
     //onClick(event) {
     //    jQuery(".route-info").addClass("visible");
     //    jQuery.when(this.renderPath()).then(this.addCounter(this.stations));
     //}
-   
-    renderPath() {
-        this.controlComponent.clearRoute();
-        this.controlComponent.buildRoute();
-        this.getPath(this.stPoint, this.finPoint, this.servicesCode);
-    }
-
     onNotify(code: number): void {
         this.servicesCode = code;
-        this.getFiltered(this.servicesCode);
+           
+    }
+    onNotify2(hard: boolean): void {
+        this.hard = hard;
+        if (this.hard) { this.getHardFiltered(this.servicesCode); }
+        else this.getSoftFiltered(this.servicesCode);
     }
     mapClicked($event: MouseEvent) {
-        
+
     }
-    addCounter(stations) {
-        console.info(stations);
-        console.info(stations.length)
-        var count = stations.length;
-        jQuery("#count").html("");
-        jQuery("#count").html("Количество заправок: " + count + "<br>"); }
 }
