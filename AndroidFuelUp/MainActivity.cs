@@ -42,7 +42,8 @@ namespace AndroidFuelUp
             Button routeButton = FindViewById<Button>(Resource.Id.routeBtn);
             routeButton.Click += delegate
             {
-                SendInfoToServer();
+                //SendInfoToServer();
+                GetRouteWithFilter();
             };
 
             Button serviceMenuButton = FindViewById<Button>(Resource.Id.testMenuButton);
@@ -144,7 +145,6 @@ namespace AndroidFuelUp
             try
             {
                 string postStringServicesUrl = "http://193.124.57.9:2000/api/Pathes/stringsPath";
-                string postCoordServiceUrl = "http://193.124.57.9:2000/api/Pathes/coordinatsPath";
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -154,15 +154,15 @@ namespace AndroidFuelUp
                         finishPoint = InfoStore.FinishPoint
                     };
 
+                    Android.Widget.Toast.MakeText(this,
+                          "Please wait while route is downloading...",
+                          Android.Widget.ToastLength.Short).Show();
+
                     var json = JsonConvert.SerializeObject(pointsPathesRequest);
                     HttpResponseMessage response = await client.PostAsync(postStringServicesUrl, new StringContent(json, Encoding.UTF8, "application/json"));
 
                     if (response.IsSuccessStatusCode)
                     {
-                        Android.Widget.Toast.MakeText(this,
-                          await response.Content.ReadAsStringAsync(),
-                          Android.Widget.ToastLength.Long).Show();
-
                         var routeJson = await response.Content.ReadAsStringAsync();
                         var routeInfo = JsonConvert.DeserializeObject<OneDirectionTwoPoints.RootObject>(routeJson);
                         InfoStore.RouteInfo = routeInfo;
@@ -183,10 +183,10 @@ namespace AndroidFuelUp
             }
             catch (Exception ex)
             {
-                var errormessage = $"{ex.Message} \n {ex.StackTrace}";
-                Android.Widget.Toast.MakeText(this,
-                      errormessage,
-                      Android.Widget.ToastLength.Long).Show();
+                //var errormessage = $"{ex.Message} \n {ex.StackTrace}";
+                //Android.Widget.Toast.MakeText(this,
+                //      errormessage,
+                //      Android.Widget.ToastLength.Long).Show();
             }
         }
 
@@ -255,7 +255,6 @@ namespace AndroidFuelUp
                      InfoStore.SelectedServiceCod.ToString(),
                      Android.Widget.ToastLength.Long).Show();
 
-            
             foreach (var station in InfoStore.StationsOnMap)
             {
                 if (station.coordinates.latitude != null && station.coordinates.longitude != null)
@@ -273,17 +272,7 @@ namespace AndroidFuelUp
             newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].start_location.lat,
                 InfoStore.RouteInfo.routes[0].legs[0].start_location.lng));
 
-            //Adding midpoints to route in common
-            //var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(InfoStore.RouteInfo.routes[0].overview_polyline.points);
-
-            //foreach (var pointToMap in listOfCurrentCoord)
-            //{
-            //    newRoute.Add(new LatLng((double)pointToMap.latitude,
-            //        (double)pointToMap.longitude));
-            //}
-
-
-            //Adding midpoints 
+            //Adding midpoints
             foreach (var currentPoints in InfoStore.RouteInfo.routes[0].legs[0].steps)
             {
                 var listOfCurrentCoord = PolylineDecode.DecodePolylinePoints(currentPoints.polyline.points);
@@ -294,12 +283,10 @@ namespace AndroidFuelUp
                 }
             }
 
-
-
             //Adding finish point to route
             newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].end_location.lat,
                 InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
-
+            mMap.Clear();
             mMap.AddPolyline(newRoute);
         }
 
@@ -318,13 +305,65 @@ namespace AndroidFuelUp
             //Set name to and/start point
             startMarkerOptions.SetTitle(InfoStore.RouteInfo.routes[0].legs[0].start_address);
             finishMarkerOptions.SetTitle(InfoStore.RouteInfo.routes[0].legs[0].end_address);
-            
-            //Set the marker of point
-            startMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker());
-            finishMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker());
 
-           mMap.AddMarker(startMarkerOptions);
+            //Set the marker of point
+            startMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueCyan));
+            finishMarkerOptions.InvokeIcon(BitmapDescriptorFactory.DefaultMarker(BitmapDescriptorFactory.HueGreen));
+
+            mMap.AddMarker(startMarkerOptions);
             mMap.AddMarker(finishMarkerOptions);
         }
+
+        public async void GetRouteWithFilter()
+        {
+            try
+            {
+                string postStringServicesWithFilterUrl = "http://193.124.57.9:2000/api/Pathes/stringsPathWithFilters";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    var pointsPathesWithFilterRequest = new Requests.PathStringsWithFilter()
+                    {
+                        filters = InfoStore.SelectedServiceCod,
+                        startPoint = InfoStore.StartPoint,
+                        finishPoint = InfoStore.FinishPoint
+                    };
+
+                    
+                    var json = JsonConvert.SerializeObject(pointsPathesWithFilterRequest);
+                    var response = await client.PostAsync(postStringServicesWithFilterUrl, new StringContent(json, Encoding.UTF8, "application/json"));
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var routeJson = await response.Content.ReadAsStringAsync();
+                        var routeInfoWithFilter = JsonConvert.DeserializeObject<Responce.PathAndStations>(routeJson);
+                        InfoStore.RouteInfo = routeInfoWithFilter.path;
+                        InfoStore.StationsOnMap = routeInfoWithFilter.stations;
+
+                        // Show current route on map
+                        ShowRouteOnMap();
+                        ShowStartFinishPointOnMap();
+                        ShowAllStationOnMap();
+
+
+                        string str = await response.Content.ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        Android.Widget.Toast.MakeText(this,
+                          "ERROR Http Response",
+                          Android.Widget.ToastLength.Long).Show();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //var errormessage = $"{ex.Message} \n {ex.StackTrace}";
+                //Android.Widget.Toast.MakeText(this,
+                //      errormessage,
+                //      Android.Widget.ToastLength.Long).Show();
+            }
+        }
+
     }
 }
