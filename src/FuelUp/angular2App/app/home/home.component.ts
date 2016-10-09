@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         jQuery(".menu-opener").click(function () {
-            jQuery(".menu-opener, .menu-opener-inner, .sidenav, .way").toggleClass("active");
+            jQuery(".menu-opener, .menu-opener-inner, .sidenav, .form-move, .way").toggleClass("active");
         });
         jQuery("#gMap").height("83vh");
         this.getStations();

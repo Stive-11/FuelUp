@@ -31,17 +31,24 @@
 .way {background-color: #555;
       padding:10px 20px;
 }
-.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .sidenav, .sidenav.active, .way, .way.active {
+.way.active {
+    padding: 10px 0;
+}
+.menu-opener, .menu-opener:hover, .menu-opener.active, .menu-opener-inner, .menu-opener-inner::before, .menu-opener-inner::after, .sidenav, .sidenav.active {
     -webkit-transition: 250ms all;
     transition: 250ms all;
 }
+/*.form-move, .form-move.active {
+    -webkit-transition: 450ms all;
+    transition: 450ms all;
+}*/
 .menu-opener {
     cursor: pointer;
     height: 44px;
     width: 44px;
     position: absolute;
-    top: 10%;
-    left: 1%;
+    top: 17%;
+    left: 0.85%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -70,12 +77,19 @@
 }
 .route-info.visible{visibility:visible;}
 
-.way.active {
-    //position:relative;
-    //top:-59px;
-    //z-index:1;
-    //visibility:hidden;
+.form-move.active {
+    position:relative;
+    transition-property:margin-left;
+    margin-left:21%;
+    transition-duration: 300ms;
+    width:550px;
 }
+.form-move {
+    transition-property:margin-left;
+    margin-left:0;
+    transition-duration: 300ms;
+}
+
 .menu-opener-inner {
     background: #fff;
     height: .4rem;

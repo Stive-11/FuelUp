@@ -6,11 +6,11 @@
     <nav class="menu-opener">
         <div class="menu-opener-inner"></div>
     </nav>
-    <form class="way">
+    <div class="way"><form class="form-move">
         <input class="form-control" placeholder="ОТКУДА" id="addressFrom" type="text" />
         <input class="form-control" placeholder="КУДА" id="addressTo" type="text" />
         <button type="button" id="butt" (click)="onClick($event)" class="btn btn-success">Поехали</button>
-    </form><!---->
+    </form></div>
     <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" id="gMap" (markerClick)="closeInfo()">
         <sebm-google-map-marker *ngFor="let station of stations" [latitude]="station.coordinates.latitude" [longitude]="station.coordinates.longitude" [iconUrl]="'assets/pin.png'">
             <sebm-google-map-info-window [disableAutoPan]="true">
