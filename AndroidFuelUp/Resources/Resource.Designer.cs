@@ -1696,31 +1696,34 @@ namespace AndroidFuelUp
 			public const int local_parking = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int money = 2130837624;
-			
-			// aapt resource value: 0x7f020080
-			public const int notification_template_icon_bg = 2130837632;
+			public const int logoFuelUpAndroid = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int photo_camera = 2130837625;
+			public const int money = 2130837625;
+			
+			// aapt resource value: 0x7f020081
+			public const int notification_template_icon_bg = 2130837633;
 			
 			// aapt resource value: 0x7f02007a
-			public const int place = 2130837626;
+			public const int photo_camera = 2130837626;
 			
 			// aapt resource value: 0x7f02007b
-			public const int restaurant = 2130837627;
+			public const int place = 2130837627;
 			
 			// aapt resource value: 0x7f02007c
-			public const int station = 2130837628;
+			public const int restaurant = 2130837628;
 			
 			// aapt resource value: 0x7f02007d
-			public const int store = 2130837629;
+			public const int station = 2130837629;
 			
 			// aapt resource value: 0x7f02007e
-			public const int wc = 2130837630;
+			public const int store = 2130837630;
 			
 			// aapt resource value: 0x7f02007f
-			public const int wifi_black = 2130837631;
+			public const int wc = 2130837631;
+			
+			// aapt resource value: 0x7f020080
+			public const int wifi_black = 2130837632;
 			
 			static Drawable()
 			{

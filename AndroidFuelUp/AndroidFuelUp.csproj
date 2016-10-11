@@ -185,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\drawable\IconAzs.png" />
+    <AndroidResource Include="Resources\drawable\logoFuelUpAndroid.png" />
     <None Include="Sources\TestRouteJson.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

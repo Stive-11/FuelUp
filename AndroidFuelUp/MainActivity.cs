@@ -15,7 +15,7 @@ using System.Text;
 
 namespace AndroidFuelUp
 {
-    [Activity(Label = "AndroidFuelUp", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = " ", MainLauncher = true, Icon = "@drawable/logoFuelUpAndroid")]
     public class MainActivity : Activity, IOnMapReadyCallback
     {
         private GoogleMap mMap;
