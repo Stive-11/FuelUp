@@ -1,13 +1,13 @@
-using System;
 using Android.App;
 using Android.OS;
 using Android.Widget;
 using AndroidFuelUp.Core;
 using AndroidFuelUp.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace AndroidFuelUp
 {
@@ -50,14 +50,10 @@ namespace AndroidFuelUp
                     resaultStr,
                     Android.Widget.ToastLength.Short).Show();
 
-               SendFilterToServer(InfoStore.SelectedServiceCod);
+                SendFilterToServer(InfoStore.SelectedServiceCod);
 
                 StartActivity(typeof(MainActivity));
-
-
-               
-
-        };
+            };
 
             Button noneServiceButton = FindViewById<Button>(Resource.Id.noneButton);
             noneServiceButton.Click += delegate
@@ -76,15 +72,13 @@ namespace AndroidFuelUp
             };
         }
 
-
         public async void SendFilterToServer(long serviceCod)
         {
-
             //api / getAllStationsWithFilter
             //json: { "filters": 123456}
             try
             {
-                string postStringFilterUrl = "http://193.124.57.9:2000/api/getAllStationsWithFilter";
+                string postStringFilterUrl = "http://fuelup.by/api/getAllStationsWithFilter";
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -111,13 +105,11 @@ namespace AndroidFuelUp
                         {
                             InfoStore.StationsOnMap.Add(new StationForMap(tempStation.coordinates, tempStation.operatorName, tempStation.codServices));
                         }
-
-
                     }
                     else
                     {
                         Android.Widget.Toast.MakeText(this,
-                          "ERROR Http Response",
+                          "ERROR SendFilter Response",
                           Android.Widget.ToastLength.Short).Show();
                     }
                 }
@@ -125,11 +117,10 @@ namespace AndroidFuelUp
             catch (Exception ex)
             {
                 var errormessage = $"{ex.Message} \n {ex.StackTrace}";
-                Android.Widget.Toast.MakeText(this,
-                      errormessage,
-                      Android.Widget.ToastLength.Short).Show();
+                //Android.Widget.Toast.MakeText(this,
+                //      errormessage,
+                //      Android.Widget.ToastLength.Short).Show();
             }
         }
-
     }
 }

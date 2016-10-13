@@ -31,16 +31,46 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutStartFinish"
         android:layout_gravity="left">
-        <EditText
-            android:id="@+id/edittextStartPoint"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:singleLine="true" />
-        <EditText
-            android:id="@+id/edittextFinishPoint"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:singleLine="true" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutStartPoint"
+            android:layout_gravity="left">
+            <TextView
+                android:text="@string/start"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textView1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="26.5dp" />
+            <EditText
+                android:id="@+id/edittextStartPoint"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:singleLine="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutFinishPoint"
+            android:layout_gravity="left">
+            <TextView
+                android:text="@string/finish"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/textView1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp" />
+            <EditText
+                android:id="@+id/edittextFinishPoint"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:singleLine="true" />
+        </LinearLayout>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
