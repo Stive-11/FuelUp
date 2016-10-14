@@ -34,10 +34,10 @@ var ImgComponent = (function () {
         }
     };
     ImgComponent.prototype.onClick = function (event) {
-        var hard = this.hardSelection;
-        this.notify2.emit(hard);
         var code = this.servicesCode;
         this.notify.emit(code);
+        var hard = this.hardSelection;
+        this.notify2.emit(hard);
     };
     __decorate([
         core_1.Output(), 
@@ -50,7 +50,7 @@ var ImgComponent = (function () {
     ImgComponent = __decorate([
         core_1.Component({
             selector: 'filtres',
-            template: " \n  <button type=\"button\" (click)=\"onClick($event)\" class=\"btn btn-success apply\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0444\u0438\u043B\u044C\u0442\u0440\u044B</button>\n  <!--<select (change)=\"getFilterType(state)\" class=\"form-control my-ctrl\">\n         <option *ngFor=\"let state of states\" [value]=\"state\">{{state}}</option>\n  </select>-->\n   <!--<input type='checkbox'(change)=\"hardSelection=true\">Hard-->\n    <input type='checkbox'(change)=\"$event.target.checked? (hardSelection =  true) : (hardSelection = false)\">Hard\n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div data-title=\"{{image.title}}\" (click)=\"toggleImage(image)\" class=\"{{image.class}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n   \n  ",
+            template: " \n  <button type=\"button\" (click)=\"onClick($event)\" class=\"btn btn-success apply\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0444\u0438\u043B\u044C\u0442\u0440\u044B</button>\n  <!--<select (change)=\"getFilterType(state)\" class=\"form-control my-ctrl\">\n         <option *ngFor=\"let state of states\" [value]=\"state\">{{state}}</option>\n  </select>-->\n    <input type='checkbox'(change)=\"$event.target.checked? (hardSelection =  true) : (hardSelection = false)\"> \u0416\u0435\u0441\u0442\u043A\u0430\u044F \u0444\u0438\u043B\u044C\u0442\u0440\u0430\u0446\u0438\u044F\n  <ul class=\"filters\"> \n    <li *ngFor=\"let image of images\">\n        <div data-title=\"{{image.title}}\" (click)=\"toggleImage(image)\" class=\"{{image.class}}\"> \n            <img src=\"{{image.url}}\"/>\n         </div>\n    </li>\n  </ul>\n   \n  ",
             styles: ["require('./image.component.scss')"],
             providers: [Httpservice.HTTPService]
         }), 

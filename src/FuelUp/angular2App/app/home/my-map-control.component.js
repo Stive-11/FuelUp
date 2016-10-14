@@ -14,12 +14,23 @@ var coordinates_interface_1 = require("../http/coordinates.interface");
 var directionsDisplay;
 var MyMapControlComponent = (function () {
     function MyMapControlComponent(wrapper) {
+        var _this = this;
         this.wrapper = wrapper;
         this.start = new coordinates_interface_1.Coordinates();
         this.end = new coordinates_interface_1.Coordinates();
         this.distance = '';
-        this.wrapper.getNativeMap().then(function (m) { });
+        this.wrapper.getNativeMap().then(function (m) {
+            _this.map = m;
+            var pos = new google.maps.LatLng(52.100512, 23.680022);
+            var marker = new google.maps.Marker({
+                position: pos,
+                map: _this.map,
+                title: 'Hello World!'
+            });
+        });
     }
+    MyMapControlComponent.prototype.ngOnInit = function () {
+    };
     MyMapControlComponent.prototype.buildRoute = function () {
         var directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;

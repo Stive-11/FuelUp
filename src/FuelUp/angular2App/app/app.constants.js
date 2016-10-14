@@ -15,6 +15,7 @@ var Configuration = (function () {
         this.URLgetMainInfo = "/api/GetMainInfo";
         this.URLgetServiceTypes = "/api/GetServiceTypes";
         this.URLgetPath = "/api/Pathes/coordinatsPath";
+        this.URLgetAllFiltered = "/api/getAllStationsWithFilter";
         this.URLgetFiltered = "/api/getFiltredStations";
         this.URLgetFiltersForRoute = "/api/Stations/coordinatsPathWithFilters";
     }

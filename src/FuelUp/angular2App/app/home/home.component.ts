@@ -31,9 +31,9 @@ export class HomeComponent implements OnInit {
     public errorMessage: string;
     public servicesCode: number = 0;
     public hard: boolean = false;
-
     mode = 'Observable';
     stations: Station[];
+    services = [];
 
     lat: number = 53.8840092;
     lng: number = 27.4548901;
@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit {
             .subscribe(
             stations => this.stations = stations,
             error => this.errorMessage = <any>error);
+        //this.putServicesOnPin();
     }
 
     ngOnInit() {
@@ -114,7 +115,7 @@ export class HomeComponent implements OnInit {
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);      
         setTimeout(() => {
             this.count = this.stations.length;
-        }, 4000);
+        }, 2500);
         jQuery(".route-info").addClass("visible");
 
     }
@@ -135,4 +136,19 @@ export class HomeComponent implements OnInit {
     mapClicked($event: MouseEvent) {
 
     }
+    putServicesOnPin() {
+        for (var station of this.stations) {          
+            for (var image of this.imgComponent.images) {
+                var result = image.code & station.codServices;
+                if (result != 0) {
+                    while (this.services.length < 15) {
+                        this.services.push(station.name);
+                    }
+                    //console.info("Название станции: " + station.name+ " Название услуги: " + image.title + " Результат: " + result);
+                    console.info(this.services);
+               }
+            }
+        }
+    }
+
 }

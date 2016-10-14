@@ -21,6 +21,7 @@ var HTTPService = (function () {
         this.getPathsURL = _configuration.Server + _configuration.URLgetPath;
         this.getFiltersURL = _configuration.Server + _configuration.URLgetFiltered;
         this.getFiltersForRouteURL = _configuration.Server + _configuration.URLgetFiltersForRoute;
+        this.getSoftFiltersURL = _configuration.Server + _configuration.URLgetAllFiltered;
     }
     HTTPService.prototype.getAllStations = function () {
         return this._http.get(this.getAllStationsURL)
@@ -47,11 +48,19 @@ var HTTPService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    HTTPService.prototype.getFiltres = function (filters) {
+    HTTPService.prototype.getHardFiltres = function (filters) {
         var body = JSON.stringify({ filters: filters });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this._http.post(this.getFiltersURL, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    HTTPService.prototype.getSoftFiltres = function (filters) {
+        var body = JSON.stringify({ filters: filters });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.post(this.getSoftFiltersURL, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     };

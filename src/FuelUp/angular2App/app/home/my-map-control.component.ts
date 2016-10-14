@@ -1,6 +1,7 @@
 ﻿import {Component, OnInit, Input} from '@angular/core';
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 import {Coordinates} from "../http/coordinates.interface";
+//import {GoogleMap} from 'angular2-google-maps/core';
 declare var google: any;
 let directionsDisplay: any;
 
@@ -9,13 +10,26 @@ let directionsDisplay: any;
     selector: 'my-map-control',
     template: ``,
 })
-export class MyMapControlComponent {  
+export class MyMapControlComponent implements OnInit {  
     @Input('stPoint') start: Coordinates = new Coordinates();
     @Input('finPoint') end: Coordinates = new Coordinates();
     time: string;
     distance: string = '';
+    map: any;
     constructor(private wrapper: GoogleMapsAPIWrapper) {
-        this.wrapper.getNativeMap().then((m) => {});
+        this.wrapper.getNativeMap().then((m) => {
+        this.map = m;
+        //let pos = new google.maps.LatLng(52.100512, 23.680022);
+        //let marker = new google.maps.Marker({
+        //    position: pos,
+        //    map: this.map,
+        //    title: 'Hello World!'
+        //});
+        });
+    }
+
+    ngOnInit() {
+       
     }
     buildRoute() {
         var directionsService = new google.maps.DirectionsService;

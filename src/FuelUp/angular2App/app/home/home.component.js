@@ -26,6 +26,7 @@ var HomeComponent = (function () {
         this.servicesCode = 0;
         this.hard = false;
         this.mode = 'Observable';
+        this.services = [];
         this.lat = 53.8840092;
         this.lng = 27.4548901;
     }
@@ -43,18 +44,26 @@ var HomeComponent = (function () {
         this._httpService.getPath(this.stPoint, this.finPoint, this.servicesCode)
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
-    HomeComponent.prototype.getFiltered = function (servicesCode) {
+    HomeComponent.prototype.getHardFiltered = function (servicesCode) {
         var _this = this;
         if (servicesCode == 0) {
             this.getStations();
         }
-        this._httpService.getFiltres(this.servicesCode)
+        this._httpService.getHardFiltres(this.servicesCode)
+            .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
+    };
+    HomeComponent.prototype.getSoftFiltered = function (servicesCode) {
+        var _this = this;
+        if (servicesCode == 0) {
+            this.getStations();
+        }
+        this._httpService.getSoftFiltres(this.servicesCode)
             .subscribe(function (stations) { return _this.stations = stations; }, function (error) { return _this.errorMessage = error; });
     };
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         jQuery(".menu-opener").click(function () {
-            jQuery(".menu-opener, .menu-opener-inner, .sidenav, .way").toggleClass("active");
+            jQuery(".menu-opener, .menu-opener-inner, .sidenav, .form-move, .way").toggleClass("active");
         });
         jQuery("#gMap").height("83vh");
         this.getStations();
@@ -86,22 +95,36 @@ var HomeComponent = (function () {
         this.getPath(this.stPoint, this.finPoint, this.servicesCode);
         setTimeout(function () {
             _this.count = _this.stations.length;
-        }, 4000);
+        }, 2500);
         jQuery(".route-info").addClass("visible");
     };
     HomeComponent.prototype.onNotify = function (code) {
         this.servicesCode = code;
-        this.getFiltered(this.servicesCode);
     };
     HomeComponent.prototype.onNotify2 = function (hard) {
         this.hard = hard;
         if (this.hard) {
-            console.info("eeee");
+            this.getHardFiltered(this.servicesCode);
         }
         else
-            (console.info("ne eeee"));
+            this.getSoftFiltered(this.servicesCode);
     };
     HomeComponent.prototype.mapClicked = function ($event) {
+    };
+    HomeComponent.prototype.putServicesOnPin = function () {
+        for (var _i = 0, _a = this.stations; _i < _a.length; _i++) {
+            var station = _a[_i];
+            for (var _b = 0, _c = this.imgComponent.images; _b < _c.length; _b++) {
+                var image = _c[_b];
+                var result = image.code & station.codServices;
+                if (result != 0) {
+                    while (this.services.length < 15) {
+                        this.services.push(station.name);
+                    }
+                    console.info(this.services);
+                }
+            }
+        }
     };
     __decorate([
         core_2.ViewChild(image_component_1.ImgComponent), 
