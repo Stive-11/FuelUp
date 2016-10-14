@@ -16,5 +16,9 @@
   <string name="ImgBtnMoney">Money Btn is clicked!</string>
   <string name="services">SERVICES</string>
 
+  <string name="start">Start</string>
+  <string name="finish">Finish</string>
+  
+
   <string name="google_maps_key">AIzaSyBh30rQjww49Ag3lYn2Dcl-WrH0hdFfN34</string>
 </resources>

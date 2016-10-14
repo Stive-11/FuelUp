@@ -15,7 +15,7 @@ using System.Text;
 
 namespace AndroidFuelUp
 {
-    [Activity(Label = "AndroidFuelUp", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "FuelUp", MainLauncher = true, Icon = "@drawable/logoFuelUpAndroid")]
     public class MainActivity : Activity, IOnMapReadyCallback
     {
         private GoogleMap mMap;
@@ -35,14 +35,12 @@ namespace AndroidFuelUp
             Button showStationsButton = FindViewById<Button>(Resource.Id.showStationsBtn);
             showStationsButton.Click += delegate
             {
-                // GetInfoFromServer();
                 ShowAllStationOnMap();
             };
 
             Button routeButton = FindViewById<Button>(Resource.Id.routeBtn);
             routeButton.Click += delegate
             {
-                //SendInfoToServer();
                 GetRouteWithFilter();
             };
 
@@ -54,15 +52,15 @@ namespace AndroidFuelUp
 
             EditText edittextStartPoint = FindViewById<EditText>(Resource.Id.edittextStartPoint);
             edittextStartPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
-            {
-                e.Handled = false;
-                if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
-                {
-                    Toast.MakeText(this, edittextStartPoint.Text, ToastLength.Short).Show();
-                    InfoStore.StartPoint = edittextStartPoint.Text;
-                    e.Handled = true;
-                }
-            };
+             {
+                 e.Handled = false;
+                 if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
+                 {
+                     Toast.MakeText(this, edittextStartPoint.Text, ToastLength.Short).Show();
+                     InfoStore.StartPoint = edittextStartPoint.Text;
+                     e.Handled = true;
+                 }
+             };
 
             EditText edittextFinishPoint = FindViewById<EditText>(Resource.Id.edittextFinishPoint);
             edittextFinishPoint.KeyPress += (object sender, View.KeyEventArgs e) =>
@@ -102,7 +100,7 @@ namespace AndroidFuelUp
             {
                 try
                 {
-                    string getInfoUrl = "http://193.124.57.9:2000/api/GetMainInfo";
+                    string getInfoUrl = "http://fuelup.by/api/GetMainInfo";
                     HttpClient client = new HttpClient();
                     HttpResponseMessage response = await client.GetAsync(getInfoUrl);
 
@@ -126,7 +124,7 @@ namespace AndroidFuelUp
                     else
                     {
                         Android.Widget.Toast.MakeText(this,
-                            "ERROR Http Respponse",
+                            "ERROR MainInfoResponse",
                             Android.Widget.ToastLength.Short).Show();
                     }
                 }
@@ -144,7 +142,7 @@ namespace AndroidFuelUp
         {
             try
             {
-                string postStringServicesUrl = "http://193.124.57.9:2000/api/Pathes/stringsPath";
+                string postStringServicesUrl = "http://fuelup.by/api/Pathes/stringsPath";
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -194,7 +192,7 @@ namespace AndroidFuelUp
         {
             try
             {
-                string getServicesUrl = "http://193.124.57.9:2000/api/GetServiceTypes";
+                string getServicesUrl = "http://fuelup.by/api/GetServiceTypes";
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync(getServicesUrl);
 
@@ -215,7 +213,7 @@ namespace AndroidFuelUp
                 else
                 {
                     Android.Widget.Toast.MakeText(this,
-                      "ERROR Http Respponse",
+                      "ERROR ServicesResponse",
                       Android.Widget.ToastLength.Short).Show();
                 }
             }
@@ -255,6 +253,8 @@ namespace AndroidFuelUp
                      InfoStore.SelectedServiceCod.ToString(),
                      Android.Widget.ToastLength.Long).Show();
 
+            //mMap.Clear();
+
             foreach (var station in InfoStore.StationsOnMap)
             {
                 if (station.coordinates.latitude != null && station.coordinates.longitude != null)
@@ -286,7 +286,7 @@ namespace AndroidFuelUp
             //Adding finish point to route
             newRoute.Add(new LatLng(InfoStore.RouteInfo.routes[0].legs[0].end_location.lat,
                 InfoStore.RouteInfo.routes[0].legs[0].end_location.lng));
-            mMap.Clear();
+           // mMap.Clear();
             mMap.AddPolyline(newRoute);
         }
 
@@ -316,54 +316,76 @@ namespace AndroidFuelUp
 
         public async void GetRouteWithFilter()
         {
-            try
+            EditText edittextStartPoint = FindViewById<EditText>(Resource.Id.edittextStartPoint);
+
+            EditText edittextFinishPoint = FindViewById<EditText>(Resource.Id.edittextFinishPoint);
+
+            if (String.IsNullOrEmpty(edittextStartPoint.Text) || String.IsNullOrEmpty(edittextFinishPoint.Text))
             {
-                string postStringServicesWithFilterUrl = "http://193.124.57.9:2000/api/Pathes/stringsPathWithFilters";
+                Android.Widget.Toast.MakeText(this,
+                    "Please fill the waypoints",
+                    Android.Widget.ToastLength.Long).Show();
+                return;
+            }
+            else
+            {
+                InfoStore.StartPoint = edittextStartPoint.Text;
+                var str1 = InfoStore.StartPoint;
+                InfoStore.FinishPoint = edittextFinishPoint.Text;
+                var str2 = InfoStore.FinishPoint;
 
-                using (HttpClient client = new HttpClient())
+
+                try
                 {
-                    var pointsPathesWithFilterRequest = new Requests.PathStringsWithFilter()
+                    string postStringServicesWithFilterUrl = "http://fuelup.by/api/Pathes/stringsPathWithFilters";
+
+                    using (HttpClient client = new HttpClient())
                     {
-                        filters = InfoStore.SelectedServiceCod,
-                        startPoint = InfoStore.StartPoint,
-                        finishPoint = InfoStore.FinishPoint
-                    };
+                        var pointsPathesWithFilterRequest = new Requests.PathStringsWithFilter()
+                        {
+                            filters = InfoStore.SelectedServiceCod,
+                            startPoint = InfoStore.StartPoint,
+                            finishPoint = InfoStore.FinishPoint
+                        };
 
-                    
-                    var json = JsonConvert.SerializeObject(pointsPathesWithFilterRequest);
-                    var response = await client.PostAsync(postStringServicesWithFilterUrl, new StringContent(json, Encoding.UTF8, "application/json"));
+                        var json = JsonConvert.SerializeObject(pointsPathesWithFilterRequest);
+                        var response =
+                            await
+                                client.PostAsync(postStringServicesWithFilterUrl,
+                                    new StringContent(json, Encoding.UTF8, "application/json"));
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var routeJson = await response.Content.ReadAsStringAsync();
-                        var routeInfoWithFilter = JsonConvert.DeserializeObject<Responce.PathAndStations>(routeJson);
-                        InfoStore.RouteInfo = routeInfoWithFilter.path;
-                        InfoStore.StationsOnMap = routeInfoWithFilter.stations;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var routeJson = await response.Content.ReadAsStringAsync();
+                            var routeInfoWithFilter = JsonConvert.DeserializeObject<Responce.PathAndStations>(routeJson);
+                            InfoStore.RouteInfo = routeInfoWithFilter.path;
+                            InfoStore.StationsOnMap = routeInfoWithFilter.stations;
 
-                        // Show current route on map
-                        ShowRouteOnMap();
-                        ShowStartFinishPointOnMap();
-                        ShowAllStationOnMap();
+                            //Clearing the map
+                            mMap.Clear();
+                            // Show current route on map
+                            ShowRouteOnMap();
+                            ShowStartFinishPointOnMap();
+                            ShowAllStationOnMap();
 
-
-                        string str = await response.Content.ReadAsStringAsync();
-                    }
-                    else
-                    {
-                        Android.Widget.Toast.MakeText(this,
-                          "ERROR Http Response",
-                          Android.Widget.ToastLength.Long).Show();
+                            string str = await response.Content.ReadAsStringAsync();
+                        }
+                        else
+                        {
+                            Android.Widget.Toast.MakeText(this,
+                                "ERROR GetRoute Response",
+                                Android.Widget.ToastLength.Long).Show();
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                //var errormessage = $"{ex.Message} \n {ex.StackTrace}";
-                //Android.Widget.Toast.MakeText(this,
-                //      errormessage,
-                //      Android.Widget.ToastLength.Long).Show();
+                catch (Exception ex)
+                {
+                    //var errormessage = $"{ex.Message} \n {ex.StackTrace}";
+                    //Android.Widget.Toast.MakeText(this,
+                    //      errormessage,
+                    //      Android.Widget.ToastLength.Long).Show();
+                }
             }
         }
-
     }
 }
