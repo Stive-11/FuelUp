@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FuelUp.Models;
 using FuelUp.Models.DB;
 using FuelUp.Services;
@@ -14,6 +15,8 @@ using System.Linq;
 using FuelUp.Models.ApiModels;
 using FuelUp.Models.Maps;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
 
 namespace FuelUp
 {
@@ -103,7 +106,22 @@ namespace FuelUp
                 await next();
             });
 
+
+            // Set up custom content types -associating file extension to MIME type
+            var provider = new FileExtensionContentTypeProvider();
+            // Add new mappings
+            provider.Mappings[".apk"] = "application/x-msdownload";
+
+
             app.UseDefaultFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\apk")),
+                RequestPath = new PathString("/apk"),
+                ContentTypeProvider = provider
+            });
+
             app.UseStaticFiles();
 
             app.UseIdentity();

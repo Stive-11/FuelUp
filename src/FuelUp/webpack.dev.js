@@ -99,7 +99,8 @@ module.exports = {
             [
                 './wwwroot/dist',
                 './wwwroot/fonts',
-                './wwwroot/assets'
+                './wwwroot/assets',
+                './wwwroot/apk'
             ]
         ),
 
@@ -116,7 +117,8 @@ module.exports = {
 
         new CopyWebpackPlugin([
             { from: './angular2App/images/*.*', to: "assets/", flatten: true },
-            { from: './angular2App/images/favicon.ico', to: "./", flatten: true }
+            { from: './angular2App/images/favicon.ico', to: "./", flatten: true },
+            { from: './angular2App/apk/*.apk', to: "./apk", flatten: true }
         ]),
         new ExtractTextPlugin('[name].css')
     ]
